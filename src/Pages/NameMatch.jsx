@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import {fetchUser} from '../helpers/SignInHelper'
 import NavBar from '../Components/NavBar'
 import BoyCard from '../Components/BoyCard'
 import GirlCard from '../Components/GirlCard'
 import SettingsCard from '../Components/SettingsCard'
 import MatchesCard from '../Components/MatchesCard.js'
+
+
+
+
+
 function NameMatch() {
     const [view, setView] = useState("boy");
     let currentDisplay;
@@ -11,7 +17,18 @@ function NameMatch() {
         setView(newView);
       }
 
+      useEffect(() => {
+       let userEmail = localStorage.getItem("email"); 
+        fetchUser(userEmail).then((user) => {
+            console.log('userqwerqwer',user)
+          if (user != false) {
+                console.log('user found')
+          } else {
+            alert("user not found");
+          }
+        });
 
+      }, []);
     if(view === 'girl'){
         currentDisplay = ( <GirlCard></GirlCard>  )
        } else if (view === 'matches'){
@@ -24,9 +41,17 @@ function NameMatch() {
 
 
   return (
-      <div className='container mx-auto mt-2 bg-base-100'>
-<NavBar view={view} onChange={handleChange}></NavBar>
-{currentDisplay}
+      <div className='bg-base-300 h-screen p-3'>
+      <div className='container mx-auto'>
+      <NavBar view={view} onChange={handleChange}></NavBar>
+
+
+
+
+<div className='card shadow-lg bg-base-100'>{currentDisplay}</div>
+
+
+</div>
 </div>
   );
 }

@@ -20,4 +20,10 @@ export function loginUser(user,pw) {
   }
 
 
-
+  export function fetchUser(email) {
+  
+  return axios.get("http://localhost:3001/api/fetchUser?email="+ email)
+    .then(response =>    
+  response.data)
+    .catch(err => console.warn(err));      
+  }

@@ -1,57 +1,70 @@
-import React, { useState, useEffect,useRef } from "react";
-//import {getPos,getList} from '../utils/getNameData'
-import { Swiper, SwiperSlide} from 'swiper/react';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFemale, faMale,faHeart ,faHeartBroken} from "@fortawesome/free-solid-svg-icons";
+import React, { useState } from "react";
 import axios from "axios";
-function BoyCard() {
-    const [list, setList] = useState([]);
-
-    const characters = list;
-
-    let mounted = false;
-    // useEffect(() => {
-
-    //   let mounted = true;
-    //   const userID = localStorage.getItem("person");
-    //   const blackList = localStorage.getItem("blackList");
-    //   const loadedMain = localStorage.getItem("loadedMain");
-
-    //   if(loadedMain){
-
-    //     getList().then((items) => {
-    //       if (mounted) {
-          
-    //         setList(items);
-    //       }
-    //     }); 
-   
-    //   }
-
-    //   return () => (mounted = false);
-    // }, []);
+import { useEffect } from 'react';
 
 
+function SettingsPanel() {
+  const [partner, setPartner] = useState("");
+let curCode = "test"
 
-    // function likeOrDislike(choice){
+  function submitPartner() {
 
-    //     const userID = localStorage.getItem("person");
-    //     axios
-    //     .get(`${process.env.REACT_APP_BASE_URL}/api/UpdateList/`, {
-    //       params: { choice: choice.target.id,name:choice.target.dataset.name,userID: userID},
-    //     })
-    //   }
-    //   const findNumber =(string)=>{
-    //     console.log(string)
-    //   }
+    localStorage.setItem("partner", partner);
+    const user = localStorage.getItem("person");
+    const partnerLocal = localStorage.getItem("partner");
+    axios.get(`${process.env.REACT_APP_BASE_URL}/api/UpdatePartner/`, {
+      params: { user: user, partner: partnerLocal },
+    });
+
+    setPartner("");
+  }
 
 
-    //   const swiper = useRef(null)
-    return (
-      
-     <div class='h-96 mx-auto'>Settings
+  return (
+    <div class="w-96  mx-auto">
+      <div class="card-body text-black">
+        <h2 class="card-title">Settings</h2>
+        <p className="m-2">Current Code: {curCode}</p>
+        <div class="form-control m-1">
+          <div class="relative">
+            <input
+              value={partner}
+              type="text"
+              onChange={(e) => setPartner(e.target.value)}
+              placeholder="New Code"
+              class="w-full pr-16 input input-primary input-bordered"
+            />
+            <button
+              onClick={submitPartner}
+              class="absolute right-0 rounded-l-none btn btn-primary"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+        <div class="form-control m-1">
+          <div class="relative">
 
-  
+          </div>
+        </div>
+        <div class="form-control m-1">
+          <div class="form-control">
+            <label class="cursor-pointer label">
+              <span class="label-text">Sounds</span>
+              <div>
+                <input
+                  type="checkbox"
+                  checked="checked"
+                  class="toggle toggle-primary"
+                />
+                <span class="toggle-mark"></span>
+              </div>
+            </label>
+          </div>
+        </div>
       </div>
-    )}
-    export default BoyCard;
+    </div>
+  );
+}
+
+export default SettingsPanel;

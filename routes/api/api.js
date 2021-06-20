@@ -250,28 +250,16 @@ router.get("/FetchUser", function (req, res, next) {
   let username = qry.username;
   let password = qry.password;
   let email = qry.email;
-  console.log("oi guvenora");
-  User.findOne({ username: username }, function (err, user) {
+
+  User.findOne({ email: req.query.email }, function (err, user) {
     try {
       if (user != null) {
         console.log("user found");
-        let userSend = { userInfo: user };
+       
         res.status(200).send(user);
       } else {
-        console.log("making new", username, password, email);
-        let newUser = new User({
-          username: username,
-          partner: "",
-          positionBoy: 1,
-          positionGirl: 1,
-          backgroundChoice: "watercolor",
-          likes: [""],
-          dislikes: [""],
-          email: email,
-          password: password,
-        });
-        newUser.save();
-        res.status(200).send(newUser);
+        console.log("user not found");
+
       }
     } catch (err) {
       console.log(err);
