@@ -20,7 +20,7 @@ function NameMatch() {
       useEffect(() => {
        let userEmail = localStorage.getItem("email"); 
         fetchUser(userEmail).then((user) => {
-            console.log('userqwerqwer',user)
+           
           if (user != false) {
                 console.log('user found')
           } else {

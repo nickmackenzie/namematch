@@ -16,51 +16,66 @@ function SignUp() {
   };
 
   return (
-    <div className="lg:flex">
-      <div className="lg:w-1/2 xl:max-w-screen-sm">
-        <div className="py-12 bg-indigo-100 lg:bg-white flex justify-center lg:justify-start lg:px-12"></div>
-        <div className="mt-10 px-12 sm:px-24 md:px-48 lg:px-12 lg:mt-16 xl:px-24 xl:max-w-2xl">
-          <h2
-            className="text-center text-4xl text-indigo-900 font-display font-semibold lg:text-left xl:text-5xl
-                xl:text-bold"
-          >
-            Sign Up
-          </h2>
-          <div className="mt-12">
-            <div>
-              <div className="text-sm font-bold text-gray-700 tracking-wide">
-                Email Address
-              </div>
+
+    <div class="hero min-h-screen bg-base-200">
+      <div class="flex-col justify-center hero-content lg:flex-row">
+        <div class="text-center lg:text-left">
+          <h1 class="mb-5 text-5xl font-bold">Create a NameMatch Account</h1>
+          <p class="mb-5">
+        Create an Account to match baby names with your partner.
+          </p>
+        </div>
+        <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+          <div class="card-body">
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text">Email</span>
+              </label>
               <input
+        
+     
+                class="input input-bordered"
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
-                type=""
-                placeholder="mike@gmail.com"
+                class="input input-bordered"
+             required
+              type='email'
               />
             </div>
-            <div className="mt-8">
-              <div className="flex justify-between items-center">
-                <div className="text-sm font-bold text-gray-700 tracking-wide">
-                  Password
-                </div>
-              </div>
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text">Password</span>
+              </label>
               <input
+                type='password'
+                type="text"
+                placeholder=""
+                class="input input-bordered"
+                minlength="8" required
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
+              />
+       
+            </div>
+            <div class="form-control mt-6 mb-3">
+              <button
+                type="button"
+                value="Login"
+                class="btn btn-primary"
+                classNameName="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
                 type=""
                 placeholder="Enter your password"
-              />
+                onClick={submitValue}
+              >Sign In</button>
             </div>
-
-            <div className="mt-10">
-              <button onClick={submitValue} className="btn btn-primary">
-                Create Account
-              </button>
-            </div>
+    
+      
           </div>
         </div>
       </div>
     </div>
+
+
+
+
   );
 }
 export default SignUp;

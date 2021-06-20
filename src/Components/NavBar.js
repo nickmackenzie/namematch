@@ -10,7 +10,10 @@ function NavBar(props) {
         props.onChange(event.target.id);
     }
 
-
+    function handleLogout(event) {
+        localStorage.setItem("isAuthenticated", false);
+        window.location.href = "/";
+    }
 
 
   return (
@@ -41,7 +44,7 @@ NameMatch
 
   </div> 
   <div className="flex-none">
-    <button className="btn btn-square btn-ghost">
+    <button className="btn btn-square btn-ghost" onClick={handleLogout}>
     <FaSignOutAlt  size={23} />
     </button>
   </div>
