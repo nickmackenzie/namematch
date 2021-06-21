@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-let Name = require("../../models/name");
+let Name = require("../../models/boy");
 let Girl = require("../../models/girl");
 let NameData = require("../../models/nameData");
 const User = require("../../models/users");
@@ -133,37 +133,39 @@ router.get("/index/choice/boy", function (req, res, next) {
 // });
 
 router.get("/boynames", function (req, res, next) {
+  User.findOne({email:"nick"},function(er,user){
+    console.log(user.likes)
+    let userLikes = user.likes
   Name.find(
-    { id: { $gte: 1, $lte: 20 } },
+   // { id: { $gte: 1, $lte: 100 } , name:{$nin: userLikes}},
+    { id: { $gte: 1, $lte: 100 } , name:{$nin: userLikes}},
 
     function (err, n) {
-      // n.forEach(function(spec,id){
 
-      //   Name.find({likes:"Brian"},function(erak,liked){
-      //     console.log("asdsad",liked)
-      //   })
-      // })
+ 
 
       res.send(n);
     }
   );
+})
 });
 
-router.get("/girlnames", function (req, res, next) {
+router.get("/girlNames", function (req, res, next) {
+  User.findOne({email:"nick"},function(er,user){
+    console.log(user.likes)
+    let userLikes = user.likes
   Girl.find(
-    { idx: { $gte: 1, $lte: 20 } },
+   // { id: { $gte: 1, $lte: 100 } , name:{$nin: userLikes}},
+    { idx: { $gte: 1, $lte: 100 } , name:{$nin: userLikes}},
 
     function (err, n) {
-      // n.forEach(function(spec,id){
 
-      //   Name.find({likes:"Brian"},function(erak,liked){
-      //     console.log("asdsad",liked)
-      //   })
-      // })
+ 
 
       res.send(n);
     }
   );
+})
 });
 router.get("/updatePartner", function (req, res, next) {
   User.findOneAndUpdate(
@@ -183,7 +185,7 @@ router.get("/updatePartner", function (req, res, next) {
 router.get("/UpdateList", function (req, res, next) {
   if (req.query.choice === "like") {
     User.findOneAndUpdate(
-      { googleID: req.query.userID },
+      { email: req.query.userID },
       { $addToSet: { likes: req.query.name } },
       function (err, updated) {
         if (err) {

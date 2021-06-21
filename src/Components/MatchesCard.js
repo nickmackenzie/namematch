@@ -1,57 +1,109 @@
-import React, { useState, useEffect,useRef } from "react";
-//import {getPos,getList} from '../utils/getNameData'
-import { Swiper, SwiperSlide} from 'swiper/react';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFemale, faMale,faHeart ,faHeartBroken} from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
-function BoyCard() {
-    const [list, setList] = useState([]);
+import React, { useState, useEffect } from "react";
+//import { getLikesUser, getMatches, delName } from "../utils/getNameData";
+import { Swiper, SwiperSlide } from "swiper/react";
+import {CgGenderMale,CgGenderFemale } from "react-icons/cg";
+import "swiper/swiper.scss";
+function MatchPanel() {
+  // const [likes, setLikes] = useState([]);
+  // const [matches, setMatches] = useState([]);
+  // const [delIndex, setDelIndex] = useState([]);
 
-    const characters = list;
+  // let needsUpdated = true;
+  // let letPass = true;
+let matches = ["Nick",'Jackson','Steph']
+  // const deleteName = (input, id) => {
 
-    let mounted = false;
-    // useEffect(() => {
+  //   //input.target.id
+  //   setDelIndex(id.like);
+  //   delName(delIndex).then((items) => {
+    
+  //     //  setLikes(items);
+  //   });
+  // };
+  // useEffect(() => {
+  //   const nameData = localStorage.getItem("person");
+  //   if (letPass) {
+  //     getLikesUser(nameData).then((items) => {
+    
+       
+  //       if (needsUpdated) {
+  //         setLikes(items);
+  //       }
+  //     });
+  //   }
+  //   if (letPass) {
+  //     getMatches(nameData).then((likes) => {
+  //       if(likes[0] === 'No Matches'){
+  //         localStorage.setItem('matches',0)
+  //       } else {
+  //         localStorage.setItem('matches',likes.length)
+  //       }
+  //       if (needsUpdated) {
+  //         setMatches(likes);
+  //       }
+  //     });
 
-    //   let mounted = true;
-    //   const userID = localStorage.getItem("person");
-    //   const blackList = localStorage.getItem("blackList");
-    //   const loadedMain = localStorage.getItem("loadedMain");
+  //     letPass = false;
+  //   }
+  // }, []);
 
-    //   if(loadedMain){
+  return (
 
-    //     getList().then((items) => {
-    //       if (mounted) {
-          
-    //         setList(items);
-    //       }
-    //     }); 
-   
-    //   }
-
-    //   return () => (mounted = false);
-    // }, []);
-
-
-
-    // function likeOrDislike(choice){
-
-    //     const userID = localStorage.getItem("person");
-    //     axios
-    //     .get(`${process.env.REACT_APP_BASE_URL}/api/UpdateList/`, {
-    //       params: { choice: choice.target.id,name:choice.target.dataset.name,userID: userID},
-    //     })
-    //   }
-    //   const findNumber =(string)=>{
-    //     console.log(string)
-    //   }
-
-
-    //   const swiper = useRef(null)
-    return (
-      
-     <div class='h-96 mx-auto'>Matches
-
-  
-      </div>
-    )}
-    export default BoyCard;
+        <div class="w-96 mx-auto">
+          <div class=" sm:-mx-6 lg:-mx-8">
+            <div class="py-2 align-middle inline-block">
+              <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                <table class="min-w-full divide-y divide-gray-200">
+                  <thead class="bg-primary ">
+                    <tr>
+                      <th
+                        scope="col"
+                        class="px-6 py-3 text-left text-sm font-bold text-white uppercase tracking-wider"
+                      >
+                        Name
+                      </th>
+                      <th
+                        scope="col"
+                        class="px-6 py-3 text-left text-sm font-bold text-white uppercase tracking-wider"
+                      >
+                        Sex
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="bg-white divide-y divide-gray-300">
+                    {matches.map((like, i) => (
+                      <tr key={i}>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                          <div class="flex items-center">
+                            <div class="flex-shrink-0 h-10 w-10">
+                       <CgGenderFemale size={48}></CgGenderFemale>
+                            </div>
+                            <div class="ml-4">
+                              <div class="text-lg font-medium text-gray-900">
+                                {like}
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                     
+                          <div
+                            id={i}
+              
+                            class="badge badge-error m-2"
+                          >
+                            Remove
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+  )
+}
+export default MatchPanel;

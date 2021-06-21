@@ -5,7 +5,8 @@ import BoyCard from '../Components/BoyCard'
 import GirlCard from '../Components/GirlCard'
 import SettingsCard from '../Components/SettingsCard'
 import MatchesCard from '../Components/MatchesCard.js'
-
+import "swiper/swiper.scss";
+import "swiper/components/navigation/navigation.scss";
 
 
 
@@ -48,7 +49,7 @@ function NameMatch() {
 
 
 
-<div className='card shadow-lg bg-base-100'>{currentDisplay}</div>
+<div className='w-96 mx-auto'>{currentDisplay}</div>
 
 
 </div>
