@@ -2,6 +2,9 @@
   "name": "namematch",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "16.x"
+},
   "dependencies": {
     "@craco/craco": "^5.9.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
