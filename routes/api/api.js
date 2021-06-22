@@ -305,13 +305,16 @@ router.get("/partnerMatch", function (req, res, next) {
   let matchArray2 = [];
   try {
     User.find({ partner: "test" }, function (err, userPartner) {
+      console.log(userPartner)
       if (userPartner.length > 1) {
+        console.log(true)
         matchArray1.push(userPartner[0].likes);
         matchArray2.push(userPartner[1].likes);
+        console.log(matchArray1,matchArray2)
         var matches = matchArray1[0].filter(function (v, i, a) {
           return matchArray2[0].indexOf(v) > -1;
         });
-
+          console.log('matches',matches)
         res.status(200).send(matches);
       } else {
         let nothing = ["No Matches"];

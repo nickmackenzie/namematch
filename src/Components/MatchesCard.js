@@ -2,15 +2,17 @@ import React, { useState, useEffect } from "react";
 //import { getLikesUser, getMatches, delName } from "../utils/getNameData";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {CgGenderMale,CgGenderFemale } from "react-icons/cg";
+import {getLikesUser, getMatches} from '../helpers/matchHelper'
+
 import "swiper/swiper.scss";
 function MatchPanel() {
-  // const [likes, setLikes] = useState([]);
-  // const [matches, setMatches] = useState([]);
-  // const [delIndex, setDelIndex] = useState([]);
+  const [likes, setLikes] = useState([]);
+  const [matches, setMatches] = useState([]);
+  const [delIndex, setDelIndex] = useState([]);
 
-  // let needsUpdated = true;
-  // let letPass = true;
-let matches = ["Nick",'Jackson','Steph']
+  let needsUpdated = true;
+  let letPass = true;
+
   // const deleteName = (input, id) => {
 
   //   //input.target.id
@@ -20,32 +22,19 @@ let matches = ["Nick",'Jackson','Steph']
   //     //  setLikes(items);
   //   });
   // };
-  // useEffect(() => {
-  //   const nameData = localStorage.getItem("person");
-  //   if (letPass) {
-  //     getLikesUser(nameData).then((items) => {
+  useEffect(() => {
+    const nameData = localStorage.getItem("email");
     
+    if (letPass) {
+      getMatches(nameData).then((likes) => {
        
-  //       if (needsUpdated) {
-  //         setLikes(items);
-  //       }
-  //     });
-  //   }
-  //   if (letPass) {
-  //     getMatches(nameData).then((likes) => {
-  //       if(likes[0] === 'No Matches'){
-  //         localStorage.setItem('matches',0)
-  //       } else {
-  //         localStorage.setItem('matches',likes.length)
-  //       }
-  //       if (needsUpdated) {
-  //         setMatches(likes);
-  //       }
-  //     });
+          setMatches(likes);
+        
+      });
 
-  //     letPass = false;
-  //   }
-  // }, []);
+      letPass = false;
+    }
+  }, []);
 
   return (
 
