@@ -49,7 +49,7 @@ function NameMatch() {
 
 
 
-<div className='w-96 mx-auto'>{currentDisplay}</div>
+<div className='mx-auto'>{currentDisplay}</div>
 
 
 </div>

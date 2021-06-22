@@ -25,7 +25,7 @@ NameMatch
           </span>
   </div> 
   <div className="flex-1 px-2 mx-2">
-    <div className="items-stretch hidden lg:flex">
+    <div className="items-stretch lg:flex">
       <a id='boy' onClick={handleChange} className="btn btn-ghost btn-sm rounded-btn">
               Boy Names
             </a> 
