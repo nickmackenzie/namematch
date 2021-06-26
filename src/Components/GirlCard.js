@@ -66,6 +66,8 @@ function GirlCard() {
                 <button
                   class="btn btn-outline btn-error btn-circle btn-lg"
                   id="dislike"
+                  data-name={character.name}
+                  onClick={likeOrDislike}
                 >
                   <ImHeartBroken size={48}></ImHeartBroken>
                 </button>

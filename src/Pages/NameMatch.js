@@ -31,7 +31,7 @@ function NameMatch() {
 
       }, []);
     if(view === 'girl'){
-        currentDisplay = ( <GirlCard></GirlCard>  )
+        currentDisplay = ( <GirlCard></GirlCard> )
        } else if (view === 'matches'){
         currentDisplay = ( <MatchesCard></MatchesCard> )
        } else if (view === 'settings') {

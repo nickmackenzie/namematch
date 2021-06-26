@@ -38,8 +38,8 @@ function MatchPanel() {
 
   return (
 
-        <div class="w-96 mx-auto">
-          <div class=" sm:-mx-6 lg:-mx-8">
+       
+          <div class="">
             <div class="py-2 align-middle inline-block">
               <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                 <table class="min-w-full divide-y divide-gray-200">
@@ -91,7 +91,7 @@ function MatchPanel() {
               </div>
             </div>
           </div>
-        </div>
+  
     
   )
 }
