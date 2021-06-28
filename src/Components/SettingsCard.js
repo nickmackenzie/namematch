@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
-
+import { themeChange } from "theme-change";
 function SettingsPanel() {
   const [partner, setPartner] = useState("");
-let curCode = "test"
+  let curCode = "test";
 
   function submitPartner() {
-
     localStorage.setItem("partner", partner);
     const user = localStorage.getItem("person");
     const partnerLocal = localStorage.getItem("partner");
@@ -18,13 +17,17 @@ let curCode = "test"
 
     setPartner("");
   }
-
+  useEffect(() => {
+    themeChange(false);
+    // 👆 false parameter is required for react project
+  }, []);
 
   return (
-    <div class="w-96  mx-auto">
+    <div class="card mx-auto    shadow bg-base-100">
+      {" "}
       <div class="card-body text-black">
-        <h2 class="card-title">Settings</h2>
-        <p className="m-2">Current Code: {curCode}</p>
+        <h2 class="card-title text-primary">Settings</h2>
+        <p className="m-2 text-secondary">Current Code: {curCode}</p>
         <div class="form-control m-1">
           <div class="relative">
             <input
@@ -43,22 +46,45 @@ let curCode = "test"
           </div>
         </div>
         <div class="form-control m-1">
-          <div class="relative">
-
-          </div>
+          <div class="relative"></div>
         </div>
         <div class="form-control m-1">
-          <div class="form-control">
+          <div class="form-control w-50">
             <label class="cursor-pointer label">
-              <span class="label-text">Sounds</span>
-              <div>
-                <input
-                  type="checkbox"
-                  checked="checked"
-                  class="toggle toggle-primary"
-                />
-                <span class="toggle-mark"></span>
-              </div>
+              <p className="m-2 text-secondary">Current Theme:</p>
+              <br></br>
+              <select
+                class='select select-bordered select-secondary  max-w-xs"'
+                data-choose-theme
+              >
+                <option value="cupcake">Cupcake</option>
+                <option value="dark">Dark</option>
+                <option value="dracula">Dracula</option>
+
+                <option value="cyberpunk">Cyberpunk</option>
+                <option value="light">Light</option>
+                <option value="luxury">luxury</option>
+                <option value="fantasy">fantasy</option>
+                <option value="pastel">pastel</option>
+                <option value="pink">Pink</option>
+
+                <option value="emerald">emerald</option>
+                <option value="light">Light</option>
+                <option value="retro">retro</option>
+                <option value="wireframe">wireframe</option>
+                <option value="black">black</option>
+                <option
+                  value="forest
+"
+                >
+                  {" "}
+                  forest
+                </option>
+
+                <option value="forest">forest</option>
+                <option value="light">Light</option>
+                <option value="pink">Pink</option>
+              </select>
             </label>
           </div>
         </div>
