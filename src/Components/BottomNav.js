@@ -29,7 +29,7 @@ function NavBar(props) {
           onClick={handleChange}
           class="w-full cursor-pointer focus:color-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1 flex flex-col items-center"
         >
-          <IoMaleSharp size={40}> </IoMaleSharp>
+          <IoMaleSharp size={"2rem"}> </IoMaleSharp>
 
           <span class="tab tab-home block text-xs">Boy Names</span>
         </a>
@@ -38,7 +38,7 @@ function NavBar(props) {
           onClick={handleChange}
           class="w-full cursor-pointer focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1 flex flex-col items-center"
         >
-          <IoFemaleSharp size={40}></IoFemaleSharp>
+          <IoFemaleSharp size={"2rem"}></IoFemaleSharp>
           <span class="tab tab-kategori block text-xs">Girl Names</span>
         </a>
         <a
@@ -46,15 +46,15 @@ function NavBar(props) {
           onClick={handleChange}
           class="w-full cursor-pointer focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1 flex flex-col items-center"
         >
-          <GiLovers size={40}></GiLovers>
+          <GiLovers size={"2rem"}></GiLovers>
           <span class="tab tab-explore block text-xs">Matches</span>
         </a>
         <a
           id="settings"
           onClick={handleChange}
-          class="w-full cursor-pointer focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1 flex flex-col items-center"
+          class="w-full cursor-pointer focus:text-teal-500 hover:text-primary justify-center inline-block text-center pt-2 pb-1 flex flex-col items-center"
         >
-          <BiCog size={40}></BiCog>
+          <BiCog className="" size={"2rem"}></BiCog>
           <span class="tab tab-whishlist block text-xs">Settings</span>
         </a>
       </div>
