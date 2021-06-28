@@ -28,8 +28,9 @@
     "react-loader-spinner": "^4.0.0",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^1.1.5",
+    "react-scripts": "^4.0.3",
     "react-tinder-card": "^1.4.0",
+    "sass": "^1.35.1",
     "swiper": "^6.7.0",
     "theme-change": "^2.0.2",
     "web-vitals": "^1.0.1"
@@ -50,5 +51,17 @@
     "autoprefixer": "^9.8.6",
     "postcss": "^7.0.36",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.2"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
