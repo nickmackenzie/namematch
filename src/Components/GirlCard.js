@@ -2,12 +2,14 @@ import React, { useState, useEffect, useRef } from "react";
 //import {getPos,getList} from '../utils/getNameData'
 import { ImHeart, ImHeartBroken } from "react-icons/im";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { ImSpinner6 } from "react-icons/im";
 import { getGirlList } from "../helpers/getNameData";
 import "swiper/swiper-bundle.css";
 
 import axios from "axios";
 function GirlCard() {
   const [list, setList] = useState([]);
+  const [loader, setLoader] = useState("loading");
 
   const characters = list;
 
@@ -18,6 +20,7 @@ function GirlCard() {
     getGirlList().then((items) => {
       if (mounted) {
         setList(items);
+        setLoader("done");
       }
     });
 
@@ -37,7 +40,28 @@ function GirlCard() {
   const findNumber = (string) => {
     console.log(string);
   };
-
+  let style = {
+    top: "50%",
+  };
+  function Loader() {
+    if (loader === "loading") {
+      return (
+        <div class="w-full h-full fixed block top-0 left-0 bg-white opacity-75 z-50">
+          <span
+            class="text-green-500 opacity-75 top-1/2 my-0 mx-auto block relative w-0 h-0"
+            style={style}
+          >
+            <i class="fas fa-circle-notch fa-spin fa-5x">
+              {" "}
+              <ImSpinner6 className="icon-spin" size={70}></ImSpinner6>
+            </i>
+          </span>
+        </div>
+      );
+    } else {
+      return true;
+    }
+  }
   const swiper = useRef(null);
   return (
     <Swiper
@@ -46,6 +70,7 @@ function GirlCard() {
       onSlideChange={() => console.log("slide change")}
       onSwiper={(swiper) => console.log(swiper)}
     >
+      <Loader></Loader>
       {characters.map((character, i) => (
         <SwiperSlide key={i}>
           <div className="card  shadow-lg bg-base-100">
