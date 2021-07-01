@@ -5,10 +5,11 @@ const userSchema = new Schema({
   partner: String,
   positionBoy: Number,
   positionGirl: Number,
-  dislikes:[],
-  likes:[],
-  backgroundChoice:String,
+  dislikes: [],
+  likes: [],
+  backgroundChoice: String,
   password: String,
-  email:String,
+  email: String,
+  theme: String,
 });
 module.exports = mongoose.model("Users", userSchema);

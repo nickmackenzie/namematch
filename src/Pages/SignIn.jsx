@@ -23,9 +23,7 @@ function SignIn() {
       <div class="flex-col justify-center hero-content lg:flex-row">
         <div class="text-center lg:text-left">
           <h1 class="mb-5 text-5xl font-bold">NameMatch</h1>
-          <p class="mb-5">
-        The App For Expecting Couples
-          </p>
+          <p class="mb-5">The App For Expecting Couples</p>
         </div>
         <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
           <div class="card-body">
@@ -34,13 +32,12 @@ function SignIn() {
                 <span class="label-text">Email</span>
               </label>
               <input
-        type='email'
-        required
+                type="email"
+                required
                 placeholder="email"
                 class="input input-bordered"
                 onChange={(e) => setEmail(e.target.value)}
                 class="input input-bordered"
-             
                 placeholder=""
               />
             </div>
@@ -49,9 +46,9 @@ function SignIn() {
                 <span class="label-text">Password</span>
               </label>
               <input
-              type="password"
-              minlength="8" required
-                type="text"
+                type="password"
+                minlength="8"
+                required
                 placeholder=""
                 class="input input-bordered"
                 onChange={(e) => setPassword(e.target.value)}
@@ -71,14 +68,16 @@ function SignIn() {
                 type=""
                 placeholder="Enter your password"
                 onClick={submitValue}
-              >Login</button>
+              >
+                Login
+              </button>
             </div>
             <label class="label">
-                <a href="#" href='/signup' class="label-text-alt">
-                Don't Have an Account? <span className='text-primary'> Sign Up!</span>
-                </a>
-              </label>
-      
+              <a href="#" href="/signup" class="label-text-alt">
+                Don't Have an Account?{" "}
+                <span className="text-primary"> Sign Up!</span>
+              </a>
+            </label>
           </div>
         </div>
       </div>

@@ -5,11 +5,10 @@ import { useEffect } from "react";
 import { themeChange } from "theme-change";
 function SettingsPanel() {
   const [partner, setPartner] = useState("");
-  let curCode = "test";
 
   function submitPartner() {
     localStorage.setItem("partner", partner);
-    const user = localStorage.getItem("person");
+    const user = localStorage.getItem("email");
     const partnerLocal = localStorage.getItem("partner");
     axios.get(`${process.env.REACT_APP_BASE_URL}/api/UpdatePartner/`, {
       params: { user: user, partner: partnerLocal },
@@ -27,7 +26,7 @@ function SettingsPanel() {
       {" "}
       <div class="card-body text-black">
         <h2 class="card-title text-primary">Settings</h2>
-        <p className="m-2 text-secondary">Current Code: {curCode}</p>
+
         <div class="form-control m-1">
           <div class="relative">
             <input

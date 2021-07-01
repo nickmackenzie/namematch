@@ -16,13 +16,12 @@ function SignUp() {
   };
 
   return (
-
     <div class="hero min-h-screen bg-base-200">
       <div class="flex-col justify-center hero-content lg:flex-row">
         <div class="text-center lg:text-left">
           <h1 class="mb-5 text-5xl font-bold">Create a NameMatch Account</h1>
           <p class="mb-5">
-        Create an Account to match baby names with your partner.
+            Create an Account to match baby names with your partner.
           </p>
         </div>
         <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
@@ -32,13 +31,11 @@ function SignUp() {
                 <span class="label-text">Email</span>
               </label>
               <input
-        
-     
                 class="input input-bordered"
                 onChange={(e) => setEmail(e.target.value)}
                 class="input input-bordered"
-             required
-              type='email'
+                required
+                type="email"
               />
             </div>
             <div class="form-control">
@@ -46,14 +43,13 @@ function SignUp() {
                 <span class="label-text">Password</span>
               </label>
               <input
-                type='password'
-                type="text"
+                type="password"
                 placeholder=""
                 class="input input-bordered"
-                minlength="8" required
+                minlength="8"
+                required
                 onChange={(e) => setPassword(e.target.value)}
               />
-       
             </div>
             <div class="form-control mt-6 mb-3">
               <button
@@ -64,18 +60,14 @@ function SignUp() {
                 type=""
                 placeholder="Enter your password"
                 onClick={submitValue}
-              >Sign In</button>
+              >
+                Sign In
+              </button>
             </div>
-    
-      
           </div>
         </div>
       </div>
     </div>
-
-
-
-
   );
 }
 export default SignUp;

@@ -240,10 +240,13 @@ router.get("/girlNames", function (req, res, next) {
   });
 });
 router.get("/updatePartner", function (req, res, next) {
+  console.log(req.params);
+  console.log(req.query);
   User.findOneAndUpdate(
-    { email: req.query.email },
+    { email: req.query.user },
     { partner: req.query.partner },
     function (err, updated) {
+      console.log("updated,", updated);
       if (err) {
         console.log(err);
       } else {

@@ -9,7 +9,7 @@ function NavBar(props) {
   }
 
   return (
-    <div className="navbar mb-2 shadow-lg bg-base-100 text-base-content rounded-box">
+    <div className="navbar mb-2 shadow-lg bg-base-100 text-base-content rounded-box z-10">
       <div className="flex-none px-2 mx-2">
         <span className="text-lg font-bold">NameMatch</span>
       </div>
