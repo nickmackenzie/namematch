@@ -5,7 +5,7 @@ Version: 0.0.1
 ![App Logo](https://i.imgur.com/edke0g8.png)
 
 A Full Stack App using MongoDB as a backend and ReactJS with TailwindCSS as a front-end.
-This app always user to create their own accounr and set a personal code. It will
+This app always user to create their own account and set a personal code. It will
 match a list of baby names that you and your partner with the same code both like.
 It will keep track of your overall personal likes/dislikes as well.
 Includes a dark and light mode.
