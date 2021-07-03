@@ -11,7 +11,9 @@ It will keep track of your overall personal likes/dislikes as well.
 Includes a dark and light mode.
 If you notice any bugs, feel free to open a pull request.
 
-More features coming soon!
+Play with it live at [namematch.me](https://namematch.me)
+
+More features coming soon! 🎭
 
 ## Technology Used
 
