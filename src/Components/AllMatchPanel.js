@@ -3,18 +3,11 @@ import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { CgGenderMale, CgGenderFemale } from "react-icons/cg";
 import { getLikesUser, getMatches } from "../helpers/matchHelper";
-import DataTable from "react-data-table-component";
+
 import "swiper/swiper.scss";
-
-const columns = [
-  {
-    name: "Like",
-  },
-];
-
-function MatchPanel() {
+function AllMatchPanel() {
   const [likes, setLikes] = useState([]);
-  const [matches, setMatches] = useState([]);
+
   const [delIndex, setDelIndex] = useState([]);
 
   let needsUpdated = true;
@@ -25,7 +18,6 @@ function MatchPanel() {
   //   //input.target.id
   //   setDelIndex(id.like);
   //   delName(delIndex).then((items) => {
-
   //     //  setLikes(items);
   //   });
   // };
@@ -33,8 +25,8 @@ function MatchPanel() {
     const nameData = localStorage.getItem("email");
 
     if (letPass) {
-      getMatches(nameData).then((likes) => {
-        setMatches(likes);
+      getLikesUser(nameData).then((likes) => {
+        setLikes(likes);
       });
 
       letPass = false;
@@ -45,8 +37,8 @@ function MatchPanel() {
     <div class="">
       <div class="py-2 align-middle inline-block">
         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-          <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-secondary ">
+          <table class="table w-full">
+            <thead>
               <tr>
                 <th
                   scope="col"
@@ -62,8 +54,8 @@ function MatchPanel() {
                 </th>
               </tr>
             </thead>
-            <tbody class="bg-base-100 text-base-content rounded-box  divide-y divide-base-content">
-              {matches.map((like, i) => (
+            <tbody class="bg-base-100 h-96 text-base-content rounded-box  divide-y divide-base-content">
+              {likes.map((like, i) => (
                 <tr key={i}>
                   <td class="px-6 py-4 whitespace-nowrap">
                     <div class="flex items-center">
@@ -91,4 +83,4 @@ function MatchPanel() {
     </div>
   );
 }
-export default MatchPanel;
+export default AllMatchPanel;

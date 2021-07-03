@@ -11,6 +11,10 @@ function SignIn() {
       if (user !== false) {
         localStorage.setItem("isAuthenticated", "true");
         localStorage.setItem("email", user.email);
+        localStorage.setItem("theme", user.theme);
+        let htmlSelect = document.getElementsByTagName("html");
+
+        htmlSelect[0].dataset.theme = "dark" ? "dark" : "light";
         window.location.href = "/namematch";
       } else {
         alert("user not found");
@@ -21,9 +25,14 @@ function SignIn() {
   return (
     <div class="hero min-h-screen bg-base-200">
       <div class="flex-col justify-center hero-content lg:flex-row">
-        <div class="text-center lg:text-left">
-          <h1 class="mb-5 text-5xl font-bold">NameMatch</h1>
-          <p class="mb-5">The App For Expecting Couples</p>
+        <div class="text-center lg:text-left ">
+          <h1 class=" mb-5 text-9xl font-bold">
+            <span className="text-primary">NAME</span>
+            <span className="text-secondary"> MATCH</span>
+          </h1>
+          <p class="mb-5 text-3xl text-warning capitalize ">
+            THE APP FOR EXPECTING COUPLES
+          </p>
         </div>
         <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
           <div class="card-body">
@@ -75,7 +84,7 @@ function SignIn() {
             <label class="label">
               <a href="#" href="/signup" class="label-text-alt">
                 Don't Have an Account?{" "}
-                <span className="text-primary"> Sign Up!</span>
+                <span className="text-warning"> Sign Up!</span>
               </a>
             </label>
           </div>

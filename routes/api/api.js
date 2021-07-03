@@ -22,7 +22,7 @@ router.get("/boys", function () {});
 router.get("/index/babyNames", function (req, res, next) {
   let txt = { name: "", about: "" };
   let pos = req.params.pos;
-  console.log(pos);
+
   const sleep = (milliseconds) => {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
   };
@@ -94,7 +94,7 @@ router.get("/index/babyNames", function (req, res, next) {
   const doSomething = async () => {
     for (const item of list) {
       await sleep(500);
-      console.log("🦄");
+
       Girl.findOne(
         {
           idx: item,
@@ -212,7 +212,6 @@ router.get("/index/choice/boy", function (req, res, next) {
 
 router.get("/boynames", function (req, res, next) {
   User.findOne({ email: "nick" }, function (er, user) {
-    console.log(user.likes);
     let userLikes = user.likes;
     Name.find(
       // { id: { $gte: 1, $lte: 100 } , name:{$nin: userLikes}},
@@ -227,7 +226,6 @@ router.get("/boynames", function (req, res, next) {
 
 router.get("/girlNames", function (req, res, next) {
   User.findOne({ email: "nick" }, function (er, user) {
-    console.log(user.likes);
     let userLikes = user.likes;
     Girl.find(
       // { id: { $gte: 1, $lte: 100 } , name:{$nin: userLikes}},
@@ -240,21 +238,17 @@ router.get("/girlNames", function (req, res, next) {
   });
 });
 router.get("/updatePartner", function (req, res, next) {
-  console.log(req.params);
-  console.log(req.query);
   User.findOneAndUpdate(
     { email: req.query.user },
     { partner: req.query.partner },
     function (err, updated) {
-      console.log("updated,", updated);
       if (err) {
-        console.log(err);
+        res.status(200).send(false);
       } else {
-        console.log("Updated");
+        res.status(200).send(true);
       }
     }
   );
-  res.send("hey");
 });
 
 router.get("/UpdateList", function (req, res, next) {
@@ -264,27 +258,25 @@ router.get("/UpdateList", function (req, res, next) {
       { $addToSet: { likes: req.query.name } },
       function (err, updated) {
         if (err) {
-          console.log(err);
+          res.status(200).send(false);
         } else {
-          console.log("Updated", updated);
+          res.status(200).send(true);
         }
       }
     );
   } else {
     User.findOneAndUpdate(
-      { googleID: req.query.userID },
+      { email: req.query.userID },
       { $push: { dislikes: req.query.name } },
       function (err, updated) {
         if (err) {
-          console.log(err);
+          res.status(200).send(false);
         } else {
-          console.log("Updated");
+          res.status(200).send(true);
         }
       }
     );
   }
-
-  res.send("hey");
 });
 router.get("/boy/swipe", function (req, res, next) {
   User.find(
@@ -366,7 +358,7 @@ router.get("/matches", function (req, res, next) {
   /*console.log(req.params.input);*/
 
   let googleID = req.params.email;
-  User.findOne({ email: req.query.googleID }, function (err, userLikes) {
+  User.findOne({ email: req.query.email }, function (err, userLikes) {
     res.status(200).send(userLikes.likes);
   });
 });

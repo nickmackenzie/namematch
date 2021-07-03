@@ -1,7 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+#root {
+  width: 100vw;
+  min-height: 100vh;
+  overflow: hidden;
+  /* background: linear-gradient(#fff, #999); */
+  background: linear-gradient(#e66465, #9198e5);
+}
 .icon-spin {
   -webkit-animation: icon-spin 2s infinite linear;
   animation: icon-spin 2s infinite linear;
@@ -27,4 +33,13 @@
     -webkit-transform: rotate(359deg);
     transform: rotate(359deg);
   }
+}
+#toast-container {
+  position: fixed;
+  z-index: 999999;
+  pointer-events: none;
+}
+.toast-top-right {
+  bottom: 10rem;
+  left: 2rem;
 }

@@ -64,13 +64,15 @@ function GirlCard() {
   }
   const swiper = useRef(null);
   return (
+    <>
+    <Loader></Loader>
     <Swiper
       spaceBetween={50}
       slidesPerView={1}
       onSlideChange={() => console.log("slide change")}
       onSwiper={(swiper) => console.log(swiper)}
     >
-      <Loader></Loader>
+
       {characters.map((character, i) => (
         <SwiperSlide key={i}>
           <div className="card  shadow-lg bg-base-100">
@@ -102,6 +104,7 @@ function GirlCard() {
         </SwiperSlide>
       ))}
     </Swiper>
+    </>
   );
 }
 export default GirlCard;

@@ -8,11 +8,28 @@ import Loader from "react-loader-spinner";
 import Spinner from "../spinner.svg";
 import { ImSpinner6 } from "react-icons/im";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
+const alertLike = () => {
+  toast.success("Liked", {
+    position: "top-center",
+    style: {
+      padding: "1.5rem",
+    },
+  });
+};
+const alertError = () => {
+  toast.error("Error", {
+    position: "top-center",
+    style: {
+      padding: "1.5rem",
+    },
+  });
+};
 function BoyCard() {
   const [list, setList] = useState([]);
   const [loader, setLoader] = useState("loading");
   const characters = list;
-
+  const [swiper, setSwiper] = useState(null);
   let mounted = false;
   useEffect(() => {
     mounted = true;
@@ -26,16 +43,27 @@ function BoyCard() {
 
     return () => (mounted = false);
   }, []);
-
+  const slideTo = (index) => swiper.slideTo(index);
   function likeOrDislike(choice) {
     const userID = localStorage.getItem("email");
-    axios.get(`${process.env.REACT_APP_BASE_URL}/api/UpdateList/`, {
-      params: {
-        choice: choice.currentTarget.id,
-        name: choice.currentTarget.dataset.name,
-        userID: userID,
-      },
-    });
+    axios
+      .get(`${process.env.REACT_APP_BASE_URL}/api/UpdateList/`, {
+        params: {
+          choice: choice.currentTarget.id,
+          name: choice.currentTarget.dataset.name,
+          userID: userID,
+        },
+      })
+      .then(function (response) {
+        console.log("response", response);
+
+        alertLike();
+        return response;
+      })
+      .catch(function (error) {
+        console.log(error);
+        alertError();
+      });
   }
   const findNumber = (string) => {
     console.log(string);
@@ -69,7 +97,7 @@ function BoyCard() {
       spaceBetween={50}
       slidesPerView={1}
       onSlideChange={() => console.log("slide change")}
-      onSwiper={(swiper) => console.log(swiper)}
+      onSwiper={setSwiper}
     >
       {" "}
       <Loader></Loader>
@@ -96,6 +124,7 @@ function BoyCard() {
                   data-name={character.name}
                   onClick={likeOrDislike}
                 >
+                  {" "}
                   <ImHeartBroken size={48}></ImHeartBroken>
                 </button>
               </div>
@@ -103,6 +132,7 @@ function BoyCard() {
           </div>
         </SwiperSlide>
       ))}
+      <Toaster></Toaster>
     </Swiper>
   );
 }
