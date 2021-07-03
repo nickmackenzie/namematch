@@ -1,13 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-#root {
-  width: 100vw;
-  min-height: 100vh;
-  overflow: hidden;
-  /* background: linear-gradient(#fff, #999); */
-  background: linear-gradient(#e66465, #9198e5);
-}
+
 .icon-spin {
   -webkit-animation: icon-spin 2s infinite linear;
   animation: icon-spin 2s infinite linear;

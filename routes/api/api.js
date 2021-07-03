@@ -211,11 +211,13 @@ router.get("/index/choice/boy", function (req, res, next) {
 // });
 
 router.get("/boynames", function (req, res, next) {
+  console.log("parrams", req.query);
   User.findOne({ email: "nick" }, function (er, user) {
     let userLikes = user.likes;
+    let userDislikes = user.dislikes;
     Name.find(
       // { id: { $gte: 1, $lte: 100 } , name:{$nin: userLikes}},
-      { id: { $gte: 1, $lte: 100 }, name: { $nin: userLikes } },
+      { id: { $gte: 1, $lte: 50 }, name: { $nin: userLikes } },
 
       function (err, n) {
         res.send(n);

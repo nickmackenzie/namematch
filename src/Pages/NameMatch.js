@@ -55,15 +55,15 @@ function NameMatch() {
       <SettingsCard onChange={handlePartnerUpdate}></SettingsCard>
     );
   } else {
-    currentDisplay = <BoyCard></BoyCard>;
+    currentDisplay = <Advanced></Advanced>;
   }
 
   return (
-    <div className="bg-base-300 h-screen p-3">
+    <div className="bg-base-200 w-screen h-screen p-3">
       <div className="container mx-auto">
         <NavBar></NavBar>
 
-        <div className="mx-auto">{currentDisplay}</div>
+        <div className="flex justify-center">{currentDisplay}</div>
       </div>
       <BottomNav view={view} onChange={handleChange}></BottomNav>
       <Alert alert={alertType} show={alert}></Alert>

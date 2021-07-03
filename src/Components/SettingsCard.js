@@ -72,6 +72,7 @@ function SettingsPanel(props) {
               onChange={(e) => setPartner(e.target.value)}
               placeholder="New Code"
               class="w-full pr-16 input input-primary input-bordered"
+              onfocus="blur();"
             />
             <button
               onClick={submitPartner}

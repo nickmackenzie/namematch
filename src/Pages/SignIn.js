@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { loginUser } from "../helpers/SignInHelper";
-
+import loginIllustration from "../imgs/loginIllustration.svg";
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,20 +25,21 @@ function SignIn() {
   return (
     <div class="hero min-h-screen bg-base-200">
       <div class="flex-col justify-center hero-content lg:flex-row">
-        <div class="text-center lg:text-left ">
-          <h1 class=" mb-5 text-9xl font-bold">
+        <div class="text-center lg:text-left mx-auto ">
+          <h1 class="  text-4xl font-bold">
             <span className="text-primary">NAME</span>
             <span className="text-secondary"> MATCH</span>
           </h1>
-          <p class="mb-5 text-3xl text-warning capitalize ">
+          <p class="mb-5 text-2xl text-warning capitalize ">
             THE APP FOR EXPECTING COUPLES
           </p>
+          <img width={300} className="mx-auto" src={loginIllustration}></img>
         </div>
-        <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+        <div class="rounded card flex-shrink-0 w-full max-w-sm shadow-sm bg-base-100">
           <div class="card-body">
             <div class="form-control">
               <label class="label">
-                <span class="label-text">Email</span>
+                <span class="label-text">Username</span>
               </label>
               <input
                 type="email"
