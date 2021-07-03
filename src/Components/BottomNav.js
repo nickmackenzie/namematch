@@ -20,8 +20,8 @@ function NavBar(props) {
 
   return (
     <section
-      id="bottom-navigation"
-      class="block card m-2 fixed inset-x-0 bottom-0 z-10 bg-white shadow navbar  m-6 shadow-lg bg-base-100 text-base-content rounded-box"
+      id="bottom-navigation sticky"
+      class="block card m-2 sticky inset-x-0 bottom-0 z-10 bg-white shadow navbar  m-6 shadow-lg bg-base-100 text-base-content rounded-box"
     >
       <div id="tabs" class="flex justify-between">
         <a

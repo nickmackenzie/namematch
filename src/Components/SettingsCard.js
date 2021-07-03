@@ -71,7 +71,7 @@ function SettingsPanel(props) {
               type="text"
               onChange={(e) => setPartner(e.target.value)}
               placeholder="New Code"
-              class="w-full pr-16 input input-primary input-bordered"
+              class="w-full pr-16 input input-primary input-bordered text-1xl "
               onfocus="blur();"
             />
             <button
@@ -86,7 +86,7 @@ function SettingsPanel(props) {
           <div class="relative"></div>
         </div>
       </div>
-      <Toaster />
+      <Toaster className="z-auto" />
     </div>
   );
 }
