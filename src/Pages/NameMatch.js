@@ -60,7 +60,7 @@ function NameMatch() {
 
   return (
     <div className="bg-base-200 w-screen h-screen flex flex-col justify-between">
-      <div className="container w-1/3 mx-auto ">
+      <div className="container mx-auto ">
         <Alert alert={alertType} show={alert}></Alert>
         <NavBar></NavBar>
 
