@@ -65,45 +65,46 @@ function GirlCard() {
   const swiper = useRef(null);
   return (
     <>
-    <Loader></Loader>
-    <Swiper
-      spaceBetween={50}
-      slidesPerView={1}
-      onSlideChange={() => console.log("slide change")}
-      onSwiper={(swiper) => console.log(swiper)}
-    >
+      <Loader></Loader>
+      <Swiper
+        spaceBetween={50}
+        slidesPerView={1}
+        onSlideChange={() => console.log("slide change")}
+        onSwiper={(swiper) => console.log(swiper)}
+      >
+        {characters.map((character, i) => (
+          <SwiperSlide key={i}>
+            <div className="card  shadow-lg bg-base-100">
+              <div class="card-body ">
+                <h2 class="card-title text-primary text-4xl">
+                  {character.name}
+                </h2>
 
-      {characters.map((character, i) => (
-        <SwiperSlide key={i}>
-          <div className="card  shadow-lg bg-base-100">
-            <div class="card-body ">
-              <h2 class="card-title text-primary text-4xl">{character.name}</h2>
-
-              <p>{character.meaning}</p>
-              <p></p>
-              <div className="card-actions">
-                <button
-                  class="btn btn-outline btn-secondary btn-circle btn-lg hover:bg-secondary"
-                  id="like"
-                  data-name={character.name}
-                  onClick={likeOrDislike}
-                >
-                  <ImHeart size={48} />
-                </button>
-                <button
-                  class="btn btn-outline btn-error btn-circle btn-lg"
-                  id="dislike"
-                  data-name={character.name}
-                  onClick={likeOrDislike}
-                >
-                  <ImHeartBroken size={48}></ImHeartBroken>
-                </button>
+                <p>{character.meaning}</p>
+                <p></p>
+                <div className="card-actions">
+                  <button
+                    class="btn btn-outline btn-secondary btn-circle btn-lg hover:bg-secondary"
+                    id="like"
+                    data-name={character.name}
+                    onClick={likeOrDislike}
+                  >
+                    <ImHeart size={48} />
+                  </button>
+                  <button
+                    class="btn btn-outline btn-error btn-circle btn-lg"
+                    id="dislike"
+                    data-name={character.name}
+                    onClick={likeOrDislike}
+                  >
+                    <ImHeartBroken size={48}></ImHeartBroken>
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        </SwiperSlide>
-      ))}
-    </Swiper>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </>
   );
 }

@@ -4,41 +4,43 @@ import axios from "axios";
 import { getList } from "../helpers/getNameData";
 import TinderCard from "react-tinder-card";
 import { ImHeart, ImHeartBroken } from "react-icons/im";
+import toast, { Toaster } from "react-hot-toast";
 import "./card.css";
 
-const db = [
-  {
-    name: "Richard Hendricks",
-    url: "./img/richard.jpg",
-  },
-  {
-    name: "Erlich Bachman",
-    url: "./img/erlich.jpg",
-  },
-  {
-    name: "Monica Hall",
-    url: "./img/monica.jpg",
-  },
-  {
-    name: "Jared Dunn",
-    url: "./img/jared.jpg",
-  },
-  {
-    name: "Dinesh Chugtai",
-    url: "./img/dinesh.jpg",
-  },
-];
-
+const alertDownload = () => {
+  toast.success("Latest Names", {
+    position: "top-center",
+    style: {
+      padding: "1.5rem",
+    },
+  });
+};
+const alertLike = () => {
+  toast.success("Liked", {
+    position: "top-center",
+    style: {
+      padding: "1.5rem",
+    },
+  });
+};
+const alertError = () => {
+  toast.error("Error", {
+    position: "top-center",
+    style: {
+      padding: "1.5rem",
+    },
+  });
+};
 const alreadyRemoved = [];
-let charactersState = db; // This fixes issues with updating characters state forcing it to use the current state and not the state that was active when the card was created.
 
 function Advanced() {
-  const [characters, setCharacters] = useState(db);
   const [lastDirection, setLastDirection] = useState();
   const [list, setList] = useState([]);
   const [loader, setLoader] = useState("loading");
+  let [currentName, setCurrentName] = useState();
 
   const names = list;
+  let charactersState = list;
   const [swiper, setSwiper] = useState(null);
   let mounted = false;
   useEffect(() => {
@@ -48,6 +50,7 @@ function Advanced() {
       if (mounted) {
         setList(items);
         setLoader("done");
+        alertDownload();
       }
     });
 
@@ -73,7 +76,7 @@ function Advanced() {
     charactersState = charactersState.filter(
       (character) => character.name !== name
     );
-    setCharacters(charactersState);
+    setList(charactersState);
   };
 
   const swipe = (dir) => {
@@ -87,6 +90,37 @@ function Advanced() {
       childRefs[index].current.swipe(dir); // Swipe the card!
     }
   };
+  const onSwipe = (direction) => {
+    console.log("You swiped: " + direction);
+    if (direction === "left") {
+      console.log("Sending Like Ajax");
+      const userID = localStorage.getItem("email");
+      axios
+        .get(`${process.env.REACT_APP_BASE_URL}/api/UpdateList/`, {
+          params: {
+            choice: "like",
+            name: direction.currentTarget.id,
+            userID: userID,
+          },
+        })
+        .then(function (response) {
+          console.log("response", response);
+
+          alertLike();
+          return response;
+        })
+        .catch(function (error) {
+          console.log(error);
+          alertError();
+        });
+    } else {
+      console.log("nope");
+    }
+  };
+
+  const onCardLeftScreen = (myIdentifier) => {
+    console.log(myIdentifier + " left the screen");
+  };
 
   return (
     <div className="">
@@ -98,15 +132,16 @@ function Advanced() {
         href="https://fonts.googleapis.com/css?family=Alatsi&display=swap"
         rel="stylesheet"
       />
+      <Toaster></Toaster>
 
       <div className="cardContainer mx-auto">
         {names.map((character, index) => (
           <TinderCard
-            ref={childRefs[index]}
             className="swipe"
             key={character.name}
-            onSwipe={(dir) => swiped(dir, character.name)}
-            onCardLeftScreen={() => outOfFrame(character.name)}
+            preventSwipe={["up", "down"]}
+            onSwipe={onSwipe}
+            id={character.name}
           >
             <div className="card cardTinder shadow-sm bg-base-100">
               <div class="card-body ">
