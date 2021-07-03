@@ -55,7 +55,7 @@ function NameMatch() {
       <SettingsCard onChange={handlePartnerUpdate}></SettingsCard>
     );
   } else {
-    currentDisplay = <Advanced></Advanced>;
+    currentDisplay = <BoyCard></BoyCard>;
   }
 
   return (
