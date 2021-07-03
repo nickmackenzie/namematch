@@ -17,6 +17,13 @@ const alertLike = () => {
     },
   });
 };
+const loadingAlert = () => {
+  toast.promise(getList(), {
+    loading: "Loading...",
+    success: <b>Loading Complete</b>,
+    error: <b>Could not load names.</b>,
+  });
+};
 const alertError = () => {
   toast.error("Error", {
     position: "top-center",
@@ -33,7 +40,7 @@ function BoyCard() {
   let mounted = false;
   useEffect(() => {
     mounted = true;
-
+    loadingAlert();
     getList().then((items) => {
       if (mounted) {
         setList(items);
@@ -46,6 +53,7 @@ function BoyCard() {
   const slideTo = (index) => swiper.slideTo(index);
   function likeOrDislike(choice) {
     const userID = localStorage.getItem("email");
+
     axios
       .get(`${process.env.REACT_APP_BASE_URL}/api/UpdateList/`, {
         params: {
