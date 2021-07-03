@@ -42,6 +42,7 @@ function NavBar(props) {
                   type="checkbox"
                   checked="checked"
                   class="toggle"
+                  readonly="readonly"
                 />
 
                 <span class="toggle-mark"></span>
