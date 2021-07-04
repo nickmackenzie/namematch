@@ -43,7 +43,11 @@ function NameMatch() {
     });
   }, []);
   if (view === "girl") {
-    currentDisplay = <GirlCard></GirlCard>;
+    currentDisplay = (
+      <div className="d-flex">
+        <GirlCard></GirlCard>;
+      </div>
+    );
   } else if (view === "matches") {
     currentDisplay = (
       <div className="d-flex">
@@ -64,7 +68,7 @@ function NameMatch() {
         <Alert alert={alertType} show={alert}></Alert>
         <NavBar></NavBar>
 
-        <div className="flex justify-center">{currentDisplay}</div>
+        <div className="">{currentDisplay}</div>
       </div>
       <BottomNav view={view} onChange={handleChange}></BottomNav>
     </div>
