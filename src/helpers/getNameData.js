@@ -5,13 +5,11 @@ export function getList() {
   //   data.json()
   // );
 
-  const user = localStorage.getItem("person");
+  const user = localStorage.getItem("email");
   console.log("user", user);
   return (
     axios
-      .get(`${process.env.REACT_APP_BASE_URL}/api/boynames/`, {
-        params: { user: user },
-      })
+      .get(`${process.env.REACT_APP_BASE_URL}/api/boynames/?user=${user}`, {})
       //.then((response) => this.setState({ articleId: response.data.id }));
       .then((data) => data.data)
   );

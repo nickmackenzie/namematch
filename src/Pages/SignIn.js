@@ -1,29 +1,68 @@
 import React, { useState } from "react";
 import { loginUser } from "../helpers/SignInHelper";
 import loginIllustration from "../imgs/loginIllustration.svg";
+import toast, { Toaster } from "react-hot-toast";
+import { themeChange } from "theme-change";
+import { Player } from "@lottiefiles/react-lottie-player";
+const alertEmptyString = () => {
+  toast.custom((t) => (
+    <div
+      className={`${
+        t.visible ? "animate-enter" : "animate-leave"
+      } max-w-md  w-full bg-base-200 shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
+    >
+      <div className="flex-1 w-0 p-4">
+        <div className="flex items-start">
+          <div className="flex-shrink-0 pt-0.5">
+            <Player
+              mode="bounce"
+              background="transparent"
+              autoplay
+              keepLastFrame
+              src="https://assets3.lottiefiles.com/packages/lf20_ApoETF.json"
+              style={{ height: "72px", width: "48px" }}
+            ></Player>
+          </div>
+          <div className="ml-3 flex-1">
+            <p className="text-lg font-medium text-error align-center">
+              Checking Details...
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  ));
+};
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const submitValue = () => {
-    loginUser(email, password).then((user) => {
-      console.log("user", user);
-      if (user !== false) {
-        localStorage.setItem("isAuthenticated", "true");
-        localStorage.setItem("email", user.email);
-        localStorage.setItem("theme", user.theme);
-        let htmlSelect = document.getElementsByTagName("html");
+    loginUser(email, password)
+      .then((user) => {
+        console.log("user", user);
+        if (user !== false) {
+          alertEmptyString();
+          localStorage.setItem("isAuthenticated", "true");
+          localStorage.setItem("email", user.email);
+          localStorage.setItem("theme", user.theme);
+          let htmlSelect = document.getElementsByTagName("html");
 
-        htmlSelect[0].dataset.theme = "dark" ? "dark" : "light";
-        window.location.href = "/namematch";
-      } else {
-        alert("user not found");
-      }
-    });
+          htmlSelect[0].dataset.theme = "dark" ? "dark" : "light";
+        } else {
+          alert("user not found");
+        }
+      })
+      .then((user) => {
+        setTimeout(() => {
+          window.location.href = "/namematch";
+        }, 3000);
+      });
   };
 
   return (
     <div class="hero min-h-screen bg-base-200">
+      <Toaster></Toaster>
       <div class="flex-col justify-center hero-content lg:flex-row">
         <div class="text-center lg:text-left mx-auto ">
           <h1 class="  text-4xl font-bold">
@@ -33,7 +72,7 @@ function SignIn() {
           <p class="mb-5 text-2xl text-warning capitalize ">
             THE APP FOR EXPECTING COUPLES
           </p>
-          <img width={300} className="mx-auto" src={loginIllustration}></img>
+          <img width={200} className="mx-auto" src={loginIllustration}></img>
         </div>
         <div class="rounded card flex-shrink-0 w-full max-w-sm shadow-sm bg-base-100">
           <div class="card-body">

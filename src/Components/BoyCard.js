@@ -9,6 +9,7 @@ import Spinner from "../spinner.svg";
 import { ImSpinner6 } from "react-icons/im";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import { Player } from "@lottiefiles/react-lottie-player";
 const alertLike = () => {
   toast.success("Liked", {
     position: "top-center",
@@ -17,13 +18,7 @@ const alertLike = () => {
     },
   });
 };
-const loadingAlert = () => {
-  toast.promise(getList(), {
-    loading: "Loading...",
-    success: <b>Loading Complete</b>,
-    error: <b>Could not load names.</b>,
-  });
-};
+
 const alertError = () => {
   toast.error("Error", {
     position: "top-center",
@@ -31,6 +26,25 @@ const alertError = () => {
       padding: "1.5rem",
     },
   });
+};
+
+const loadingAlert = () => {
+  toast.custom((t) => (
+    <div
+      className={`${
+        t.visible ? "animate-enter" : "animate-leave"
+      } max-w-md  w-full  rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
+    >
+      <Player
+        mode="bounce"
+        background="transparent"
+        autoplay
+        speed="2"
+        keepLastFrame
+        src="https://assets10.lottiefiles.com/packages/lf20_QBlCSK.json"
+      ></Player>
+    </div>
+  ));
 };
 function BoyCard() {
   const [list, setList] = useState([]);
@@ -40,7 +54,7 @@ function BoyCard() {
   let mounted = false;
   useEffect(() => {
     mounted = true;
-    loadingAlert();
+
     getList().then((items) => {
       if (mounted) {
         setList(items);
@@ -65,7 +79,7 @@ function BoyCard() {
       .then(function (response) {
         console.log("response", response);
 
-        alertLike();
+        loadingAlert();
         return response;
       })
       .catch(function (error) {
@@ -87,10 +101,7 @@ function BoyCard() {
             class="text-green-500 opacity-75 top-1/2 my-0 mx-auto block relative w-0 h-0"
             style={style}
           >
-            <i class="fas fa-circle-notch fa-spin fa-5x">
-              {" "}
-              <ImSpinner6 className="icon-spin" size={70}></ImSpinner6>
-            </i>
+            <i class="fas fa-circle-notch fa-spin fa-5x"> </i>
           </span>
         </div>
       );

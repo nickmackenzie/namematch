@@ -3,7 +3,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { themeChange } from "theme-change";
-
+import { Player } from "@lottiefiles/react-lottie-player";
 const alertSuccess = () => {
   toast.success("Successfully Updated!", {
     position: "top-center",
@@ -13,12 +13,33 @@ const alertSuccess = () => {
   });
 };
 const alertEmptyString = () => {
-  toast.error("Please Set a Code.", {
-    position: "top-center",
-    style: {
-      padding: "1.5rem",
-    },
-  });
+  toast.custom((t) => (
+    <div
+      className={`${
+        t.visible ? "animate-enter" : "animate-leave"
+      } max-w-md  w-full bg-base-200 shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
+    >
+      <div className="flex-1 w-0 p-4">
+        <div className="flex items-start">
+          <div className="flex-shrink-0 pt-0.5">
+            <Player
+              mode="bounce"
+              background="transparent"
+              autoplay
+              keepLastFrame
+              src="https://assets3.lottiefiles.com/packages/lf20_VnOIrj.json"
+              style={{ height: "48px", width: "48px" }}
+            ></Player>
+          </div>
+          <div className="ml-3 flex-1">
+            <p className="text-lg font-medium text-error align-center">
+              New Code Can Not Be Blank.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  ));
 };
 const alertError = () => {
   toast.error("There was a problem.", {

@@ -212,7 +212,7 @@ router.get("/index/choice/boy", function (req, res, next) {
 
 router.get("/boynames", function (req, res, next) {
   console.log("parrams", req.query);
-  User.findOne({ email: "nick" }, function (er, user) {
+  User.findOne({ email: req.query.user }, function (er, user) {
     let userLikes = user.likes;
     let userDislikes = user.dislikes;
     Name.find(

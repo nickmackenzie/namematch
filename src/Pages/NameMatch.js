@@ -11,7 +11,7 @@ import "swiper/swiper.scss";
 import "swiper/components/navigation/navigation.scss";
 import Advanced from "../Components/Advanced";
 import Alert from "../Components/Alert";
-
+import { Player, Controls } from "@lottiefiles/react-lottie-player";
 function NameMatch() {
   const [view, setView] = useState("boy");
   const [alert, showAlert] = useState(false);
@@ -43,11 +43,7 @@ function NameMatch() {
     });
   }, []);
   if (view === "girl") {
-    currentDisplay = (
-      <div className="d-flex">
-        <GirlCard></GirlCard>;
-      </div>
-    );
+    currentDisplay = <GirlCard></GirlCard>;
   } else if (view === "matches") {
     currentDisplay = (
       <div className="d-flex">
