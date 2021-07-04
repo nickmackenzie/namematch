@@ -8,26 +8,19 @@ const alertLoginSuccess = () => {
   toast.custom((t) => (
     <div
       className={`${
-        t.visible ? "animate-enter" : "animate-leave"
-      } max-w-md  w-full bg-base-content shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
+        t.visible ? "fade-in-fwd" : "fade-out-bck"
+      } card round bg-base-content bg-opacity-30 shadow-lg rounded-lg pointer-events-auto`}
     >
-      <div className="flex-1 w-0 p-4">
-        <div className="flex items-start">
-          <div className="flex-shrink-0 pt-0.5">
-            <Player
-              mode="bounce"
-              background="transparent"
-              autoplay
-              speed="1.5"
-              keepLastFrame
-              src="https://assets3.lottiefiles.com/packages/lf20_ApoETF.json"
-              style={{ height: "72px", width: "48px" }}
-            ></Player>
-          </div>
-          <div className="ml-3 flex-1">
-            <p className="text-2xl  text-base-100 mt-4">Signing In</p>
-          </div>
-        </div>
+      <div className="m-2 p-2">
+        <Player
+          mode="bounce"
+          background="transparent"
+          autoplay
+          speed="1"
+          keepLastFrame
+          src="https://assets3.lottiefiles.com/packages/lf20_ApoETF.json"
+          style={{ height: "100px", width: "100px" }}
+        ></Player>
       </div>
     </div>
   ));
@@ -37,64 +30,88 @@ const userNotFoundAlert = () => {
   toast.custom((t) => (
     <div
       className={`${
-        t.visible ? "animate-enter" : "animate-leave"
-      } max-w-md  w-full bg-base-content shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
+        t.visible ? "fade-in-fwd" : "fade-out-bck"
+      } card round bg-base-content bg-opacity-40 shadow-lg rounded-lg pointer-events-auto`}
     >
-      <div className="flex-1 w-0 p-4">
-        <div className="flex items-start">
-          <div className="flex-shrink-0 pt-0.5">
-            <Player
-              mode="bounce"
-              background="transparent"
-              autoplay
-              speed="1"
-              keepLastFrame
-              src="https://assets4.lottiefiles.com/packages/lf20_ndk1Mk.json"
-              style={{ height: "72px", width: "72px" }}
-            ></Player>
-          </div>
-          <div className="ml-3 flex-1">
-            <p className="text-lg  text-base-100 mt-4">
-              Username or Password is Wrong
-            </p>
-          </div>
-        </div>
+      <div className="m-2 p-2">
+        <Player
+          mode="bounce"
+          background="transparent"
+          autoplay
+          speed="1"
+          keepLastFrame
+          src="https://assets4.lottiefiles.com/packages/lf20_ndk1Mk.json"
+          style={{ height: "48px", width: "48px" }}
+        ></Player>
       </div>
+
+      <p className="text-lg  text-base-100 p-4">
+        Username or Password is Wrong
+      </p>
     </div>
   ));
 };
+const emptyFieldAlert = () => {
+  toast.custom((t) => (
+    <div
+      className={`${
+        t.visible ? "fade-in-fwd" : "fade-out-bck"
+      } card round bg-base-content bg-opacity-20 shadow-lg rounded-lg pointer-events-auto`}
+    >
+      <div className="p-2">
+        <Player
+          mode="bounce"
+          background="transparent"
+          autoplay
+          speed="1"
+          keepLastFrame
+          src="https://assets6.lottiefiles.com/packages/lf20_f1cFsO.json"
+          style={{ height: "80px", width: "80px" }}
+        ></Player>
+      </div>
 
+      <p className="text-base-content p-4">
+        Please enter an
+        <br /> email and password
+      </p>
+    </div>
+  ));
+};
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const submitValue = () => {
-    loginUser(email, password)
-      .then((user) => {
-        console.log("user", user);
-        if (user !== false) {
-          alertLoginSuccess();
-          localStorage.setItem("isAuthenticated", "true");
-          localStorage.setItem("email", user.email);
-          localStorage.setItem("theme", user.theme);
-          let htmlSelect = document.getElementsByTagName("html");
+    if (email != "" || password !== "") {
+      loginUser(email, password)
+        .then((user) => {
+          console.log("user", user);
+          if (user !== false) {
+            alertLoginSuccess();
+            localStorage.setItem("isAuthenticated", "true");
+            localStorage.setItem("email", user.email);
+            localStorage.setItem("theme", user.theme);
+            let htmlSelect = document.getElementsByTagName("html");
 
-          return user;
-        } else {
-          userNotFoundAlert();
-          return user;
-        }
-      })
-      .then((user) => {
-        console.log("user", user);
-        if (user !== false) {
-          setTimeout(() => {
-            window.location.href = "/namematch";
-          }, 3000);
-        } else {
-          return false;
-        }
-      });
+            return user;
+          } else {
+            userNotFoundAlert();
+            return user;
+          }
+        })
+        .then((user) => {
+          console.log("user", user);
+          if (user !== false) {
+            setTimeout(() => {
+              window.location.href = "/namematch";
+            }, 3000);
+          } else {
+            return false;
+          }
+        });
+    } else {
+      emptyFieldAlert();
+    }
   };
 
   return (

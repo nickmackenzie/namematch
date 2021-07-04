@@ -8,7 +8,7 @@ const accountCreatedSuccessAlert = () => {
   toast.custom((t) => (
     <div
       className={`${
-        t.visible ? "animate-enter" : "animate-leave"
+        t.visible ? "fade-in-fwd" : "fade-out-bck"
       } max-w-md  w-full bg-base-content shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
     >
       <div className="flex-1 w-0 p-4">
@@ -25,7 +25,7 @@ const accountCreatedSuccessAlert = () => {
             ></Player>
           </div>
           <div className="ml-3 flex-1">
-            <p className="text-2xl  text-base-100 mt-4">Signing In</p>
+            <p className="text-2xl  text-base-100 mt-4">Creating Account</p>
           </div>
         </div>
       </div>
@@ -36,26 +36,20 @@ const userFoundAlert = () => {
   toast.custom((t) => (
     <div
       className={`${
-        t.visible ? "animate-enter" : "animate-leave"
-      } max-w-md  w-full bg-base-content shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
+        t.visible ? "fade-in-fwd" : "fade-out-bck"
+      }    card round bg-base-content bg-opacity-40 shadow-lg rounded-lg pointer-events-auto `}
     >
-      <div className="flex-1 w-0 p-4">
-        <div className="flex items-start">
-          <div className="flex-shrink-0 pt-0.5">
-            <Player
-              mode="bounce"
-              background="transparent"
-              autoplay
-              speed="1.5"
-              keepLastFrame
-              src="https://assets4.lottiefiles.com/packages/lf20_7b2658.json"
-              style={{ height: "100px", width: "100px" }}
-            ></Player>
-          </div>
-          <div className="ml-3 flex-1">
-            <p className="text-lg  text-base-100 mt-4">E-mail already taken</p>
-          </div>
-        </div>
+      <div className="m-2 p-2">
+        <Player
+          mode="bounce"
+          background="transparent"
+          autoplay
+          speed="1"
+          keepLastFrame
+          src="https://assets6.lottiefiles.com/packages/lf20_f1cFsO.json"
+          style={{ height: "75px", width: "75px" }}
+        ></Player>
+        <p className="text-base-content">E-mail Taken</p>
       </div>
     </div>
   ));

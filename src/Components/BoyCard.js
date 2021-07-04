@@ -32,7 +32,7 @@ const loadingAlert = () => {
   toast.custom((t) => (
     <div
       className={`${
-        t.visible ? "animate-enter" : "animate-leave"
+        t.visible ? "fade-in-fwd" : "fade-out-bck"
       } max-w-md  w-full  rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
     >
       <Player
