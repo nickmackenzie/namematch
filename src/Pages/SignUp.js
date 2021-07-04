@@ -1,6 +1,93 @@
 import React, { useState, useEffect, useRef } from "react";
 import { createUser } from "../helpers/SignInHelper";
+import toast, { Toaster } from "react-hot-toast";
+import { themeChange } from "theme-change";
+import { Player } from "@lottiefiles/react-lottie-player";
 
+const accountCreatedSuccessAlert = () => {
+  toast.custom((t) => (
+    <div
+      className={`${
+        t.visible ? "animate-enter" : "animate-leave"
+      } max-w-md  w-full bg-base-content shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
+    >
+      <div className="flex-1 w-0 p-4">
+        <div className="flex items-start">
+          <div className="flex-shrink-0 pt-0.5">
+            <Player
+              mode="bounce"
+              background="transparent"
+              autoplay
+              speed="1.5"
+              keepLastFrame
+              src="https://assets3.lottiefiles.com/packages/lf20_ApoETF.json"
+              style={{ height: "72px", width: "48px" }}
+            ></Player>
+          </div>
+          <div className="ml-3 flex-1">
+            <p className="text-2xl  text-base-100 mt-4">Signing In</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  ));
+};
+const userFoundAlert = () => {
+  toast.custom((t) => (
+    <div
+      className={`${
+        t.visible ? "animate-enter" : "animate-leave"
+      } max-w-md  w-full bg-base-content shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
+    >
+      <div className="flex-1 w-0 p-4">
+        <div className="flex items-start">
+          <div className="flex-shrink-0 pt-0.5">
+            <Player
+              mode="bounce"
+              background="transparent"
+              autoplay
+              speed="1.5"
+              keepLastFrame
+              src="https://assets4.lottiefiles.com/packages/lf20_7b2658.json"
+              style={{ height: "100px", width: "100px" }}
+            ></Player>
+          </div>
+          <div className="ml-3 flex-1">
+            <p className="text-lg  text-base-100 mt-4">E-mail already taken</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  ));
+};
+const creatingAccountAlert = () => {
+  toast.custom((t) => (
+    <div
+      className={`${
+        t.visible ? "animate-enter" : "animate-leave"
+      } max-w-md  w-full bg-base-content shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
+    >
+      <div className="flex-1 w-0 p-4">
+        <div className="flex items-start">
+          <div className="flex-shrink-0 pt-0.5">
+            <Player
+              mode="bounce"
+              background="transparent"
+              autoplay
+              speed="1"
+              keepLastFrame
+              src="https://assets4.lottiefiles.com/packages/lf20_gzoqde3x.json"
+              style={{ height: "75px", width: "75px" }}
+            ></Player>
+          </div>
+          <div className="ml-3 flex-1">
+            <p className="text-lg  text-base-100 mt-4">Creating Account</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  ));
+};
 function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -8,18 +95,23 @@ function SignUp() {
   const submitValue = () => {
     createUser(email, password).then((user) => {
       if (user !== false) {
-        window.location.href = "/";
+        creatingAccountAlert();
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 3000);
       } else {
-        alert("user already made");
+        userFoundAlert();
+        return user;
       }
     });
   };
 
   return (
     <div class="hero min-h-screen bg-base-200">
+      <Toaster></Toaster>
       <div class="flex-col justify-center hero-content lg:flex-row">
         <div class="text-center lg:text-left">
-          <h1 class="mb-5 text-5xl font-bold">Create a NameMatch Account</h1>
+          <h1 class="mb-5 text-5xl font-bold">Create a Name Match Account</h1>
           <p class="mb-5">
             Create an Account to match baby names with your partner.
           </p>

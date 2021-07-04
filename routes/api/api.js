@@ -406,27 +406,33 @@ router.get("/delete", function (req, res, next) {
 });
 
 router.post("/signup", function (req, res, next) {
-  console.log(req.query);
-  const saltRounds = 10;
-  const pw = req.query.pw;
-  let hashPw = "";
-  bcrypt.genSalt(saltRounds, function (err, salt) {
-    bcrypt.hash(pw, salt, function (err, hash) {
-      hashPw = hash;
-      let newUser = new User({
-        partner: "",
-        positionBoy: 1,
-        positionGirl: 1,
-        backgroundChoice: "watercolor",
-        likes: [""],
-        dislikes: [""],
-        email: req.query.user,
-        password: hashPw,
-      });
+  User.findOne({ email: req.query.user }, function (err, existingUser) {
+    console.log("exsiting", existingUser);
+    if (existingUser === null) {
+      const saltRounds = 10;
+      const pw = req.query.pw;
+      let hashPw = "";
+      bcrypt.genSalt(saltRounds, function (err, salt) {
+        bcrypt.hash(pw, salt, function (err, hash) {
+          hashPw = hash;
+          let newUser = new User({
+            partner: "",
+            positionBoy: 1,
+            positionGirl: 1,
+            backgroundChoice: "watercolor",
+            likes: [""],
+            dislikes: [""],
+            email: req.query.user,
+            password: hashPw,
+          });
 
-      newUser.save();
-      res.status(200).send(true);
-    });
+          newUser.save();
+          res.status(200).send(true);
+        });
+      });
+    } else {
+      res.status(200).send(false);
+    }
   });
 });
 

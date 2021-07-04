@@ -79,7 +79,6 @@ function SignIn() {
           localStorage.setItem("theme", user.theme);
           let htmlSelect = document.getElementsByTagName("html");
 
-          htmlSelect[0].dataset.theme = "dark" ? "dark" : "light";
           return user;
         } else {
           userNotFoundAlert();

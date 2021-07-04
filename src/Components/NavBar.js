@@ -11,17 +11,17 @@ function NavBar(props) {
     console.log(event.currentTarget);
     if (event.currentTarget.type === "checkbox") {
       event.currentTarget.type = "checked";
-      localStorage.setItem("theme", "light");
-      let htmlSelect = document.getElementsByTagName("html");
-
-      htmlSelect[0].dataset.theme = "light";
-    } else {
-      console.log("else");
-      event.currentTarget.type = "checkbox";
-      localStorage.setItem("theme", "light");
+      localStorage.setItem("theme", "dark");
       let htmlSelect = document.getElementsByTagName("html");
 
       htmlSelect[0].dataset.theme = "dark";
+    } else {
+      console.log("else");
+      event.currentTarget.type = "checkbox";
+      localStorage.setItem("theme", "cupcake");
+      let htmlSelect = document.getElementsByTagName("html");
+
+      htmlSelect[0].dataset.theme = "cupcake";
     }
   }
 
