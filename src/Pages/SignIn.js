@@ -4,12 +4,12 @@ import loginIllustration from "../imgs/loginIllustration.svg";
 import toast, { Toaster } from "react-hot-toast";
 import { themeChange } from "theme-change";
 import { Player } from "@lottiefiles/react-lottie-player";
-const alertEmptyString = () => {
+const alertLoginSuccess = () => {
   toast.custom((t) => (
     <div
       className={`${
         t.visible ? "animate-enter" : "animate-leave"
-      } max-w-md  w-full bg-base-200 shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
+      } max-w-md  w-full bg-base-content shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
     >
       <div className="flex-1 w-0 p-4">
         <div className="flex items-start">
@@ -18,14 +18,44 @@ const alertEmptyString = () => {
               mode="bounce"
               background="transparent"
               autoplay
+              speed="1.5"
               keepLastFrame
               src="https://assets3.lottiefiles.com/packages/lf20_ApoETF.json"
               style={{ height: "72px", width: "48px" }}
             ></Player>
           </div>
           <div className="ml-3 flex-1">
-            <p className="text-lg font-medium text-error align-center">
-              Checking Details...
+            <p className="text-2xl  text-base-100 mt-4">Signing In</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  ));
+};
+
+const userNotFoundAlert = () => {
+  toast.custom((t) => (
+    <div
+      className={`${
+        t.visible ? "animate-enter" : "animate-leave"
+      } max-w-md  w-full bg-base-content shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
+    >
+      <div className="flex-1 w-0 p-4">
+        <div className="flex items-start">
+          <div className="flex-shrink-0 pt-0.5">
+            <Player
+              mode="bounce"
+              background="transparent"
+              autoplay
+              speed="1"
+              keepLastFrame
+              src="https://assets4.lottiefiles.com/packages/lf20_ndk1Mk.json"
+              style={{ height: "72px", width: "72px" }}
+            ></Player>
+          </div>
+          <div className="ml-3 flex-1">
+            <p className="text-lg  text-base-100 mt-4">
+              Username or Password is Wrong
             </p>
           </div>
         </div>
@@ -33,6 +63,7 @@ const alertEmptyString = () => {
     </div>
   ));
 };
+
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -42,21 +73,28 @@ function SignIn() {
       .then((user) => {
         console.log("user", user);
         if (user !== false) {
-          alertEmptyString();
+          alertLoginSuccess();
           localStorage.setItem("isAuthenticated", "true");
           localStorage.setItem("email", user.email);
           localStorage.setItem("theme", user.theme);
           let htmlSelect = document.getElementsByTagName("html");
 
           htmlSelect[0].dataset.theme = "dark" ? "dark" : "light";
+          return user;
         } else {
-          alert("user not found");
+          userNotFoundAlert();
+          return user;
         }
       })
       .then((user) => {
-        setTimeout(() => {
-          window.location.href = "/namematch";
-        }, 3000);
+        console.log("user", user);
+        if (user !== false) {
+          setTimeout(() => {
+            window.location.href = "/namematch";
+          }, 3000);
+        } else {
+          return false;
+        }
       });
   };
 

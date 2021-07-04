@@ -78,9 +78,10 @@ function BoyCard() {
       })
       .then(function (response) {
         console.log("response", response);
-
-        loadingAlert();
-        return response;
+        if (response.data) {
+          loadingAlert();
+          return response;
+        }
       })
       .catch(function (error) {
         console.log(error);

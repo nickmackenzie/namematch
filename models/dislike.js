@@ -1,14 +1,14 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const likeSchema = new Schema({
+const dislikedSchema = new Schema({
   name: String,
   sex: String,
   id: Number,
   meaning: String,
   popularity: String,
-  likedBy: { type: mongoose.Schema.Types.ObjectId, ref: "Users" },
+  dislikedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   dateCreated: Date,
 });
 
-module.exports = mongoose.model("likes", likeSchema);
+module.exports = mongoose.model("dislikes", dislikedSchema);
