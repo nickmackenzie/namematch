@@ -56,7 +56,7 @@ const emptyFieldAlert = () => {
     <div
       className={`${
         t.visible ? "fade-in-fwd" : "fade-out-bck"
-      } card round bg-base-content bg-opacity-20 shadow-lg rounded-lg pointer-events-auto`}
+      } card round bg-base-content bg-opacity-40 shadow-lg rounded-lg pointer-events-auto`}
     >
       <div className="p-2">
         <Player
@@ -70,7 +70,7 @@ const emptyFieldAlert = () => {
         ></Player>
       </div>
 
-      <p className="text-base-content p-4">
+      <p className="text-base-content m-2">
         Please enter an
         <br /> email and password
       </p>
@@ -115,75 +115,57 @@ function SignIn() {
   };
 
   return (
-    <div class="hero min-h-screen bg-base-200">
-      <Toaster></Toaster>
-      <div class="flex-col justify-center hero-content lg:flex-row">
-        <div class="text-center lg:text-left mx-auto ">
-          <h1 class="  text-4xl font-bold">
-            <span className="text-primary">NAME</span>
-            <span className="text-secondary"> MATCH</span>
-          </h1>
-          <p class="mb-5 text-2xl text-warning capitalize ">
-            THE APP FOR EXPECTING COUPLES
-          </p>
-          <img width={200} className="mx-auto" src={loginIllustration}></img>
-        </div>
-        <div class="rounded card flex-shrink-0 w-full max-w-sm shadow-sm bg-base-100">
-          <div class="card-body">
-            <div class="form-control">
-              <label class="label">
-                <span class="label-text">Username</span>
-              </label>
-              <input
-                type="email"
-                required
-                placeholder="email"
-                class="input input-bordered"
-                onChange={(e) => setEmail(e.target.value)}
-                class="input input-bordered"
-                placeholder=""
-              />
-            </div>
-            <div class="form-control">
-              <label class="label">
-                <span class="label-text">Password</span>
-              </label>
-              <input
-                type="password"
-                minlength="8"
-                required
-                placeholder=""
-                class="input input-bordered"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <label class="label">
-                <a href="#" class="label-text-alt text-error">
-                  Forgot password?
-                </a>
-              </label>
-            </div>
-            <div class="form-control mt-6 mb-3">
-              <button
-                type="button"
-                value="Login"
-                class="btn btn-primary"
-                classNameName="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
-                type=""
-                placeholder="Enter your password"
-                onClick={submitValue}
-              >
-                Login
-              </button>
-            </div>
-            <label class="label">
-              <a href="#" href="/signup" class="label-text-alt">
-                Don't Have an Account?{" "}
-                <span className="text-warning"> Sign Up!</span>
-              </a>
-            </label>
-          </div>
-        </div>
+    <div class="card-body p-3">
+      <div class="form-control">
+        <label class="label">
+          <span class="label-text">Username</span>
+        </label>
+        <input
+          type="email"
+          required
+          placeholder="email"
+          class="input input-bordered"
+          onChange={(e) => setEmail(e.target.value)}
+          class="input input-bordered"
+          placeholder=""
+        />
       </div>
+      <div class="form-control">
+        <label class="label">
+          <span class="label-text">Password</span>
+        </label>
+        <input
+          type="password"
+          minlength="8"
+          required
+          placeholder=""
+          class="input input-bordered"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <label class="label">
+          <a href="#" class="label-text-alt text-error">
+            Forgot password?
+          </a>
+        </label>
+      </div>
+      <div class="form-control mt-1 mb-1">
+        <button
+          type="button"
+          value="Login"
+          class="btn btn-primary"
+          classNameName="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
+          type=""
+          placeholder="Enter your password"
+          onClick={submitValue}
+        >
+          Login
+        </button>
+      </div>
+      <label class="label">
+        <a href="#" href="/signup" class="label-text-alt">
+          Don't Have an Account? <span className="text-warning"> Sign Up!</span>
+        </a>
+      </label>
     </div>
   );
 }
