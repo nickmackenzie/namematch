@@ -10,6 +10,7 @@ import { ImSpinner6 } from "react-icons/im";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { Player } from "@lottiefiles/react-lottie-player";
+
 const alertLike = () => {
   toast.success("Liked", {
     position: "top-center",

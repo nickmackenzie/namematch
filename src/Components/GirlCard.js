@@ -2,17 +2,56 @@ import React, { useState, useEffect, useRef } from "react";
 //import {getPos,getList} from '../utils/getNameData'
 import { ImHeart, ImHeartBroken } from "react-icons/im";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { ImSpinner6 } from "react-icons/im";
 import { getGirlList } from "../helpers/getNameData";
 import "swiper/swiper-bundle.css";
-
+import Loader from "react-loader-spinner";
+import Spinner from "../spinner.svg";
+import { ImSpinner6 } from "react-icons/im";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
+import { Player } from "@lottiefiles/react-lottie-player";
+
+const alertLike = () => {
+  toast.success("Liked", {
+    position: "top-center",
+    style: {
+      padding: "1.5rem",
+    },
+  });
+};
+
+const alertError = () => {
+  toast.error("Error", {
+    position: "top-center",
+    style: {
+      padding: "1.5rem",
+    },
+  });
+};
+
+const loadingAlert = () => {
+  toast.custom((t) => (
+    <div
+      className={`${
+        t.visible ? "fade-in-fwd" : "fade-out-bck"
+      } max-w-md  w-full  rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
+    >
+      <Player
+        mode="bounce"
+        background="transparent"
+        autoplay
+        speed="2"
+        keepLastFrame
+        src="https://assets10.lottiefiles.com/packages/lf20_QBlCSK.json"
+      ></Player>
+    </div>
+  ));
+};
 function GirlCard() {
   const [list, setList] = useState([]);
   const [loader, setLoader] = useState("loading");
-
   const characters = list;
-
+  const [swiper, setSwiper] = useState(null);
   let mounted = false;
   useEffect(() => {
     mounted = true;
@@ -26,16 +65,29 @@ function GirlCard() {
 
     return () => (mounted = false);
   }, []);
-
+  const slideTo = (index) => swiper.slideTo(index);
   function likeOrDislike(choice) {
     const userID = localStorage.getItem("email");
-    axios.get(`${process.env.REACT_APP_BASE_URL}/api/UpdateList/`, {
-      params: {
-        choice: choice.currentTarget.id,
-        name: choice.currentTarget.dataset.name,
-        userID: userID,
-      },
-    });
+
+    axios
+      .get(`${process.env.REACT_APP_BASE_URL}/api/UpdateList/`, {
+        params: {
+          choice: choice.currentTarget.id,
+          name: choice.currentTarget.dataset.name,
+          userID: userID,
+        },
+      })
+      .then(function (response) {
+        console.log("response", response);
+        if (response.data) {
+          loadingAlert();
+          return response;
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+        alertError();
+      });
   }
   const findNumber = (string) => {
     console.log(string);
@@ -46,15 +98,12 @@ function GirlCard() {
   function Loader() {
     if (loader === "loading") {
       return (
-        <div class="w-full h-full fixed block top-0 left-0">
+        <div class="w-full h-full fixed block top-0 left-0 ">
           <span
             class="text-green-500 opacity-75 top-1/2 my-0 mx-auto block relative w-0 h-0"
             style={style}
           >
-            <i class="fas fa-circle-notch fa-spin fa-5x">
-              {" "}
-              <ImSpinner6 className="icon-spin" size={70}></ImSpinner6>
-            </i>
+            <i class="fas fa-circle-notch fa-spin fa-5x"> </i>
           </span>
         </div>
       );
@@ -62,19 +111,21 @@ function GirlCard() {
       return true;
     }
   }
-  const swiper = useRef(null);
+
+  //   const swiper = useRef(null)
   return (
-    <>
+    <Swiper
+      spaceBetween={50}
+      slidesPerView={1}
+      onSlideChange={() => console.log("slide change")}
+      onSwiper={setSwiper}
+    >
+      {" "}
       <Loader></Loader>
-      <Swiper
-        spaceBetween={50}
-        slidesPerView={1}
-        onSlideChange={() => console.log("slide change")}
-        onSwiper={(swiper) => console.log(swiper)}
-      >
-        {characters.map((character, i) => (
+      {characters.map((character, i) => (
+        <div className="container h-1/3">
           <SwiperSlide key={i}>
-            <div className="card  shadow-lg bg-base-100">
+            <div className="card h-80 shadow-lg bg-base-100 ">
               <div class="card-body ">
                 <h2 class="card-title text-primary text-4xl">
                   {character.name}
@@ -97,15 +148,17 @@ function GirlCard() {
                     data-name={character.name}
                     onClick={likeOrDislike}
                   >
+                    {" "}
                     <ImHeartBroken size={48}></ImHeartBroken>
                   </button>
                 </div>
               </div>
             </div>
           </SwiperSlide>
-        ))}
-      </Swiper>
-    </>
+        </div>
+      ))}
+      <Toaster></Toaster>
+    </Swiper>
   );
 }
 export default GirlCard;

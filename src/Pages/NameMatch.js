@@ -59,14 +59,15 @@ function NameMatch() {
   }
 
   return (
-    <div className="bg-base-200  p-3 w-screen h-screen flex flex-col justify-between">
+    <div className="bg-base-200  p-3 w-screen  flex flex-col justify-between">
       <div className="container mx-auto ">
         <Alert alert={alertType} show={alert}></Alert>
         <NavBar></NavBar>
 
-        <div className="">{currentDisplay}</div>
+        <div className="\\">{currentDisplay}</div>
+
+        <BottomNav view={view} onChange={handleChange}></BottomNav>
       </div>
-      <BottomNav view={view} onChange={handleChange}></BottomNav>
     </div>
   );
 }
