@@ -9,7 +9,7 @@ const accountCreatedSuccessAlert = () => {
     <div
       className={`${
         t.visible ? "fade-in-fwd" : "fade-out-bck"
-      } max-w-md  w-full bg-base-content shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
+      } ard round bg-base-content bg-opacity-90 shadow-sm rounded-lg pointer-events-auto`}
     >
       <div className="flex-1 w-0 p-4">
         <div className="flex items-start">
@@ -34,11 +34,7 @@ const accountCreatedSuccessAlert = () => {
 };
 const userFoundAlert = () => {
   toast.custom((t) => (
-    <div
-      className={`${
-        t.visible ? "fade-in-fwd" : "fade-out-bck"
-      }    card round bg-base-content bg-opacity-40 shadow-lg rounded-lg pointer-events-auto `}
-    >
+    <div className={`${t.visible ? "fade-in-fwd" : "fade-out-bck"} `}>
       <div className="m-2 p-2">
         <Player
           mode="bounce"
@@ -46,42 +42,32 @@ const userFoundAlert = () => {
           autoplay
           speed="1"
           keepLastFrame
-          src="https://assets6.lottiefiles.com/packages/lf20_f1cFsO.json"
-          style={{ height: "75px", width: "75px" }}
+          src="https://assets8.lottiefiles.com/packages/lf20_K3XjOi.json"
+          style={{ height: "60px", width: "60px" }}
         ></Player>
-        <p className="text-base-content">E-mail Taken</p>
       </div>
     </div>
   ));
 };
+
 const creatingAccountAlert = () => {
   toast.custom((t) => (
-    <div
-      className={`${
-        t.visible ? "animate-enter" : "animate-leave"
-      } max-w-md  w-full bg-base-content shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
-    >
-      <div className="flex-1 w-0 p-4">
-        <div className="flex items-start">
-          <div className="flex-shrink-0 pt-0.5">
-            <Player
-              mode="bounce"
-              background="transparent"
-              autoplay
-              speed="1"
-              keepLastFrame
-              src="https://assets4.lottiefiles.com/packages/lf20_gzoqde3x.json"
-              style={{ height: "75px", width: "75px" }}
-            ></Player>
-          </div>
-          <div className="ml-3 flex-1">
-            <p className="text-lg  text-base-100 mt-4">Creating Account</p>
-          </div>
-        </div>
+    <div className={`${t.visible ? "fade-in-fwd" : "fade-out-bck"} `}>
+      <div className="m-2 p-2">
+        <Player
+          mode="bounce"
+          background="transparent"
+          autoplay
+          speed="1"
+          keepLastFrame
+          src="https://assets4.lottiefiles.com/packages/lf20_gzoqde3x.json"
+          style={{ height: "90px", width: "90px" }}
+        ></Player>
       </div>
     </div>
   ));
 };
+
 function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

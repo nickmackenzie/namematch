@@ -5,12 +5,25 @@ import toast, { Toaster } from "react-hot-toast";
 import { themeChange } from "theme-change";
 import { Player } from "@lottiefiles/react-lottie-player";
 const alertSuccess = () => {
-  toast.success("Successfully Updated!", {
-    position: "top-center",
-    style: {
-      padding: "1.5rem",
-    },
-  });
+  toast.custom((t) => (
+    <div
+      className={`${
+        t.visible ? "fade-in-fwd" : "fade-out-bck"
+      } pointer-events-auto`}
+    >
+      <div className="m-2 p-2">
+        <Player
+          mode="bounce"
+          background="transparent"
+          autoplay
+          speed="1"
+          keepLastFrame
+          src="https://assets1.lottiefiles.com/packages/lf20_wwcnpl4u.json"
+          style={{ height: "150px", width: "150px" }}
+        ></Player>
+      </div>
+    </div>
+  ));
 };
 const alertEmptyString = () => {
   toast.custom((t) => (

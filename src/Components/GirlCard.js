@@ -125,7 +125,7 @@ function GirlCard() {
       {characters.map((character, i) => (
         <div className="container h-1/3">
           <SwiperSlide key={i}>
-            <div className="card h-80 shadow-lg bg-base-100 ">
+            <div className="card h-80 shadow-lg bg-base-100 drop-shadow ">
               <div class="card-body ">
                 <h2 class="card-title text-primary text-4xl">
                   {character.name}

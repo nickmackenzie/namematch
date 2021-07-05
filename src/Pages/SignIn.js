@@ -9,7 +9,7 @@ const alertLoginSuccess = () => {
     <div
       className={`${
         t.visible ? "fade-in-fwd" : "fade-out-bck"
-      } card round bg-base-content bg-opacity-30 shadow-lg rounded-lg pointer-events-auto`}
+      } pointer-events-auto`}
     >
       <div className="m-2 p-2">
         <Player
@@ -18,8 +18,8 @@ const alertLoginSuccess = () => {
           autoplay
           speed="1"
           keepLastFrame
-          src="https://assets3.lottiefiles.com/packages/lf20_ApoETF.json"
-          style={{ height: "100px", width: "100px" }}
+          src="https://assets1.lottiefiles.com/packages/lf20_wwcnpl4u.json"
+          style={{ height: "150px", width: "150px" }}
         ></Player>
       </div>
     </div>
@@ -28,11 +28,7 @@ const alertLoginSuccess = () => {
 
 const userNotFoundAlert = () => {
   toast.custom((t) => (
-    <div
-      className={`${
-        t.visible ? "fade-in-fwd" : "fade-out-bck"
-      } card round bg-base-content bg-opacity-40 shadow-lg rounded-lg pointer-events-auto`}
-    >
+    <div className={`${t.visible ? "fade-in-fwd" : "fade-out-bck"} `}>
       <div className="m-2 p-2">
         <Player
           mode="bounce"
@@ -40,40 +36,27 @@ const userNotFoundAlert = () => {
           autoplay
           speed="1"
           keepLastFrame
-          src="https://assets4.lottiefiles.com/packages/lf20_ndk1Mk.json"
-          style={{ height: "48px", width: "48px" }}
+          src="https://assets8.lottiefiles.com/packages/lf20_K3XjOi.json"
+          style={{ height: "60px", width: "60px" }}
         ></Player>
       </div>
-
-      <p className="text-lg  text-base-100 p-4">
-        Username or Password is Wrong
-      </p>
     </div>
   ));
 };
 const emptyFieldAlert = () => {
   toast.custom((t) => (
-    <div
-      className={`${
-        t.visible ? "fade-in-fwd" : "fade-out-bck"
-      } card round bg-base-content bg-opacity-40 shadow-lg rounded-lg pointer-events-auto`}
-    >
-      <div className="p-2">
+    <div className={`${t.visible ? "fade-in-fwd" : "fade-out-bck"} `}>
+      <div className="m-2">
         <Player
           mode="bounce"
           background="transparent"
           autoplay
           speed="1"
           keepLastFrame
-          src="https://assets6.lottiefiles.com/packages/lf20_f1cFsO.json"
-          style={{ height: "80px", width: "80px" }}
+          src="https://assets8.lottiefiles.com/packages/lf20_K3XjOi.json"
+          style={{ height: "60px", width: "60px" }}
         ></Player>
       </div>
-
-      <p className="text-base-content m-2">
-        Please enter an
-        <br /> email and password
-      </p>
     </div>
   ));
 };
@@ -104,7 +87,7 @@ function SignIn() {
           if (user !== false) {
             setTimeout(() => {
               window.location.href = "/namematch";
-            }, 3000);
+            }, 2000);
           } else {
             return false;
           }
