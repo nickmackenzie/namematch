@@ -34,7 +34,7 @@ const loadingAlert = () => {
     <div
       className={`${
         t.visible ? "fade-in-fwd" : "fade-out-bck"
-      } max-w-md  w-full  rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
+      } max-w-md  w-full`}
     >
       <Player
         mode="bounce"
@@ -70,11 +70,12 @@ function BoyCard() {
     const userID = localStorage.getItem("email");
 
     axios
-      .get(`${process.env.REACT_APP_BASE_URL}/api/UpdateList/`, {
+      .get(`${process.env.REACT_APP_BASE_URL}/api/LikeName/`, {
         params: {
-          choice: choice.currentTarget.id,
+          meaning: choice.currentTarget.id,
           name: choice.currentTarget.dataset.name,
-          userID: userID,
+          email: userID,
+          sex: "boy",
         },
       })
       .then(function (response) {

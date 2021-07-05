@@ -253,6 +253,25 @@ router.get("/updatePartner", function (req, res, next) {
   );
 });
 
+router.get("/LikeName", function (req, res, next) {
+  userLike.findOne(
+    { email: req.query.email, name: req.query.name },
+    function (checkError, previousLikeCheck) {
+      if (previousLikeCheck === null) {
+        let like = new userLike({
+          name: req.query.name,
+          email: req.query.email,
+          sex: req.query.sex,
+        });
+        like.save();
+        res.status(200).send("created");
+      } else {
+        res.send("not null");
+      }
+    }
+  );
+});
+
 router.get("/UpdateList", function (req, res, next) {
   if (req.query.choice === "like") {
     User.findOneAndUpdate(

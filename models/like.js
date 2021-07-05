@@ -3,12 +3,9 @@ const Schema = mongoose.Schema;
 
 const likeSchema = new Schema({
   name: String,
+  email: String,
   sex: String,
-  id: Number,
-  meaning: String,
-  popularity: String,
-  likedBy: { type: mongoose.Schema.Types.ObjectId, ref: "Users" },
-  dateCreated: Date,
+  dateCreated: { type: Date, default: Date.now },
 });
 
 module.exports = mongoose.model("likes", likeSchema);
