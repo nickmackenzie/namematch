@@ -93,19 +93,29 @@ function BoyCard() {
   const findNumber = (string) => {
     console.log(string);
   };
-  let style = {
-    top: "50%",
-  };
+
   function Loader() {
     if (loader === "loading") {
       return (
-        <div class="w-full h-full fixed block top-0 left-0 ">
-          <span
-            class="text-green-500 opacity-75 top-1/2 my-0 mx-auto block relative w-0 h-0"
-            style={style}
-          >
-            <i class="fas fa-circle-notch fa-spin fa-5x"> </i>
-          </span>
+        <div className="container h-1/3">
+          <SwiperSlide>
+            <div className="card h-80 w-1/2  bg-base-100  mx-auto">
+              <div class="card-body ">
+                <h2 class="card-title text-primary text-4xl">Loading...</h2>
+
+                <p></p>
+                <div className="card-actions">
+                  <button class="btn btn-outline btn-secondary btn-circle btn-lg hover:bg-secondary">
+                    <ImHeart size={48} />
+                  </button>
+                  <button class="btn btn-outline btn-error btn-circle btn-lg">
+                    {" "}
+                    <ImHeartBroken size={48}></ImHeartBroken>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </SwiperSlide>
         </div>
       );
     } else {
@@ -120,17 +130,20 @@ function BoyCard() {
       slidesPerView={1}
       onSlideChange={() => console.log("slide change")}
       onSwiper={setSwiper}
+      className="w-96 card"
     >
       {" "}
       <Loader></Loader>
       {characters.map((character, i) => (
         <SwiperSlide key={i}>
-          <div className="card  shadow-lg bg-base-100">
+          <div className="bg-base-100  mx-auto">
             <div class="card-body ">
-              <h2 class="card-title text-primary text-4xl">{character.name}</h2>
+              <div class="card-title text-primary text-4xl">
+                {character.name}
+              </div>
 
-              <p>{character.meaning}</p>
-              <p></p>
+              <p className="">{character.meaning}</p>
+
               <div className="card-actions">
                 <button
                   class="btn btn-outline btn-secondary btn-circle btn-lg hover:bg-secondary"

@@ -383,7 +383,14 @@ router.get("/matches", function (req, res, next) {
     res.status(200).send(userLikes.likes);
   });
 });
+router.get("/getLikes", function (req, res, next) {
+  /*console.log(req.params.input);*/
 
+  let email = req.params.email;
+  userLike.find({ email: req.query.email }, function (err, userLikes) {
+    res.status(200).send(userLikes);
+  });
+});
 router.get("/partnerMatch", function (req, res, next) {
   /*console.log(req.params.input);*/
 

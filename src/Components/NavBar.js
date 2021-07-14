@@ -26,7 +26,7 @@ function NavBar(props) {
   }
 
   return (
-    <div className="navbar sticky mb-10 shadow-lg bg-base-100 text-base-content rounded-box ">
+    <div className="navbar sticky  shadow-lg bg-base-100 w-auto sm:w-1/2  mx-auto text-base-content rounded-box ">
       <div className="flex-none px-2 mx-2">
         <span className="text-lg font-bold">NameMatch</span>
       </div>

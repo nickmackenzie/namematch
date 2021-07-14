@@ -10,16 +10,16 @@ export function getMatches(userID) {
       .then((data) => data.data)
   );
 }
-function getLikes() {
-  const userID = localStorage.getItem("person");
+export function getLikes() {
+  const userID = localStorage.getItem("email");
 
   return (
     axios
-      .get(`${process.env.REACT_APP_BASE_URL}/api/Matches/`, {
-        params: { id: userID },
+      .get(`${process.env.REACT_APP_BASE_URL}/api/getLikes/`, {
+        params: { email: userID },
       })
       //.then((response) => this.setState({ articleId: response.data.id }));
-      .then((data) => data.data.json())
+      .then((data) => data)
   );
 }
 

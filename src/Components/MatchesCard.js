@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 //import { getLikesUser, getMatches, delName } from "../utils/getNameData";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { CgGenderMale, CgGenderFemale } from "react-icons/cg";
-import { getLikesUser, getMatches } from "../helpers/matchHelper";
+import { getLikesUser, getMatches, getLikes } from "../helpers/matchHelper";
 import DataTable from "react-data-table-component";
 import "swiper/swiper.scss";
+import { compareAsc, format } from "date-fns";
 
 const columns = [
   {
@@ -33,61 +34,36 @@ function MatchPanel() {
     const nameData = localStorage.getItem("email");
 
     if (letPass) {
-      getMatches(nameData).then((likes) => {
-        setMatches(likes);
+      getLikes(nameData).then((likesData) => {
+        setLikes(likesData.data);
+        console.log("matches", likes[0]);
       });
 
       letPass = false;
     }
   }, []);
 
+  function renderTable() {
+    return likes.map((like, i) => (
+      <tr key={i}>
+        <th> {like.name}</th>
+        <td>{like.sex}</td>
+        <td>{format(new Date(like.dateCreated), "EEEE MMM do yyyy")}</td>
+      </tr>
+    ));
+  }
   return (
-    <div class="">
-      <div class="py-2 align-middle inline-block">
-        <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-          <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-secondary ">
-              <tr>
-                <th
-                  scope="col"
-                  class="px-6 py-3 text-left text-sm font-bold text-base-content uppercase tracking-wider"
-                >
-                  Name
-                </th>
-                <th
-                  scope="col"
-                  class="px-6 py-3 text-left text-sm font-bold text-base-content uppercase tracking-wider"
-                >
-                  Sex
-                </th>
-              </tr>
-            </thead>
-            <tbody class="bg-base-100 text-base-content rounded-box  divide-y divide-base-content">
-              {matches.map((like, i) => (
-                <tr key={i}>
-                  <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="flex items-center">
-                      <div class="flex-shrink-0 h-10 w-10">
-                        <CgGenderFemale size={48}></CgGenderFemale>
-                      </div>
-                      <div class="ml-4">
-                        <div class="text-lg font-medium text-base-content0">
-                          {like}
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap">
-                    {/* <div id={i} class="badge badge-error m-2">
-                      Remove
-                    </div> */}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
+    <div class="overflow-x-auto shadow round bg-base-300">
+      <table class="table striped w-full bg-base-300 shadow round">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Sex</th>
+            <th>Liked On</th>
+          </tr>
+        </thead>
+        <tbody>{renderTable()}</tbody>
+      </table>
     </div>
   );
 }
