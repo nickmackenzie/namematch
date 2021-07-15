@@ -37,16 +37,14 @@ export default function Advanced(props) {
           pos={"relative"}
         />
         <Heading fontSize={"4xl"} margin={4} fontFamily={"body"}>
-          {props.name}
+          Loading
         </Heading>
 
         <Text
           textAlign={"center"}
           color={useColorModeValue("gray.700", "gray.400")}
           px={3}
-        >
-          {props.meaning}
-        </Text>
+        ></Text>
 
         <Stack mt={8} direction={"row"} spacing={4}>
           <Button

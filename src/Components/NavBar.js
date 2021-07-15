@@ -26,7 +26,7 @@ function NavBar(props) {
   }
 
   return (
-    <div className="navbar    b w-auto sm:w-1/2  mx-auto text-base-content rounded-box ">
+    <div className="navbar  shadow-lg   b w-auto sm:w-1/2  mx-auto text-base-content rounded-box ">
       <div className="flex-1 px-2 mx-2">
         <strong>Name Match</strong>{" "}
       </div>

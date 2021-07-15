@@ -22,6 +22,12 @@ import Advanced from "../Components/Advanced";
 import Alert from "../Components/Alert";
 import { Player, Controls } from "@lottiefiles/react-lottie-player";
 import { Swiper, SwiperSlide } from "swiper/react";
+import toast, { Toaster } from "react-hot-toast";
+import { getList } from "../helpers/getNameData";
+import "swiper/swiper-bundle.css";
+import LoadingCard from "../Components/LoadingCard";
+import axios from "axios";
+
 /* Styles */
 const style = css`
   display: none;
@@ -31,6 +37,58 @@ function NameMatch() {
   const [view, setView] = useState("boy");
   const [alert, showAlert] = useState(false);
   const [alertType, setType] = useState("success");
+
+  const [list, setList] = useState([]);
+  const [loader, setLoader] = useState("loading");
+  const characters = list;
+  const [swiper, setSwiper] = useState(null);
+  let mounted = false;
+  useEffect(() => {
+    mounted = true;
+
+    getList().then((items) => {
+      if (mounted) {
+        setList(items);
+        setLoader("done");
+      }
+    });
+
+    return () => (mounted = false);
+  }, []);
+
+  function Loader() {
+    if (loader === "loading") {
+      return <LoadingCard></LoadingCard>;
+    } else {
+      return true;
+    }
+  }
+
+  const slideTo = (index) => swiper.slideTo(index);
+  function likeOrDislike(choice) {
+    const userID = localStorage.getItem("email");
+
+    axios
+      .get(`${process.env.REACT_APP_BASE_URL}/api/LikeName/`, {
+        params: {
+          meaning: choice.currentTarget.id,
+          name: choice.currentTarget.dataset.name,
+          email: userID,
+          sex: "boy",
+        },
+      })
+      .then(function (response) {
+        console.log("response", response);
+        if (response.data) {
+          loadingAlert();
+          return response;
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+        alertError();
+      });
+  }
 
   let currentDisplay;
   function handlePartnerUpdate(newView) {
@@ -45,6 +103,33 @@ function NameMatch() {
     showAlert(true);
     setType(alertType);
   }
+  const alertError = () => {
+    toast.error("Error", {
+      position: "top-center",
+      style: {
+        padding: "1.5rem",
+      },
+    });
+  };
+
+  const loadingAlert = () => {
+    toast.custom((t) => (
+      <div
+        className={`${
+          t.visible ? "fade-in-fwd" : "fade-out-bck"
+        } max-w-md  w-full`}
+      >
+        <Player
+          mode="bounce"
+          background="transparent"
+          autoplay
+          speed="2"
+          keepLastFrame
+          src="https://assets10.lottiefiles.com/packages/lf20_QBlCSK.json"
+        ></Player>
+      </div>
+    ));
+  };
   useEffect(() => {
     let userEmail = localStorage.getItem("email");
     fetchUser(userEmail).then((user) => {
@@ -70,7 +155,16 @@ function NameMatch() {
       <SettingsCard onChange={handlePartnerUpdate}></SettingsCard>
     );
   } else {
-    currentDisplay = <Advanced></Advanced>;
+    currentDisplay = characters.map((character, i) => (
+      <SwiperSlide key={i}>
+        <Box>
+          <Advanced
+            name={character.name}
+            meaning={character.meaning}
+          ></Advanced>
+        </Box>
+      </SwiperSlide>
+    ));
   }
 
   return (
@@ -83,22 +177,7 @@ function NameMatch() {
         onSlideChange={() => console.log("slide change")}
         onSwiper={(swiper) => console.log(swiper)}
       >
-        <SwiperSlide>
-          {" "}
-          <Box>{currentDisplay}</Box>
-        </SwiperSlide>
-        <SwiperSlide>
-          {" "}
-          <Box>{currentDisplay}</Box>
-        </SwiperSlide>
-        <SwiperSlide>
-          {" "}
-          <Box>{currentDisplay}</Box>
-        </SwiperSlide>
-        <SwiperSlide>
-          {" "}
-          <Box>{currentDisplay}</Box>
-        </SwiperSlide>
+        {currentDisplay}
       </Swiper>
       <Box> </Box>
 
