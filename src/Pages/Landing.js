@@ -5,6 +5,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { themeChange } from "theme-change";
 import { Player } from "@lottiefiles/react-lottie-player";
 import SignIn from "./SignIn";
+
 const alertLoginSuccess = () => {
   toast.custom((t) => (
     <div
@@ -93,7 +94,7 @@ function Landing() {
           <p class="mb-5 text-2xl text-warning capitalize ">
             THE APP FOR EXPECTING COUPLES
           </p>
-          <img width={200} className="mx-auto" src={loginIllustration}></img>
+          {/* <img width={200} className="mx-auto" src={loginIllustration}></img> */}
         </div>
       </div>
       <div class="rounded card flex-shrink-0 w-full max-w-sm shadow-lg bg-base-100">

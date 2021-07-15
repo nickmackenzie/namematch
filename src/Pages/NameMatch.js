@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { fetchUser } from "../helpers/SignInHelper";
+import {
+  Stack,
+  HStack,
+  VStack,
+  Box,
+  StackDivider,
+  Container,
+} from "@chakra-ui/react";
+import { jsx, css } from "@emotion/react";
 import NavBar from "../Components/NavBar";
 import BoyCard from "../Components/BoyCard";
 import GirlCard from "../Components/GirlCard";
@@ -12,6 +21,12 @@ import "swiper/components/navigation/navigation.scss";
 import Advanced from "../Components/Advanced";
 import Alert from "../Components/Alert";
 import { Player, Controls } from "@lottiefiles/react-lottie-player";
+import { Swiper, SwiperSlide } from "swiper/react";
+/* Styles */
+const style = css`
+  display: none;
+`;
+
 function NameMatch() {
   const [view, setView] = useState("boy");
   const [alert, showAlert] = useState(false);
@@ -55,19 +70,42 @@ function NameMatch() {
       <SettingsCard onChange={handlePartnerUpdate}></SettingsCard>
     );
   } else {
-    currentDisplay = <BoyCard></BoyCard>;
+    currentDisplay = <Advanced></Advanced>;
   }
 
   return (
-    <div className="bg-base-200 antialiased  p-3 ">
+    <Container>
       <Alert alert={alertType} show={alert}></Alert>
+      <NavBar h="40px"></NavBar>
+      <Swiper
+        spaceBetween={1}
+        slidesPerView={1}
+        onSlideChange={() => console.log("slide change")}
+        onSwiper={(swiper) => console.log(swiper)}
+      >
+        <SwiperSlide>
+          {" "}
+          <Box>{currentDisplay}</Box>
+        </SwiperSlide>
+        <SwiperSlide>
+          {" "}
+          <Box>{currentDisplay}</Box>
+        </SwiperSlide>
+        <SwiperSlide>
+          {" "}
+          <Box>{currentDisplay}</Box>
+        </SwiperSlide>
+        <SwiperSlide>
+          {" "}
+          <Box>{currentDisplay}</Box>
+        </SwiperSlide>
+      </Swiper>
+      <Box> </Box>
 
-      <NavBar></NavBar>
-
-      {currentDisplay}
-
-      <BottomNav view={view} onChange={handleChange}></BottomNav>
-    </div>
+      <Box>
+        <BottomNav view={view} onChange={handleChange}></BottomNav>
+      </Box>
+    </Container>
   );
 }
 export default NameMatch;

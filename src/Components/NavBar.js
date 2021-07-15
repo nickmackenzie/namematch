@@ -26,11 +26,10 @@ function NavBar(props) {
   }
 
   return (
-    <div className="navbar sticky  shadow-lg bg-base-100 w-auto sm:w-1/2  mx-auto text-base-content rounded-box ">
-      <div className="flex-none px-2 mx-2">
-        <span className="text-lg font-bold">NameMatch</span>
+    <div className="navbar    b w-auto sm:w-1/2  mx-auto text-base-content rounded-box ">
+      <div className="flex-1 px-2 mx-2">
+        <strong>Name Match</strong>{" "}
       </div>
-      <div className="flex-1 px-2 mx-2"></div>
       <div className="flex-none">
         <div class="p-6">
           <div class="form-control">

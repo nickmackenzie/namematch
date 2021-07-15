@@ -130,13 +130,12 @@ function BoyCard() {
       slidesPerView={1}
       onSlideChange={() => console.log("slide change")}
       onSwiper={setSwiper}
-      className="w-96 card"
     >
       {" "}
       <Loader></Loader>
       {characters.map((character, i) => (
-        <SwiperSlide key={i}>
-          <div className="bg-base-100  mx-auto">
+        <SwiperSlide key={i} className="w-96 ">
+          <div className="card w-1/2 bg-base-100  mx-auto">
             <div class="card-body ">
               <div class="card-title text-primary text-4xl">
                 {character.name}

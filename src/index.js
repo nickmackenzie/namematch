@@ -1,17 +1,20 @@
-import React from 'react';
-import {BrowserRouter} from 'react-router-dom';
-import ReactDOM from 'react-dom';
-import './index.css';
-import Routes from './Routes';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import { ChakraProvider } from "@chakra-ui/react";
+import { BrowserRouter } from "react-router-dom";
+import ReactDOM from "react-dom";
+import "./index.css";
+import Routes from "./Routes";
+import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-  <BrowserRouter>  <Routes />
-</BrowserRouter>
-  
+    <BrowserRouter>
+      <ChakraProvider>
+        <Routes />
+      </ChakraProvider>
+    </BrowserRouter>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
