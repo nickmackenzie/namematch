@@ -7,6 +7,9 @@ import {
   Box,
   StackDivider,
   Container,
+  Spinner,
+  Center,
+  Flex,
 } from "@chakra-ui/react";
 import { jsx, css } from "@emotion/react";
 import NavBar from "../Components/NavBar";
@@ -74,7 +77,17 @@ function NameMatch() {
 
   function Loader() {
     if (loader === "loading") {
-      return <LoadingCard></LoadingCard>;
+      return (
+        <Flex align="center" justify="center" marginTop="20">
+          <Spinner
+            thickness="8px"
+            speed="0.65s"
+            emptyColor="gray.200"
+            color="red.500"
+            size="xl"
+          ></Spinner>
+        </Flex>
+      );
     } else {
       return true;
     }
@@ -114,13 +127,17 @@ function NameMatch() {
   }
   function handleChange(newView) {
     setView(newView);
+
     if (newView === "girl") {
+      setLoader("loading");
       getGirlList().then((items) => {
         setList([]);
         setGirlList(items);
         setLoader("done");
       });
     } else if (newView === "boy") {
+      setLoader("loading");
+
       getList().then((items) => {
         setGirlList([]);
         setList(items);
@@ -212,16 +229,15 @@ function NameMatch() {
   return (
     <Container>
       <Alert alert={alertType} show={alert}></Alert>
-
+      <Center> </Center>
       <Swiper
         spaceBetween={1}
         slidesPerView={1}
         onSlideChange={() => console.log("slide change")}
         onSwiper={(swiper) => console.log(swiper)}
       >
-        {currentDisplay}
+        {currentDisplay} <Loader></Loader>
       </Swiper>
-      <Box> </Box>
 
       <Box>
         <BottomNav view={view} onChange={handleChange}></BottomNav>
