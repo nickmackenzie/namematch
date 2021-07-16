@@ -7,6 +7,11 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  background-image: linear-gradient(
+    to top,
+    #fff1eb 0%,
+    #ace0f9 100%
+  ) !important;
 }
 
 .swiper-container {
