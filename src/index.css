@@ -18,3 +18,8 @@ body {
   max-height: 500px;
   min-height: 500px;
 }
+
+.sc-dlnjwi {
+  overflow: scroll;
+  height: 30rem;
+}

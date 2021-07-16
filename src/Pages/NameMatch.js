@@ -201,11 +201,7 @@ function NameMatch() {
       </Box>
     ));
   } else if (view === "matches") {
-    currentDisplay = (
-      <div className="d-flex">
-        <Timeline></Timeline>
-      </div>
-    );
+    currentDisplay = <Timeline></Timeline>;
   } else if (view === "settings") {
     currentDisplay = (
       <SettingsCard onChange={handlePartnerUpdate}></SettingsCard>
