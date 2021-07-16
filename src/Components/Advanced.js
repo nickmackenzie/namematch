@@ -1,4 +1,8 @@
 import React, { useState, useMemo, useEffect } from "react";
+import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
+import { Player } from "@lottiefiles/react-lottie-player";
+
 // import TinderCard from '../react-tinder-card/index'
 import {
   Heading,
@@ -12,10 +16,71 @@ import {
   Badge,
   useColorModeValue,
 } from "@chakra-ui/react";
+
 import { ImHeart, ImHeartBroken } from "react-icons/im";
 
+const alertLike = () => {
+  toast.success("Liked", {
+    position: "top-center",
+    style: {
+      padding: "1.5rem",
+    },
+  });
+};
+
+const alertError = () => {
+  toast.error("Error", {
+    position: "top-center",
+    style: {
+      padding: "1.5rem",
+    },
+  });
+};
+
+const loadingAlert = () => {
+  toast.custom((t) => (
+    <div
+      className={`${
+        t.visible ? "fade-in-fwd" : "fade-out-bck"
+      } max-w-md  w-full`}
+    >
+      <Player
+        mode="bounce"
+        background="transparent"
+        autoplay
+        speed="2"
+        keepLastFrame
+        src="https://assets10.lottiefiles.com/packages/lf20_QBlCSK.json"
+      ></Player>
+    </div>
+  ));
+};
+
+function likeOrDislike(choice) {
+  const userID = localStorage.getItem("email");
+
+  axios
+    .get(`${process.env.REACT_APP_BASE_URL}/api/LikeName/`, {
+      params: {
+        meaning: choice.currentTarget.id,
+        name: choice.currentTarget.dataset.name,
+        email: userID,
+        sex: "boy",
+      },
+    })
+    .then(function (response) {
+      console.log("response", response);
+      if (response.data) {
+        loadingAlert();
+        return response;
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+      alertError();
+    });
+}
 export default function Advanced(props) {
-  console.log();
   return (
     <Center py={6}>
       <Box
@@ -50,6 +115,9 @@ export default function Advanced(props) {
 
         <Stack mt={8} direction={"row"} spacing={4}>
           <Button
+            id="like"
+            data-name={props.name}
+            onClick={likeOrDislike}
             flex={1}
             fontSize={"sm"}
             rounded={"full"}

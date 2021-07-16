@@ -23,7 +23,8 @@ import Alert from "../Components/Alert";
 import { Player, Controls } from "@lottiefiles/react-lottie-player";
 import { Swiper, SwiperSlide } from "swiper/react";
 import toast, { Toaster } from "react-hot-toast";
-import { getList } from "../helpers/getNameData";
+import { getList, getGirlList } from "../helpers/getNameData";
+import { getGif } from "../helpers/giphyHelper.js";
 import "swiper/swiper-bundle.css";
 import LoadingCard from "../Components/LoadingCard";
 import axios from "axios";
@@ -39,19 +40,34 @@ function NameMatch() {
   const [alertType, setType] = useState("success");
 
   const [list, setList] = useState([]);
+  const [girlList, setGirlList] = useState([]);
   const [loader, setLoader] = useState("loading");
   const characters = list;
   const [swiper, setSwiper] = useState(null);
   let mounted = false;
+
+  function GetGif() {
+    getGif().then((gif) => {
+      console.log("gif", gif);
+    });
+  }
   useEffect(() => {
     mounted = true;
-
-    getList().then((items) => {
-      if (mounted) {
-        setList(items);
-        setLoader("done");
-      }
-    });
+    if (view === "boy") {
+      getList().then((items) => {
+        if (mounted) {
+          setList(items);
+          setLoader("done");
+        }
+      });
+    } else if (view === "girl") {
+      getGirlList().then((items) => {
+        if (mounted) {
+          setGirlList(items);
+          setLoader("done");
+        }
+      });
+    }
 
     return () => (mounted = false);
   }, []);
@@ -98,6 +114,19 @@ function NameMatch() {
   }
   function handleChange(newView) {
     setView(newView);
+    if (newView === "girl") {
+      getGirlList().then((items) => {
+        setList([]);
+        setGirlList(items);
+        setLoader("done");
+      });
+    } else if (newView === "boy") {
+      getList().then((items) => {
+        setGirlList([]);
+        setList(items);
+        setLoader("done");
+      });
+    }
   }
   function handleAlert(alertType) {
     showAlert(true);
@@ -143,7 +172,18 @@ function NameMatch() {
     });
   }, []);
   if (view === "girl") {
-    currentDisplay = <GirlCard></GirlCard>;
+    currentDisplay = girlList.map((character, i) => (
+      <Box key={i}>
+        <SwiperSlide>
+          <Box>
+            <Advanced
+              name={character.name}
+              meaning={character.meaning}
+            ></Advanced>
+          </Box>
+        </SwiperSlide>
+      </Box>
+    ));
   } else if (view === "matches") {
     currentDisplay = (
       <div className="d-flex">
@@ -156,21 +196,23 @@ function NameMatch() {
     );
   } else {
     currentDisplay = characters.map((character, i) => (
-      <SwiperSlide key={i}>
-        <Box>
-          <Advanced
-            name={character.name}
-            meaning={character.meaning}
-          ></Advanced>
-        </Box>
-      </SwiperSlide>
+      <Box>
+        <SwiperSlide key={i}>
+          <Box>
+            <Advanced
+              name={character.name}
+              meaning={character.meaning}
+            ></Advanced>
+          </Box>
+        </SwiperSlide>
+      </Box>
     ));
   }
 
   return (
     <Container>
       <Alert alert={alertType} show={alert}></Alert>
-      <NavBar h="40px"></NavBar>
+
       <Swiper
         spaceBetween={1}
         slidesPerView={1}
