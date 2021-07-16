@@ -94,9 +94,7 @@ export default function Advanced(props) {
       >
         <Avatar
           size={"xl"}
-          src={
-            "https://icon-library.com/images/avatar-icon-images/avatar-icon-images-4.jpg"
-          }
+          src={`https://picsum.photos/200/300?random=${props.picture}"`}
           alt={"male name"}
           mb={4}
           pos={"relative"}

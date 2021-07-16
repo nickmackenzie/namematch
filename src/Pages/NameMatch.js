@@ -12,9 +12,7 @@ import {
   Flex,
 } from "@chakra-ui/react";
 import { jsx, css } from "@emotion/react";
-import NavBar from "../Components/NavBar";
-import BoyCard from "../Components/BoyCard";
-import GirlCard from "../Components/GirlCard";
+import Timeline from "../Components/Timeline";
 import SettingsCard from "../Components/SettingsCard";
 import MatchesCard from "../Components/MatchesCard.js";
 import BottomNav from "../Components/BottomNav";
@@ -190,12 +188,13 @@ function NameMatch() {
   }, []);
   if (view === "girl") {
     currentDisplay = girlList.map((character, i) => (
-      <Box key={i}>
+      <Box key={character}>
         <SwiperSlide>
           <Box>
             <Advanced
               name={character.name}
               meaning={character.meaning}
+              picture={i + 3}
             ></Advanced>
           </Box>
         </SwiperSlide>
@@ -204,7 +203,7 @@ function NameMatch() {
   } else if (view === "matches") {
     currentDisplay = (
       <div className="d-flex">
-        <MatchesCard></MatchesCard>
+        <Timeline></Timeline>
       </div>
     );
   } else if (view === "settings") {
@@ -213,12 +212,13 @@ function NameMatch() {
     );
   } else {
     currentDisplay = characters.map((character, i) => (
-      <Box>
-        <SwiperSlide key={i}>
+      <Box key={i}>
+        <SwiperSlide>
           <Box>
             <Advanced
               name={character.name}
               meaning={character.meaning}
+              picture={i}
             ></Advanced>
           </Box>
         </SwiperSlide>
