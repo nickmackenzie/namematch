@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { loginUser } from "../helpers/SignInHelper";
+
 import loginIllustration from "../imgs/loginIllustration.svg";
 import toast, { Toaster } from "react-hot-toast";
 import { themeChange } from "theme-change";
 import { Player } from "@lottiefiles/react-lottie-player";
+import { useToast } from "@chakra-ui/react";
+import { Link } from "@chakra-ui/react";
 
 import {
   Box,
@@ -44,65 +47,44 @@ const avatars = [
     url: "https://bit.ly/code-beast",
   },
 ];
-const alertLoginSuccess = () => {
-  toast.custom((t) => (
-    <div
-      className={`${
-        t.visible ? "fade-in-fwd" : "fade-out-bck"
-      } pointer-events-auto`}
-    >
-      <div className="m-2 p-2">
-        <Player
-          mode="bounce"
-          background="transparent"
-          autoplay
-          speed="1"
-          keepLastFrame
-          src="https://assets1.lottiefiles.com/packages/lf20_wwcnpl4u.json"
-          style={{ height: "150px", width: "150px" }}
-        ></Player>
-      </div>
-    </div>
-  ));
-};
 
-const userNotFoundAlert = () => {
-  toast.custom((t) => (
-    <div className={`${t.visible ? "fade-in-fwd" : "fade-out-bck"} `}>
-      <div className="m-2 p-2">
-        <Player
-          mode="bounce"
-          background="transparent"
-          autoplay
-          speed="1"
-          keepLastFrame
-          src="https://assets8.lottiefiles.com/packages/lf20_K3XjOi.json"
-          style={{ height: "60px", width: "60px" }}
-        ></Player>
-      </div>
-    </div>
-  ));
-};
-const emptyFieldAlert = () => {
-  toast.custom((t) => (
-    <div className={`${t.visible ? "fade-in-fwd" : "fade-out-bck"} `}>
-      <div className="m-2">
-        <Player
-          mode="bounce"
-          background="transparent"
-          autoplay
-          speed="1"
-          keepLastFrame
-          src="https://assets8.lottiefiles.com/packages/lf20_K3XjOi.json"
-          style={{ height: "60px", width: "60px" }}
-        ></Player>
-      </div>
-    </div>
-  ));
-};
-function SignIn() {
+function SignIn(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const toast = useToast();
+  const alertLoginSuccess = () => {
+    toast({
+      title: "Account Found.",
+      description: "Signing in...",
+      status: "success",
+      duration: 9000,
+      isClosable: true,
+    });
+  };
+  const userNotFoundAlert = () => {
+    toast({
+      title: "Please Try Again.",
+      description: "Wrong Password or Username",
+      status: "error",
+      duration: 9000,
+      isClosable: true,
+    });
+  };
+  const emptyFieldAlert = () => {
+    toast({
+      title: "Empty Input",
+      description: "Please fill out the form or create a new account.",
+      status: "warning",
+      duration: 9000,
+      isClosable: true,
+    });
+  };
+
+  function handleChange(event) {
+    // Here, we invoke the callback with the new value
+
+    props.onChange(false);
+  }
 
   const submitValue = () => {
     if (email != "" || password !== "") {
@@ -237,8 +219,13 @@ function SignIn() {
             >
               Login
             </Button>
+            <Text margin={3}>
+              Don't have an account?{" "}
+              <Button id="false" onClick={handleChange}>
+                Sign Up
+              </Button>
+            </Text>
           </Box>
-          form
         </Stack>
       </Container>
     </Box>

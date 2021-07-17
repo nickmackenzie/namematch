@@ -5,6 +5,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { themeChange } from "theme-change";
 import { Player } from "@lottiefiles/react-lottie-player";
 import SignIn from "./SignIn";
+import SignUp from "./SignUp";
 
 const alertLoginSuccess = () => {
   toast.custom((t) => (
@@ -79,9 +80,22 @@ const emptyFieldAlert = () => {
     </div>
   ));
 };
+
 function Landing() {
   const [email, setEmail] = useState("");
+  const [view, setView] = useState(true);
 
-  return <SignIn></SignIn>;
+  function handleChange(newView) {
+    setView(newView);
+  }
+  function HandleViewSwitch() {
+    if (view !== false) {
+      return <SignIn view={view} onChange={handleChange}></SignIn>;
+    } else {
+      return <SignUp view={view} onChange={handleChange}></SignUp>;
+    }
+  }
+
+  return <HandleViewSwitch></HandleViewSwitch>;
 }
 export default Landing;
