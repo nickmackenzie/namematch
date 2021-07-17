@@ -82,25 +82,6 @@ const emptyFieldAlert = () => {
 function Landing() {
   const [email, setEmail] = useState("");
 
-  return (
-    <div class="hero min-h-screen bg-base-200 flex flex-col lg:flex-row justify-center ">
-      <Toaster></Toaster>
-      <div class="flex-col justify-center hero-content lg:flex-row">
-        <div class="text-center lg:text-left mx-auto ">
-          <h1 class="  text-4xl font-bold">
-            <span className="text-primary">NAME</span>
-            <span className="text-secondary"> MATCH</span>
-          </h1>
-          <p class="mb-5 text-2xl text-warning capitalize ">
-            THE APP FOR EXPECTING COUPLES
-          </p>
-          {/* <img width={200} className="mx-auto" src={loginIllustration}></img> */}
-        </div>
-      </div>
-      <div class="rounded card flex-shrink-0 w-full max-w-sm shadow-lg bg-base-100">
-        <SignIn></SignIn>
-      </div>
-    </div>
-  );
+  return <SignIn></SignIn>;
 }
 export default Landing;

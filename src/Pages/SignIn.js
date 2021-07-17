@@ -4,6 +4,46 @@ import loginIllustration from "../imgs/loginIllustration.svg";
 import toast, { Toaster } from "react-hot-toast";
 import { themeChange } from "theme-change";
 import { Player } from "@lottiefiles/react-lottie-player";
+
+import {
+  Box,
+  Flex,
+  Stack,
+  Heading,
+  Text,
+  Container,
+  Input,
+  Button,
+  SimpleGrid,
+  Avatar,
+  AvatarGroup,
+  useBreakpointValue,
+  IconProps,
+  Icon,
+} from "@chakra-ui/react";
+
+const avatars = [
+  {
+    name: "Ryan Florence",
+    url: "https://bit.ly/ryan-florence",
+  },
+  {
+    name: "Segun Adebayo",
+    url: "https://bit.ly/sage-adebayo",
+  },
+  {
+    name: "Kent Dodds",
+    url: "https://bit.ly/kent-c-dodds",
+  },
+  {
+    name: "Prosper Otemuyiwa",
+    url: "https://bit.ly/prosper-baba",
+  },
+  {
+    name: "Christian Nwamba",
+    url: "https://bit.ly/code-beast",
+  },
+];
 const alertLoginSuccess = () => {
   toast.custom((t) => (
     <div
@@ -98,58 +138,111 @@ function SignIn() {
   };
 
   return (
-    <div class="card-body p-3">
-      <div class="form-control">
-        <label class="label">
-          <span class="label-text">Username</span>
-        </label>
-        <input
-          type="email"
-          required
-          placeholder="email"
-          class="input input-bordered"
-          onChange={(e) => setEmail(e.target.value)}
-          class="input input-bordered"
-          placeholder=""
-        />
-      </div>
-      <div class="form-control">
-        <label class="label">
-          <span class="label-text">Password</span>
-        </label>
-        <input
-          type="password"
-          minlength="8"
-          required
-          placeholder=""
-          class="input input-bordered"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <label class="label">
-          <a href="#" class="label-text-alt text-error">
-            Forgot password?
-          </a>
-        </label>
-      </div>
-      <div class="form-control mt-1 mb-1">
-        <button
-          type="button"
-          value="Login"
-          class="btn btn-primary"
-          classNameName="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
-          type=""
-          placeholder="Enter your password"
-          onClick={submitValue}
+    <Box position={"relative"}>
+      <Container
+        as={SimpleGrid}
+        maxW={"7xl"}
+        columns={{ base: 1, md: 2 }}
+        spacing={{ base: 10, lg: 32 }}
+        py={{ base: 10, sm: 20, lg: 32 }}
+      >
+        <Stack spacing={{ base: 10, md: 20 }}>
+          <Heading
+            lineHeight={1.2}
+            fontSize={{ base: "3xl", sm: "4xl", md: "5xl", lg: "6xl" }}
+          >
+            <Text
+              as={"span"}
+              bgGradient="linear(to-r, blue.500,pink.300)"
+              bgClip="text"
+            >
+              Name Match<br></br>
+            </Text>{" "}
+            The App For Expecting <br></br>Couples
+          </Heading>
+        </Stack>
+        <Stack
+          bg={"gray.50"}
+          rounded={"xl"}
+          p={{ base: 4, sm: 6, md: 8 }}
+          spacing={{ base: 8 }}
+          maxW={{ lg: "lg" }}
         >
-          Login
-        </button>
-      </div>
-      <label class="label">
-        <a href="#" href="/signup" class="label-text-alt">
-          Don't Have an Account? <span className="text-warning"> Sign Up!</span>
-        </a>
-      </label>
-    </div>
+          <Stack spacing={4}>
+            <Heading
+              color={"gray.800"}
+              lineHeight={1.1}
+              fontSize={{ base: "2xl", sm: "3xl", md: "4xl" }}
+            >
+              Sign In{" "}
+            </Heading>
+          </Stack>
+          <Box as={"form"} mt={10}>
+            <Stack spacing={4}>
+              <Text
+                as={"span"}
+                bgGradient="linear(to-r, blue.500,blue.300)"
+                bgClip="text"
+              >
+                Username{" "}
+              </Text>
+              <Input
+                type="email"
+                required
+                placeholder="email"
+                class="input input-bordered"
+                onChange={(e) => setEmail(e.target.value)}
+                class="input input-bordered"
+                placeholder=""
+                bg={"gray.100"}
+                border={0}
+                color={"gray.500"}
+                _placeholder={{
+                  color: "gray.500",
+                }}
+              />
+              <Text
+                as={"span"}
+                bgGradient="linear(to-r, blue.500,pink.300)"
+                bgClip="text"
+              >
+                Password{" "}
+              </Text>
+              <Input
+                type="password"
+                minlength="8"
+                required
+                placeholder=""
+                class="input input-bordered"
+                onChange={(e) => setPassword(e.target.value)}
+                bg={"gray.100"}
+                border={0}
+                color={"gray.500"}
+                _placeholder={{
+                  color: "gray.500",
+                }}
+              />
+            </Stack>
+            <Button
+              fontFamily={"heading"}
+              mt={8}
+              w={"full"}
+              onClick={submitValue}
+              bgGradient="linear(to-r, blue.500,blue.300)"
+              color={"white"}
+              _hover={{
+                bgGradient: "linear(to-r, blue.400,blue.500)",
+                boxShadow: "xl",
+              }}
+            >
+              Login
+            </Button>
+          </Box>
+          form
+        </Stack>
+      </Container>
+    </Box>
   );
 }
+
 export default SignIn;
