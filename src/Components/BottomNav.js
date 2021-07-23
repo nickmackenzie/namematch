@@ -16,6 +16,8 @@ import {
   Switch,
   toggleColorMode,
   useColorMode,
+  Divider,
+  Button,
 } from "@chakra-ui/react";
 import { BiCog } from "react-icons/bi";
 function NavBar(props) {
@@ -31,7 +33,7 @@ function NavBar(props) {
   }
   const { colorMode, toggleColorMode } = useColorMode();
   return (
-    <Flex w="full" justifyContent="center">
+    <Flex flexDirection="column">
       <Box
         mx="auto"
         rounded="lg"
@@ -45,7 +47,12 @@ function NavBar(props) {
         p={2}
         textAlign={"center"}
       >
-        <Flex justifyContent="space-between" alignItems="center" mt={4}>
+        <Flex
+          justifyContent="space-between"
+          alignItems="center"
+          mt={4}
+          height="50px"
+        >
           {" "}
           <Link
             color={useColorModeValue("brand.600", "brand.400")}
@@ -59,18 +66,19 @@ function NavBar(props) {
               alignItems="center"
               justifyContent="center"
             >
+              {" "}
+              <span>Boys</span>
               <IoMaleSharp size={"2rem"}> </IoMaleSharp>
-
-              <span class="tab tab-home block text-xs">Boy Names</span>
             </Flex>
           </Link>
+          <Divider m="1" orientation="vertical" />
           <Link
             color={useColorModeValue("brand.600", "brand.400")}
             _hover={{ textDecor: "underline" }}
             id="girl"
             onClick={handleChange}
             alignItems="center"
-            m="3"
+            m="1"
             textAlign="center"
           >
             {" "}
@@ -79,17 +87,19 @@ function NavBar(props) {
               alignItems="center"
               justifyContent="center"
             >
+              {" "}
+              <span>Girls</span>
               <IoFemaleSharp size={"2rem"}></IoFemaleSharp>
-              <span class="tab tab-kategori block text-xs">Girl Names</span>
             </Flex>
           </Link>
+          <Divider m="1" orientation="vertical" />
           <Link
             color={useColorModeValue("brand.600", "brand.400")}
             _hover={{ textDecor: "underline" }}
             id="matches"
             onClick={handleChange}
             alignItems="center"
-            m="3"
+            m="1"
             textAlign="center"
           >
             {" "}
@@ -98,17 +108,18 @@ function NavBar(props) {
               alignItems="center"
               justifyContent="center"
             >
+              <span>Matches</span>
               <GiLovers size={"2rem"}></GiLovers>
-              <span class="tab tab-explore block text-xs">Matches</span>
             </Flex>
           </Link>
+          <Divider m="1" orientation="vertical" />
           <Link
             color={useColorModeValue("brand.600", "brand.400")}
             _hover={{ textDecor: "underline" }}
             id="settings"
             onClick={handleChange}
             alignItems="center"
-            m="3"
+            m="1"
             textAlign="center"
           >
             {" "}
@@ -117,14 +128,18 @@ function NavBar(props) {
               alignItems="center"
               justifyContent="center"
             >
+              {" "}
+              <span>Settings</span>
               <BiCog className="" size={"2rem"}></BiCog>
-              <span class="tab tab-whishlist block text-xs">Settings</span>
             </Flex>
           </Link>
-          <FormControl m="4" display="flex" alignItems="center">
-            <Switch onChange={toggleColorMode} />
-          </FormControl>
         </Flex>
+        <FormControl mt="1">
+          <Switch onChange={toggleColorMode} />
+        </FormControl>
+        <FormControl mt="1">
+          <Button onClick={handleLogout}>Logout</Button>
+        </FormControl>
       </Box>
     </Flex>
   );

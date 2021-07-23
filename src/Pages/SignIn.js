@@ -7,7 +7,7 @@ import { themeChange } from "theme-change";
 import { Player } from "@lottiefiles/react-lottie-player";
 import { useToast } from "@chakra-ui/react";
 import { Link, useColorMode, useColorModeValue } from "@chakra-ui/react";
-
+import Success from "../Components/Alerts/Success";
 import {
   Box,
   Flex,
@@ -54,11 +54,8 @@ function SignIn(props) {
   const toast = useToast();
   const alertLoginSuccess = () => {
     toast({
-      title: "Account Found.",
-      description: "Signing in...",
-      status: "success",
-      duration: 9000,
-      isClosable: true,
+      position: "top",
+      render: () => <Success></Success>,
     });
   };
   const userNotFoundAlert = () => {
