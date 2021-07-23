@@ -11,6 +11,11 @@ import {
   Flex,
   useColorModeValue,
   Link,
+  Center,
+  FormControl,
+  Switch,
+  toggleColorMode,
+  useColorMode,
 } from "@chakra-ui/react";
 import { BiCog } from "react-icons/bi";
 function NavBar(props) {
@@ -24,14 +29,13 @@ function NavBar(props) {
     localStorage.setItem("isAuthenticated", false);
     window.location.href = "/";
   }
-
+  const { colorMode, toggleColorMode } = useColorMode();
   return (
     <Flex w="full" justifyContent="center">
       <Box
         mx="auto"
         rounded="lg"
         shadow="lg"
-        bg={useColorModeValue("white", "gray.800")}
         maxW="2xl"
         maxW={"320px"}
         w={"full"}
@@ -41,21 +45,24 @@ function NavBar(props) {
         p={2}
         textAlign={"center"}
       >
-        <Flex justifyContent="space-between" alignItems="center"></Flex>
-
         <Flex justifyContent="space-between" alignItems="center" mt={4}>
+          {" "}
           <Link
             color={useColorModeValue("brand.600", "brand.400")}
             _hover={{ textDecor: "underline" }}
             id="boy"
             onClick={handleChange}
-            alignItems="center"
           >
-            <IoMaleSharp alignItems="center" size={"2rem"}>
-              {" "}
-            </IoMaleSharp>
+            {" "}
+            <Flex
+              direction="column"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <IoMaleSharp size={"2rem"}> </IoMaleSharp>
 
-            <span class="tab tab-home block text-xs">Boy Names</span>
+              <span class="tab tab-home block text-xs">Boy Names</span>
+            </Flex>
           </Link>
           <Link
             color={useColorModeValue("brand.600", "brand.400")}
@@ -66,8 +73,15 @@ function NavBar(props) {
             m="3"
             textAlign="center"
           >
-            <IoFemaleSharp size={"2rem"}></IoFemaleSharp>
-            <span class="tab tab-kategori block text-xs">Girl Names</span>
+            {" "}
+            <Flex
+              direction="column"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <IoFemaleSharp size={"2rem"}></IoFemaleSharp>
+              <span class="tab tab-kategori block text-xs">Girl Names</span>
+            </Flex>
           </Link>
           <Link
             color={useColorModeValue("brand.600", "brand.400")}
@@ -78,8 +92,15 @@ function NavBar(props) {
             m="3"
             textAlign="center"
           >
-            <GiLovers size={"2rem"}></GiLovers>
-            <span class="tab tab-explore block text-xs">Matches</span>
+            {" "}
+            <Flex
+              direction="column"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <GiLovers size={"2rem"}></GiLovers>
+              <span class="tab tab-explore block text-xs">Matches</span>
+            </Flex>
           </Link>
           <Link
             color={useColorModeValue("brand.600", "brand.400")}
@@ -90,9 +111,19 @@ function NavBar(props) {
             m="3"
             textAlign="center"
           >
-            <BiCog className="" size={"2rem"}></BiCog>
-            <span class="tab tab-whishlist block text-xs">Settings</span>
+            {" "}
+            <Flex
+              direction="column"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <BiCog className="" size={"2rem"}></BiCog>
+              <span class="tab tab-whishlist block text-xs">Settings</span>
+            </Flex>
           </Link>
+          <FormControl m="4" display="flex" alignItems="center">
+            <Switch onChange={toggleColorMode} />
+          </FormControl>
         </Flex>
       </Box>
     </Flex>

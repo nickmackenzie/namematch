@@ -20,11 +20,11 @@ export function getGirlList() {
   //   data.json()
   // );
 
-  const user = localStorage.getItem("person");
+  const user = localStorage.getItem("email");
 
   return (
     axios
-      .get(`${process.env.REACT_APP_BASE_URL}/api/girlnames/`, {})
+      .get(`${process.env.REACT_APP_BASE_URL}/api/girlnames/?user=${user}`, {})
       //.then((response) => this.setState({ articleId: response.data.id }));
       .then((data) => data.data)
   );

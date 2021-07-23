@@ -28,11 +28,6 @@ router.get("/index/babyNames", function (req, res, next) {
   };
 
   const list = [
-    252, 273, 279, 305, 313, 341, 351, 356, 364, 370, 381, 411, 450, 473, 483,
-    491, 500, 4, 42, 5, 1, 11, 26, 40, 7, 46, 48, 50, 101, 58, 104, 80, 116,
-    106, 144, 117, 173, 128, 178, 145, 248, 150, 259, 160, 283, 186, 284, 215,
-    291, 225, 304, 226, 306, 227, 307, 239, 310, 249, 365, 251, 378, 258, 413,
-    265, 430, 285, 436, 452, 287, 453, 326, 330, 480, 331, 339, 350, 387, 396,
     405, 424, 443, 451, 466, 475, 43, 9, 44, 24, 63, 65, 32, 83, 36, 96, 57,
     171, 59, 202, 74, 247, 91, 264, 94, 107, 321, 137, 332, 140, 349, 159, 168,
     366, 229, 398, 403, 232, 409, 274, 410, 276, 421, 301, 425, 315, 437, 317,
@@ -91,9 +86,9 @@ router.get("/index/babyNames", function (req, res, next) {
     1341, 1345, 1346, 1351, 1365, 1376, 1400, 1436, 1438, 1451, 1475, 1498,
     1016, 1113, 1145, 1020,
   ];
-  const doSomething = async () => {
+  const doSomething = () => {
     for (const item of list) {
-      await sleep(500);
+      sleep(500);
 
       Girl.findOne(
         {
@@ -113,14 +108,13 @@ router.get("/index/babyNames", function (req, res, next) {
               subject.meaning = $(".stats p").text();
               subject.popularity = $(".nameitem").text().trim();
               subject.save();
-              res.send(response.data);
             })
             .catch(function (error) {
               // handle error
               console.log(error);
             })
             .then(function () {
-              // always executed
+              res.send(response.data);
             });
         }
       );
@@ -211,7 +205,6 @@ router.get("/index/choice/boy", function (req, res, next) {
 // });
 
 router.get("/boynames", function (req, res, next) {
-  console.log("parrams", req.query);
   User.findOne({ email: req.query.user }, function (er, user) {
     let userLikes = user.likes;
     let userDislikes = user.dislikes;
@@ -227,16 +220,19 @@ router.get("/boynames", function (req, res, next) {
 });
 
 router.get("/girlNames", function (req, res, next) {
-  User.findOne({ email: "nick" }, function (er, user) {
-    let userLikes = user.likes;
-    Girl.find(
-      // { id: { $gte: 1, $lte: 100 } , name:{$nin: userLikes}},
-      { idx: { $gte: 1, $lte: 100 }, name: { $nin: userLikes } },
+  User.findOne({ email: req.query.user }, function (er, user) {
+    if (user.likes != null) {
+      let userLikes = user.likes;
 
-      function (err, n) {
-        res.send(n);
-      }
-    );
+      Girl.find(
+        // { id: { $gte: 1, $lte: 100 } , name:{$nin: userLikes}},
+        { idx: { $gte: 1, $lte: 50 }, name: { $nin: userLikes } },
+
+        function (err, n) {
+          res.send(n);
+        }
+      );
+    }
   });
 });
 router.get("/updatePartner", function (req, res, next) {

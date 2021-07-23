@@ -4,6 +4,19 @@ import { useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { themeChange } from "theme-change";
 import { Player } from "@lottiefiles/react-lottie-player";
+import { Input, Button } from "@chakra-ui/react";
+import {
+  Flex,
+  Box,
+  FormControl,
+  FormLabel,
+  Checkbox,
+  Stack,
+  Link,
+  Heading,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
 const alertSuccess = () => {
   toast.custom((t) => (
     <div
@@ -94,13 +107,23 @@ function SettingsPanel(props) {
   }
 
   return (
-    <div class="card mx-auto    shadow bg-base-100">
-      {" "}
-      <div class="card-body text-black">
-        <h2 class="card-title text-primary">Settings</h2>
-        <div class="form-control m-1">
-          <div class="relative">
-            <input
+    <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+      <Stack align={"center"}>
+        <Heading fontSize={"4xl"}>Setting</Heading>
+        <Text fontSize={"lg"} color={"gray.600"}>
+          Set your Partner code here. ✌️
+        </Text>
+      </Stack>
+      <Box
+        rounded={"lg"}
+        bg={useColorModeValue("white", "gray.700")}
+        boxShadow={"lg"}
+        p={8}
+      >
+        <Stack spacing={4}>
+          <FormControl id="password">
+            <FormLabel>Partner Code</FormLabel>
+            <Input
               value={partner}
               type="text"
               onChange={(e) => setPartner(e.target.value)}
@@ -108,20 +131,27 @@ function SettingsPanel(props) {
               class="w-full pr-16 input input-primary input-bordered text-1xl "
               onfocus="blur();"
             />
-            <button
+          </FormControl>
+          <Stack spacing={2}>
+            <Stack
+              direction={{ base: "column", sm: "row" }}
+              align={"start"}
+              justify={"space-between"}
+            ></Stack>
+            <Button
               onClick={submitPartner}
-              class="absolute right-0 rounded-l-none btn btn-primary"
+              bg={"blue.400"}
+              color={"white"}
+              _hover={{
+                bg: "blue.500",
+              }}
             >
-              Save
-            </button>
-          </div>
-        </div>{" "}
-        <div class="form-control m-1">
-          <div class="relative"></div>
-        </div>
-      </div>
-      <Toaster className="z-auto" />
-    </div>
+              Save New Code
+            </Button>
+          </Stack>
+        </Stack>
+      </Box>
+    </Stack>
   );
 }
 
