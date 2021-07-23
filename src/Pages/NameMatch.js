@@ -10,6 +10,9 @@ import {
   Spinner,
   Center,
   Flex,
+  FormControl,
+  FormLabel,
+  Switch,
 } from "@chakra-ui/react";
 import { jsx, css } from "@emotion/react";
 import Timeline from "../Components/Timeline";
@@ -45,7 +48,7 @@ function NameMatch() {
   const [loader, setLoader] = useState("loading");
   const characters = list;
   const [swiper, setSwiper] = useState(null);
-  const { colorMode, toggleColorMode } = useColorMode();
+
   let mounted = false;
 
   function GetGif() {
@@ -227,12 +230,7 @@ function NameMatch() {
     <Container>
       <Alert alert={alertType} show={alert}></Alert>
 
-      <Center>
-        {" "}
-        <Button onClick={toggleColorMode}>
-          {colorMode === "light" ? "Dark" : "Light"}
-        </Button>{" "}
-      </Center>
+      <Center></Center>
       <Swiper
         spaceBetween={1}
         slidesPerView={1}
