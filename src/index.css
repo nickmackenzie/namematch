@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+/* body {
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -12,11 +12,11 @@ body {
     #fff1eb 0%,
     #ace0f9 100%
   ) !important;
-}
+} */
 
 .swiper-container {
-  max-height: 500px;
-  min-height: 500px;
+  max-height: 400px;
+  min-height: 400px;
 }
 
 .sc-dlnjwi {

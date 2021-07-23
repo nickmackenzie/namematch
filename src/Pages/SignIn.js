@@ -6,7 +6,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { themeChange } from "theme-change";
 import { Player } from "@lottiefiles/react-lottie-player";
 import { useToast } from "@chakra-ui/react";
-import { Link } from "@chakra-ui/react";
+import { Link, useColorMode, useColorModeValue } from "@chakra-ui/react";
 
 import {
   Box,
@@ -144,15 +144,14 @@ function SignIn(props) {
           </Heading>
         </Stack>
         <Stack
-          bg={"gray.50"}
           rounded={"xl"}
           p={{ base: 4, sm: 6, md: 8 }}
           spacing={{ base: 8 }}
           maxW={{ lg: "lg" }}
+          bg={useColorModeValue("white", "gray.800")}
         >
           <Stack spacing={4}>
             <Heading
-              color={"gray.800"}
               lineHeight={1.1}
               fontSize={{ base: "2xl", sm: "3xl", md: "4xl" }}
             >

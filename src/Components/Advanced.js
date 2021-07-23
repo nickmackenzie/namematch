@@ -89,14 +89,14 @@ export default function Advanced(props) {
         bg={useColorModeValue("white", "gray.900")}
         boxShadow={"lg"}
         rounded={"lg"}
-        p={6}
+        p={4}
         textAlign={"center"}
       >
         <Avatar
           size={"xl"}
           src={`https://picsum.photos/200/300?random=${props.picture}"`}
           alt={"male name"}
-          mb={4}
+          mb={2}
           pos={"relative"}
         />
         <Heading fontSize={"4xl"} margin={4} fontFamily={"body"}>

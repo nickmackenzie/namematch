@@ -4,7 +4,14 @@ import { FaSignOutAlt } from "react-icons/fa";
 
 import { IoFemaleSharp, IoMaleSharp } from "react-icons/io5";
 import { GiLovers } from "react-icons/gi";
-
+import {
+  chakra,
+  Box,
+  Image,
+  Flex,
+  useColorModeValue,
+  Link,
+} from "@chakra-ui/react";
 import { BiCog } from "react-icons/bi";
 function NavBar(props) {
   function handleChange(event) {
@@ -19,46 +26,76 @@ function NavBar(props) {
   }
 
   return (
-    <section
-      id="bottom-navigation m-3"
-      class="block  m-4 mx-auto static inset-x-0 bottom-0  bg-white shadow navbar  m-6 shadow-lg text-base-content rounded-box"
-    >
-      <div id="tabs" class="flex justify-between">
-        <a
-          id="boy"
-          onClick={handleChange}
-          class="w-full cursor-pointer focus:color-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1 flex flex-col items-center"
-        >
-          <IoMaleSharp size={"2rem"}> </IoMaleSharp>
+    <Flex w="full" justifyContent="center">
+      <Box
+        mx="auto"
+        rounded="lg"
+        shadow="lg"
+        bg={useColorModeValue("white", "gray.800")}
+        maxW="2xl"
+        maxW={"320px"}
+        w={"full"}
+        bg={useColorModeValue("white", "gray.900")}
+        boxShadow={"lg"}
+        rounded={"lg"}
+        p={2}
+        textAlign={"center"}
+      >
+        <Flex justifyContent="space-between" alignItems="center"></Flex>
 
-          <span class="tab tab-home block text-xs">Boy Names</span>
-        </a>
-        <a
-          id="girl"
-          onClick={handleChange}
-          class="w-full cursor-pointer focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1 flex flex-col items-center"
-        >
-          <IoFemaleSharp size={"2rem"}></IoFemaleSharp>
-          <span class="tab tab-kategori block text-xs">Girl Names</span>
-        </a>
-        <a
-          id="matches"
-          onClick={handleChange}
-          class="w-full cursor-pointer focus:text-teal-500 hover:text-teal-500 justify-center inline-block text-center pt-2 pb-1 flex flex-col items-center"
-        >
-          <GiLovers size={"2rem"}></GiLovers>
-          <span class="tab tab-explore block text-xs">Matches</span>
-        </a>
-        <a
-          id="settings"
-          onClick={handleChange}
-          class="w-full cursor-pointer focus:text-teal-500 hover:text-primary justify-center inline-block text-center pt-2 pb-1 flex flex-col items-center"
-        >
-          <BiCog className="" size={"2rem"}></BiCog>
-          <span class="tab tab-whishlist block text-xs">Settings</span>
-        </a>
-      </div>
-    </section>
+        <Flex justifyContent="space-between" alignItems="center" mt={4}>
+          <Link
+            color={useColorModeValue("brand.600", "brand.400")}
+            _hover={{ textDecor: "underline" }}
+            id="boy"
+            onClick={handleChange}
+            alignItems="center"
+          >
+            <IoMaleSharp alignItems="center" size={"2rem"}>
+              {" "}
+            </IoMaleSharp>
+
+            <span class="tab tab-home block text-xs">Boy Names</span>
+          </Link>
+          <Link
+            color={useColorModeValue("brand.600", "brand.400")}
+            _hover={{ textDecor: "underline" }}
+            id="girl"
+            onClick={handleChange}
+            alignItems="center"
+            m="3"
+            textAlign="center"
+          >
+            <IoFemaleSharp size={"2rem"}></IoFemaleSharp>
+            <span class="tab tab-kategori block text-xs">Girl Names</span>
+          </Link>
+          <Link
+            color={useColorModeValue("brand.600", "brand.400")}
+            _hover={{ textDecor: "underline" }}
+            id="matches"
+            onClick={handleChange}
+            alignItems="center"
+            m="3"
+            textAlign="center"
+          >
+            <GiLovers size={"2rem"}></GiLovers>
+            <span class="tab tab-explore block text-xs">Matches</span>
+          </Link>
+          <Link
+            color={useColorModeValue("brand.600", "brand.400")}
+            _hover={{ textDecor: "underline" }}
+            id="settings"
+            onClick={handleChange}
+            alignItems="center"
+            m="3"
+            textAlign="center"
+          >
+            <BiCog className="" size={"2rem"}></BiCog>
+            <span class="tab tab-whishlist block text-xs">Settings</span>
+          </Link>
+        </Flex>
+      </Box>
+    </Flex>
   );
 }
 export default NavBar;

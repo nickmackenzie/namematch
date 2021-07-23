@@ -6,7 +6,7 @@ import { themeChange } from "theme-change";
 import { Player } from "@lottiefiles/react-lottie-player";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
-
+import { Stack, useColorMode, useColorModeValue } from "@chakra-ui/react";
 const alertLoginSuccess = () => {
   toast.custom((t) => (
     <div
@@ -96,6 +96,10 @@ function Landing() {
     }
   }
 
-  return <HandleViewSwitch></HandleViewSwitch>;
+  return (
+    <Stack h="100%" bg={useColorModeValue("white", "gray.800")}>
+      <HandleViewSwitch></HandleViewSwitch>
+    </Stack>
+  );
 }
 export default Landing;

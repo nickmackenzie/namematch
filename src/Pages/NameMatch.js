@@ -14,20 +14,20 @@ import {
 import { jsx, css } from "@emotion/react";
 import Timeline from "../Components/Timeline";
 import SettingsCard from "../Components/SettingsCard";
-import MatchesCard from "../Components/MatchesCard.js";
+
 import BottomNav from "../Components/BottomNav";
-import AllMatchPanel from "../Components/AllMatchPanel";
+
 import "swiper/swiper.scss";
 import "swiper/components/navigation/navigation.scss";
 import Advanced from "../Components/Advanced";
 import Alert from "../Components/Alert";
-import { Player, Controls } from "@lottiefiles/react-lottie-player";
+import { Player } from "@lottiefiles/react-lottie-player";
 import { Swiper, SwiperSlide } from "swiper/react";
 import toast, { Toaster } from "react-hot-toast";
 import { getList, getGirlList } from "../helpers/getNameData";
 import { getGif } from "../helpers/giphyHelper.js";
 import "swiper/swiper-bundle.css";
-import LoadingCard from "../Components/LoadingCard";
+import { Button, useColorMode } from "@chakra-ui/react";
 import axios from "axios";
 
 /* Styles */
@@ -45,6 +45,7 @@ function NameMatch() {
   const [loader, setLoader] = useState("loading");
   const characters = list;
   const [swiper, setSwiper] = useState(null);
+  const { colorMode, toggleColorMode } = useColorMode();
   let mounted = false;
 
   function GetGif() {
@@ -225,7 +226,13 @@ function NameMatch() {
   return (
     <Container>
       <Alert alert={alertType} show={alert}></Alert>
-      <Center> </Center>
+
+      <Center>
+        {" "}
+        <Button onClick={toggleColorMode}>
+          {colorMode === "light" ? "Dark" : "Light"}
+        </Button>{" "}
+      </Center>
       <Swiper
         spaceBetween={1}
         slidesPerView={1}
