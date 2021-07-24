@@ -10,17 +10,15 @@ import {
   Image,
   Flex,
   useColorModeValue,
+  useColorMode,
   Link,
   Center,
-  FormControl,
-  Switch,
-  toggleColorMode,
-  useColorMode,
-  Divider,
   Button,
 } from "@chakra-ui/react";
 import { BiCog } from "react-icons/bi";
 function NavBar(props) {
+  const { colorMode, toggleColorMode } = useColorMode();
+
   function handleChange(event) {
     // Here, we invoke the callback with the new value
     console.log("test", event.currentTarget.id);
@@ -31,117 +29,77 @@ function NavBar(props) {
     localStorage.setItem("isAuthenticated", false);
     window.location.href = "/";
   }
-  const { colorMode, toggleColorMode } = useColorMode();
+
   return (
-    <Flex flexDirection="column">
-      <Box
-        mx="auto"
-        rounded="lg"
-        shadow="lg"
-        maxW="2xl"
-        maxW={"320px"}
-        w={"full"}
-        bg={useColorModeValue("white", "gray.900")}
-        boxShadow={"lg"}
-        rounded={"lg"}
-        p={2}
-        textAlign={"center"}
-      >
-        <Flex
-          justifyContent="space-between"
+    <Box
+      mx="auto"
+      rounded="lg"
+      shadow="lg"
+      bg={useColorModeValue("white", "gray.800")}
+      maxW="2xl"
+      mt="4"
+      maxW={"320px"}
+      w={"full"}
+      bg={useColorModeValue("white", "gray.900")}
+      boxShadow={"lg"}
+      rounded={"lg"}
+      p={2}
+      textAlign={"center"}
+    >
+      <Flex justifyContent="space-between" alignItems="center" mt={4}>
+        {" "}
+        <Link
+          color={useColorModeValue("brand.600", "brand.400")}
+          _hover={{ textDecor: "underline" }}
+          id="boy"
+          onClick={handleChange}
           alignItems="center"
-          mt={4}
-          height="50px"
         >
           {" "}
-          <Link
-            color={useColorModeValue("brand.600", "brand.400")}
-            _hover={{ textDecor: "underline" }}
-            id="boy"
-            onClick={handleChange}
-          >
-            {" "}
-            <Flex
-              direction="column"
-              alignItems="center"
-              justifyContent="center"
-            >
+          <Center>
+            <IoMaleSharp alignItems="center" size={"2.5rem"}>
               {" "}
-              <span>Boys</span>
-              <IoMaleSharp size={"2rem"}> </IoMaleSharp>
-            </Flex>
-          </Link>
-          <Divider m="1" orientation="vertical" />
-          <Link
-            color={useColorModeValue("brand.600", "brand.400")}
-            _hover={{ textDecor: "underline" }}
-            id="girl"
-            onClick={handleChange}
-            alignItems="center"
-            m="1"
-            textAlign="center"
-          >
-            {" "}
-            <Flex
-              direction="column"
-              alignItems="center"
-              justifyContent="center"
-            >
-              {" "}
-              <span>Girls</span>
-              <IoFemaleSharp size={"2rem"}></IoFemaleSharp>
-            </Flex>
-          </Link>
-          <Divider m="1" orientation="vertical" />
-          <Link
-            color={useColorModeValue("brand.600", "brand.400")}
-            _hover={{ textDecor: "underline" }}
-            id="matches"
-            onClick={handleChange}
-            alignItems="center"
-            m="1"
-            textAlign="center"
-          >
-            {" "}
-            <Flex
-              direction="column"
-              alignItems="center"
-              justifyContent="center"
-            >
-              <span>Matches</span>
-              <GiLovers size={"2rem"}></GiLovers>
-            </Flex>
-          </Link>
-          <Divider m="1" orientation="vertical" />
-          <Link
-            color={useColorModeValue("brand.600", "brand.400")}
-            _hover={{ textDecor: "underline" }}
-            id="settings"
-            onClick={handleChange}
-            alignItems="center"
-            m="1"
-            textAlign="center"
-          >
-            {" "}
-            <Flex
-              direction="column"
-              alignItems="center"
-              justifyContent="center"
-            >
-              {" "}
-              <span>Settings</span>
-              <BiCog className="" size={"2rem"}></BiCog>
-            </Flex>
-          </Link>
-        </Flex>
-        <FormControl mt="1">
-          <Switch onChange={toggleColorMode} />
-        </FormControl>
-        <FormControl mt="1">
-          <Button onClick={handleLogout}>Logout</Button>
-        </FormControl>
-      </Box>
-    </Flex>
+            </IoMaleSharp>
+          </Center>
+        </Link>
+        <Link
+          color={useColorModeValue("brand.600", "brand.400")}
+          _hover={{ textDecor: "underline" }}
+          id="girl"
+          onClick={handleChange}
+          alignItems="center"
+          m="3"
+          textAlign="center"
+        >
+          <IoFemaleSharp size={"2.5rem"}></IoFemaleSharp>
+        </Link>
+        <Link
+          color={useColorModeValue("brand.600", "brand.400")}
+          _hover={{ textDecor: "underline" }}
+          id="matches"
+          onClick={handleChange}
+          alignItems="center"
+          m="3"
+          textAlign="center"
+        >
+          <GiLovers size={"2.5rem"}></GiLovers>
+        </Link>
+        <Link
+          color={useColorModeValue("brand.600", "brand.400")}
+          _hover={{ textDecor: "underline" }}
+          id="settings"
+          onClick={handleChange}
+          alignItems="center"
+          m="3"
+          textAlign="center"
+        >
+          <BiCog className="" size={"2.5rem"}></BiCog>
+        </Link>
+        <Button onClick={toggleColorMode}>
+          {colorMode === "light" ? "Dark" : "Light"}
+        </Button>
+      </Flex>
+    </Box>
   );
 }
 export default NavBar;

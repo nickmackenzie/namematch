@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { fetchUser } from "../helpers/SignInHelper";
+import { jsx, css } from "@emotion/react";
 import {
   Stack,
   HStack,
@@ -13,8 +14,9 @@ import {
   FormControl,
   FormLabel,
   Switch,
+  useColorModeValue,
 } from "@chakra-ui/react";
-import { jsx, css } from "@emotion/react";
+
 import Timeline from "../Components/Timeline";
 import SettingsCard from "../Components/SettingsCard";
 
@@ -127,6 +129,7 @@ function NameMatch() {
     showAlert(true);
     setType("success");
   }
+
   function handleChange(newView) {
     setView(newView);
 
@@ -225,9 +228,16 @@ function NameMatch() {
       </Box>
     ));
   }
+  let color = `bgGradient: "linear(to-r, red.500, yellow.500)"`;
 
   return (
-    <Container>
+    <Box
+      style={{ height: "100vh", width: "100%", margin: "0 auto" }}
+      bgGradient={useColorModeValue(
+        "linear(to-t, #fff1eb, #ace0f9)",
+        "linear(to-t, #859398, #283048)"
+      )}
+    >
       <Alert alert={alertType} show={alert}></Alert>
 
       <Center></Center>
@@ -243,7 +253,7 @@ function NameMatch() {
       <Box>
         <BottomNav view={view} onChange={handleChange}></BottomNav>
       </Box>
-    </Container>
+    </Box>
   );
 }
 export default NameMatch;
