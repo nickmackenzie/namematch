@@ -18,9 +18,11 @@ const customTheme = createTheme(themes.default, {
   },
   date: {
     backgroundColor: "#2E3C43",
+    padding: "10px",
+    margin: "10px",
 
-    padding: ".2rem",
-    fontSize: "rem",
+    padding: ".5rem",
+    fontSize: "1rem",
   },
   marker: {
     borderColor: "#2E3C43",
@@ -51,7 +53,7 @@ export default function App() {
   //     //  setLikes(items);
   //   });
   // };
-  const MyCustomMarker = () => <span>❤️️</span>;
+
   useEffect(() => {
     const nameData = localStorage.getItem("email");
 
@@ -68,12 +70,11 @@ export default function App() {
   function renderTable() {
     return likes.map((like, i) => (
       <TextEvent
-        date={`Liked on: ${format(
+        date={`${format(
           new Date(like.dateCreated),
-          "EEEE MMM do yyyy"
+          "EE MMM do yyyy '@' h:mm a"
         )}`}
         text={like.name}
-        marker={MyCustomMarker}
       />
     ));
   }

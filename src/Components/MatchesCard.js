@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Component, useContext } from "react";
 //import { getLikesUser, getMatches, delName } from "../utils/getNameData";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { CgGenderMale, CgGenderFemale } from "react-icons/cg";
@@ -45,26 +45,55 @@ function MatchPanel() {
 
   function renderTable() {
     return likes.map((like, i) => (
-      <tr key={i}>
-        <th> {like.name}</th>
-        <td>{like.sex}</td>
-        <td>{format(new Date(like.dateCreated), "EEEE MMM do yyyy")}</td>
-      </tr>
+      <Flex
+        direction={{ base: "row", md: "column" }}
+        bg={useColorModeValue("white", "gray.800")}
+        key={i}
+      >
+        {useBreakpointValue({ base: true, md: pid === 0 }) && (
+          <SimpleGrid
+            spacingY={3}
+            columns={{ base: 1, md: 3 }}
+            w={{ base: 120, md: "full" }}
+            textTransform="uppercase"
+            bg={useColorModeValue("gray.100", "gray.700")}
+            color={useColorModeValue("gray.500")}
+            py={{ base: 1, md: 4 }}
+            px={{ base: 2, md: 10 }}
+            fontSize="md"
+            fontWeight="hairline"
+            display="table-header-group"
+          >
+            <span>Name</span>
+            <span>Date</span>
+            <chakra.span textAlign={{ md: "right" }}></chakra.span>
+          </SimpleGrid>
+        )}
+        <SimpleGrid
+          spacingY={3}
+          columns={{ base: 1, md: 3 }}
+          w="full"
+          py={2}
+          px={10}
+          fontWeight="hairline"
+        >
+          <span>{like.name}</span>
+          <chakra.span
+            textOverflow="ellipsis"
+            overflow="hidden"
+            whiteSpace="nowrap"
+          >
+            {format(new Date(like.dateCreated), "EEEE MMM do yyyy")}
+          </chakra.span>
+          <Flex justify={{ md: "end" }}>
+            <Button variant="solid" colorScheme="red" size="sm">
+              Delete
+            </Button>
+          </Flex>
+        </SimpleGrid>
+      </Flex>
     ));
   }
-  return (
-    <div class="overflow-x-auto shadow round bg-base-300">
-      <table class="table striped w-full bg-base-300 shadow round">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Sex</th>
-            <th>Liked On</th>
-          </tr>
-        </thead>
-        <tbody>{renderTable()}</tbody>
-      </table>
-    </div>
-  );
+  return <div>{renderTable()}</div>;
 }
 export default MatchPanel;

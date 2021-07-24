@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import Tour from "reactour";
+
 import { fetchUser } from "../helpers/SignInHelper";
 import { jsx, css } from "@emotion/react";
 import {
@@ -34,12 +36,58 @@ import { getGif } from "../helpers/giphyHelper.js";
 import "swiper/swiper-bundle.css";
 import { Button, useColorMode } from "@chakra-ui/react";
 import axios from "axios";
+import { ShepherdTour, ShepherdTourContext } from "react-shepherd";
 
-/* Styles */
-const style = css`
-  display: none;
-`;
+const steps = [
+  {
+    selector: ".nav",
+    content: "Welcome to Name Match. Lets show you around.",
+  },
+  {
+    selector: ".css-19gg9hj",
+    content: "This a name card.",
+  },
+  {
+    selector: ".css-1c7yk0v",
+    content: "Click on the heart to like a name.",
+  },
+  {
+    selector: ".css-1pq29zb",
+    content:
+      "Click on the broken heart to dislike a name. When you like or dislike a name, this will get saved to your portfolio.",
+  },
 
+  {
+    selector: "#settings",
+    content:
+      "Next, Let's make a secret code to share with your partner so you can start to match your favorite names! Click on the cog to continue. ",
+  },
+];
+const steps2 = [
+  {
+    selector: ".nav",
+    content: "Welcome to Name Match. Lets show you around.",
+  },
+  {
+    selector: ".css-19gg9hj",
+    content: "This a name card.",
+  },
+  {
+    selector: ".css-1c7yk0v",
+    content: "Click on the heart to like a name.",
+  },
+  {
+    selector: ".css-1pq29zb",
+    content:
+      "Click on the broken heart to dislike a name. When you like or dislike a name, this will get saved to your portfolio.",
+  },
+
+  {
+    selector: "#settings",
+    content:
+      "Next, Let's make a secret code to share with your partner so you can start to match your favorite names! Click on the cog to continue. ",
+  },
+];
 function NameMatch() {
   const [view, setView] = useState("boy");
   const [alert, showAlert] = useState(false);
@@ -50,6 +98,7 @@ function NameMatch() {
   const [loader, setLoader] = useState("loading");
   const characters = list;
   const [swiper, setSwiper] = useState(null);
+  const tour = useContext(ShepherdTourContext);
 
   let mounted = false;
 
@@ -149,6 +198,7 @@ function NameMatch() {
         setLoader("done");
       });
     }
+    setOpen(false);
   }
   function handleAlert(alertType) {
     showAlert(true);
@@ -181,10 +231,13 @@ function NameMatch() {
       </div>
     ));
   };
+  const [isTourOpen, setIsTourOpen] = useState(false);
+  const [isOpen, setOpen] = useState(false);
   useEffect(() => {
     let userEmail = localStorage.getItem("email");
     fetchUser(userEmail).then((user) => {
       if (user != false) {
+        setOpen(true);
         console.log("user found");
         return user;
         console.log("asdfasdf");
@@ -251,7 +304,12 @@ function NameMatch() {
       </Swiper>
 
       <Box>
-        <BottomNav view={view} onChange={handleChange}></BottomNav>
+        <BottomNav view={view} class="nav" onChange={handleChange}></BottomNav>
+        <Tour
+          steps={steps}
+          isOpen={isOpen}
+          onRequestClose={() => setIsTourOpen(false)}
+        />
       </Box>
     </Box>
   );
