@@ -8,6 +8,7 @@ import { Player } from "@lottiefiles/react-lottie-player";
 import { useToast } from "@chakra-ui/react";
 import { Link, useColorMode, useColorModeValue } from "@chakra-ui/react";
 import Success from "../Components/Alerts/Success";
+import Error from "../Components/Alerts/Error";
 import {
   Box,
   Flex,
@@ -55,25 +56,31 @@ function SignIn(props) {
   const alertLoginSuccess = () => {
     toast({
       position: "top",
-      render: () => <Success></Success>,
+      render: () => (
+        <Success title="Success" body="Retrieving Account Details."></Success>
+      ),
     });
   };
   const userNotFoundAlert = () => {
     toast({
-      title: "Please Try Again.",
-      description: "Wrong Password or Username",
-      status: "error",
-      duration: 9000,
-      isClosable: true,
+      position: "top",
+      render: () => (
+        <Error
+          title={"Error"}
+          body={"Username or password is incorrect."}
+        ></Error>
+      ),
     });
   };
   const emptyFieldAlert = () => {
     toast({
-      title: "Empty Input",
-      description: "Please fill out the form or create a new account.",
-      status: "warning",
-      duration: 9000,
-      isClosable: true,
+      position: "top",
+      render: () => (
+        <Error
+          title={"Error"}
+          body={"Please enter a username or password"}
+        ></Error>
+      ),
     });
   };
 
