@@ -3,7 +3,7 @@ import { chakra, Box, Icon, Flex, useColorModeValue } from "@chakra-ui/react";
 
 import { BsLightningFill } from "react-icons/bs";
 
-export default function Error() {
+export default function Error(props) {
   return (
     <Flex
       maxW="sm"
@@ -21,16 +21,16 @@ export default function Error() {
       <Box mx={-3} py={2} px={4}>
         <Box mx={3}>
           <chakra.span
-            color={useColorModeValue("green.400", "green.500")}
+            color={useColorModeValue("red.400", "red.500")}
             fontWeight="bold"
           >
-            Success
+            {props.title}
           </chakra.span>
           <chakra.p
             color={useColorModeValue("gray.200", "gray.600")}
             fontSize="sm"
           >
-            Your account was found!
+            {props.body}
           </chakra.p>
         </Box>
       </Box>

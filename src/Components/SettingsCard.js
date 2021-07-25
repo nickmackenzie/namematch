@@ -5,6 +5,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { themeChange } from "theme-change";
 import { Player } from "@lottiefiles/react-lottie-player";
 import { Input, Button } from "@chakra-ui/react";
+import Success from "../Components/Alerts/Success";
 import {
   Flex,
   Box,

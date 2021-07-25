@@ -1,99 +1,71 @@
-import React, { useState, useEffect, Component, useContext } from "react";
-//import { getLikesUser, getMatches, delName } from "../utils/getNameData";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { CgGenderMale, CgGenderFemale } from "react-icons/cg";
-import { getLikesUser, getMatches, getLikes } from "../helpers/matchHelper";
-import DataTable from "react-data-table-component";
-import "swiper/swiper.scss";
-import { compareAsc, format } from "date-fns";
-
-const columns = [
-  {
-    name: "Like",
-  },
-];
-
-function MatchPanel() {
-  const [likes, setLikes] = useState([]);
-  const [matches, setMatches] = useState([]);
-  const [delIndex, setDelIndex] = useState([]);
-
-  let needsUpdated = true;
-  let letPass = true;
-
-  // const deleteName = (input, id) => {
-
-  //   //input.target.id
-  //   setDelIndex(id.like);
-  //   delName(delIndex).then((items) => {
-
-  //     //  setLikes(items);
-  //   });
-  // };
-  useEffect(() => {
-    const nameData = localStorage.getItem("email");
-
-    if (letPass) {
-      getLikes(nameData).then((likesData) => {
-        setLikes(likesData.data);
-        console.log("matches", likes[0]);
-      });
-
-      letPass = false;
-    }
-  }, []);
-
-  function renderTable() {
-    return likes.map((like, i) => (
-      <Flex
-        direction={{ base: "row", md: "column" }}
+import React from "react";
+import {} from "react-super-responsive-table";
+import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
+import {
+  Stack,
+  HStack,
+  VStack,
+  Box,
+  StackDivider,
+  Container,
+  Spinner,
+  Center,
+  Flex,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  Table,
+  FormControl,
+  FormLabel,
+  Switch,
+  useColorModeValue,
+  Button,
+  TableCaption,
+} from "@chakra-ui/react";
+export default function TableExample(props) {
+  return (
+    <Flex justifyContent="center">
+      <Table
+        mt="5"
+        variant="unstyled"
+        rounded={"xl"}
         bg={useColorModeValue("white", "gray.800")}
-        key={i}
+        w="50"
       >
-        {useBreakpointValue({ base: true, md: pid === 0 }) && (
-          <SimpleGrid
-            spacingY={3}
-            columns={{ base: 1, md: 3 }}
-            w={{ base: 120, md: "full" }}
-            textTransform="uppercase"
-            bg={useColorModeValue("gray.100", "gray.700")}
-            color={useColorModeValue("gray.500")}
-            py={{ base: 1, md: 4 }}
-            px={{ base: 2, md: 10 }}
-            fontSize="md"
-            fontWeight="hairline"
-            display="table-header-group"
-          >
-            <span>Name</span>
-            <span>Date</span>
-            <chakra.span textAlign={{ md: "right" }}></chakra.span>
-          </SimpleGrid>
-        )}
-        <SimpleGrid
-          spacingY={3}
-          columns={{ base: 1, md: 3 }}
-          w="full"
-          py={2}
-          px={10}
-          fontWeight="hairline"
-        >
-          <span>{like.name}</span>
-          <chakra.span
-            textOverflow="ellipsis"
-            overflow="hidden"
-            whiteSpace="nowrap"
-          >
-            {format(new Date(like.dateCreated), "EEEE MMM do yyyy")}
-          </chakra.span>
-          <Flex justify={{ md: "end" }}>
-            <Button variant="solid" colorScheme="red" size="sm">
-              Delete
-            </Button>
-          </Flex>
-        </SimpleGrid>
-      </Flex>
-    ));
-  }
-  return <div>{renderTable()}</div>;
+        {" "}
+        <Thead>
+          <Tr>
+            <Th>Name</Th>
+            <Th>Date</Th>
+            <Th></Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          <Tr>
+            <Td>David</Td>
+            <Td>9 April 2019</Td>
+            <Td>
+              <Button>Delete</Button>
+            </Td>
+          </Tr>
+          <Tr>
+            <Td>Capstone Data</Td>
+            <Td>19 May 2019</Td>
+            <Td>
+              <Button>Delete</Button>
+            </Td>
+          </Tr>
+          <Tr>
+            <Td>Tuscaloosa D3</Td>
+            <Td>29 June 2019</Td>
+            <Td>
+              <Button>Delete</Button>
+            </Td>
+          </Tr>
+        </Tbody>
+      </Table>
+    </Flex>
+  );
 }
-export default MatchPanel;

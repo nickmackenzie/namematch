@@ -4,18 +4,10 @@ import Tour from "reactour";
 import { fetchUser } from "../helpers/SignInHelper";
 import { jsx, css } from "@emotion/react";
 import {
-  Stack,
-  HStack,
-  VStack,
   Box,
-  StackDivider,
-  Container,
   Spinner,
   Center,
   Flex,
-  FormControl,
-  FormLabel,
-  Switch,
   useColorModeValue,
 } from "@chakra-ui/react";
 
@@ -24,12 +16,11 @@ import SettingsCard from "../Components/SettingsCard";
 
 import BottomNav from "../Components/BottomNav";
 
-import "swiper/swiper.scss";
-import "swiper/components/navigation/navigation.scss";
 import Advanced from "../Components/Advanced";
 import Alert from "../Components/Alert";
 import { Player } from "@lottiefiles/react-lottie-player";
 import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore, { EffectFade } from "swiper";
 import toast, { Toaster } from "react-hot-toast";
 import { getList, getGirlList } from "../helpers/getNameData";
 import { getGif } from "../helpers/giphyHelper.js";
@@ -37,6 +28,13 @@ import "swiper/swiper-bundle.css";
 import { Button, useColorMode } from "@chakra-ui/react";
 import axios from "axios";
 import { ShepherdTour, ShepherdTourContext } from "react-shepherd";
+import { EffectCube } from "swiper";
+import "swiper/swiper.scss";
+import "swiper/components/navigation/navigation.scss";
+import "swiper/components/effect-cube/effect-cube.scss";
+import AllMatchPanel from "../Components/AllMatchPanel";
+import ChartSwitcher from "../Components/ChartSwitcher";
+SwiperCore.use([EffectCube]);
 
 const steps = [
   {
@@ -237,7 +235,7 @@ function NameMatch() {
     let userEmail = localStorage.getItem("email");
     fetchUser(userEmail).then((user) => {
       if (user != false) {
-        setOpen(true);
+        setOpen(false);
         console.log("user found");
         return user;
         console.log("asdfasdf");
@@ -261,7 +259,11 @@ function NameMatch() {
       </Box>
     ));
   } else if (view === "matches") {
-    currentDisplay = <Timeline></Timeline>;
+    currentDisplay = (
+      <>
+        <ChartSwitcher></ChartSwitcher>
+      </>
+    );
   } else if (view === "settings") {
     currentDisplay = (
       <SettingsCard onChange={handlePartnerUpdate}></SettingsCard>
@@ -298,7 +300,6 @@ function NameMatch() {
         spaceBetween={1}
         slidesPerView={1}
         onSlideChange={() => console.log("slide change")}
-        onSwiper={(swiper) => console.log(swiper)}
       >
         {currentDisplay} <Loader></Loader>
       </Swiper>

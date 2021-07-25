@@ -46,6 +46,8 @@
     "react-scripts": "^4.0.3",
     "react-shepherd": "^3.3.3",
     "react-stack-cards": "^1.0.8",
+    "react-super-responsive-table": "^5.2.0",
+    "react-table": "^7.7.0",
     "react-tinder-card": "^1.4.0",
     "react-toastr": "^3.0.0",
     "reactour": "^1.18.6",

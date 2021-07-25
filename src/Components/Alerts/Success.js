@@ -3,7 +3,7 @@ import { chakra, Box, Icon, Flex, useColorModeValue } from "@chakra-ui/react";
 
 import { IoMdCheckmarkCircle } from "react-icons/io";
 
-export default function Success() {
+export default function Success(props) {
   return (
     <Flex
       maxW="sm"
@@ -24,13 +24,13 @@ export default function Success() {
             color={useColorModeValue("green.400", "green.500")}
             fontWeight="bold"
           >
-            Success
+            {props.title}
           </chakra.span>
           <chakra.p
             color={useColorModeValue("gray.200", "gray.600")}
             fontSize="sm"
           >
-            Your account was found!
+            {props.body}
           </chakra.p>
         </Box>
       </Box>

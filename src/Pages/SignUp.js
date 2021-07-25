@@ -5,7 +5,8 @@ import { themeChange } from "theme-change";
 import { Player } from "@lottiefiles/react-lottie-player";
 import { useToast } from "@chakra-ui/react";
 import { Link } from "@chakra-ui/react";
-
+import Success from "../Components/Alerts/Success";
+import Error from "../Components/Alerts/Error";
 import {
   Box,
   Flex,
@@ -24,67 +25,23 @@ import {
 } from "@chakra-ui/react";
 
 const accountCreatedSuccessAlert = () => {
-  toast.custom((t) => (
-    <div
-      className={`${
-        t.visible ? "fade-in-fwd" : "fade-out-bck"
-      } ard round bg-base-content bg-opacity-90 shadow-sm rounded-lg pointer-events-auto`}
-    >
-      <div className="flex-1 w-0 p-4">
-        <div className="flex items-start">
-          <div className="flex-shrink-0 pt-0.5">
-            <Player
-              mode="bounce"
-              background="transparent"
-              autoplay
-              speed="1.5"
-              keepLastFrame
-              src="https://assets3.lottiefiles.com/packages/lf20_ApoETF.json"
-              style={{ height: "72px", width: "48px" }}
-            ></Player>
-          </div>
-          <div className="ml-3 flex-1">
-            <p className="text-2xl  text-base-100 mt-4">Creating Account</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  ));
+  toast({
+    position: "top",
+    render: () => <Success title="Success" body="Account Created"></Success>,
+  });
 };
 const userFoundAlert = () => {
-  toast.custom((t) => (
-    <div className={`${t.visible ? "fade-in-fwd" : "fade-out-bck"} `}>
-      <div className="m-2 p-2">
-        <Player
-          mode="bounce"
-          background="transparent"
-          autoplay
-          speed="1"
-          keepLastFrame
-          src="https://assets8.lottiefiles.com/packages/lf20_K3XjOi.json"
-          style={{ height: "60px", width: "60px" }}
-        ></Player>
-      </div>
-    </div>
-  ));
+  toast({
+    position: "top",
+    render: () => <Error title="Error" body="Account Found"></Error>,
+  });
 };
 
 const creatingAccountAlert = () => {
-  toast.custom((t) => (
-    <div className={`${t.visible ? "fade-in-fwd" : "fade-out-bck"} `}>
-      <div className="m-2 p-2">
-        <Player
-          mode="bounce"
-          background="transparent"
-          autoplay
-          speed="1"
-          keepLastFrame
-          src="https://assets4.lottiefiles.com/packages/lf20_gzoqde3x.json"
-          style={{ height: "90px", width: "90px" }}
-        ></Player>
-      </div>
-    </div>
-  ));
+  toast({
+    position: "top",
+    render: () => <Success title="Success" body="Account Created!"></Success>,
+  });
 };
 
 function SignUp(props) {
