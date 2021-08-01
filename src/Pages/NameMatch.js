@@ -20,7 +20,8 @@ import Advanced from "../Components/Advanced";
 import Alert from "../Components/Alert";
 import { Player } from "@lottiefiles/react-lottie-player";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { EffectFade } from "swiper";
+
+import SwiperCore, { Navigation, Pagination, Scrollbar } from "swiper/core";
 import toast, { Toaster } from "react-hot-toast";
 import { getList, getGirlList } from "../helpers/getNameData";
 import { getGif } from "../helpers/giphyHelper.js";
@@ -32,9 +33,9 @@ import { EffectCube } from "swiper";
 import "swiper/swiper.scss";
 import "swiper/components/navigation/navigation.scss";
 import "swiper/components/effect-cube/effect-cube.scss";
-import AllMatchPanel from "../Components/AllMatchPanel";
+import AllLikePanel from "../Components/AllLikePanel";
 import ChartSwitcher from "../Components/ChartSwitcher";
-SwiperCore.use([EffectCube]);
+SwiperCore.use([Navigation, Pagination, Scrollbar]);
 
 const steps = [
   {
@@ -270,8 +271,8 @@ function NameMatch() {
     );
   } else {
     currentDisplay = characters.map((character, i) => (
-      <Box key={i}>
-        <SwiperSlide>
+      <Box>
+        <SwiperSlide key={character.name}>
           <Box>
             <Advanced
               name={character.name}
@@ -290,16 +291,20 @@ function NameMatch() {
       style={{ height: "100vh", width: "100%", margin: "0 auto" }}
       bgGradient={useColorModeValue(
         "linear(to-t, #fff1eb, #ace0f9)",
-        "linear(to-t, #859398, #283048)"
+        "linear(to-t, #09203f, #537895)"
       )}
     >
       <Alert alert={alertType} show={alert}></Alert>
 
-      <Center></Center>
       <Swiper
         spaceBetween={1}
         slidesPerView={1}
         onSlideChange={() => console.log("slide change")}
+        speed={500}
+        navigation={{
+          prevEl: ".nextBtn2",
+          nextEl: ".nextBtn",
+        }}
       >
         {currentDisplay} <Loader></Loader>
       </Swiper>

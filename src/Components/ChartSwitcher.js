@@ -10,7 +10,7 @@ import {
   Center,
   useColorModeValue,
 } from "@chakra-ui/react";
-import AllMatchPanel from "../Components/AllMatchPanel";
+import AllLikePanel from "../Components/AllLikePanel";
 import MatchesCard from "../Components/MatchesCard";
 
 export default function ChartSwitcher(props) {
@@ -18,12 +18,12 @@ export default function ChartSwitcher(props) {
     <Center>
       <Tabs
         variant="soft-rounded"
-        colorScheme={useColorModeValue("red", "green")}
+        colorScheme={useColorModeValue("blue", "teal")}
       >
         <TabPanels>
           <TabPanel>
             <p>
-              <AllMatchPanel></AllMatchPanel>
+              <AllLikePanel></AllLikePanel>
             </p>
           </TabPanel>
           <TabPanel>

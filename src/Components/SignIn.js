@@ -1,12 +1,14 @@
-import React, { useState, useEffect, useRef } from "react";
-import { createUser } from "../helpers/SignInHelper";
+import React, { useState } from "react";
+import { loginUser } from "../helpers/SignInHelper";
+
+import loginIllustration from "../imgs/loginIllustration.svg";
 import toast, { Toaster } from "react-hot-toast";
 import { themeChange } from "theme-change";
 import { Player } from "@lottiefiles/react-lottie-player";
 import { useToast } from "@chakra-ui/react";
-import { Link } from "@chakra-ui/react";
-import Success from "../Components/Alerts/Success";
-import Error from "../Components/Alerts/Error";
+import { Link, useColorMode, useColorModeValue } from "@chakra-ui/react";
+import Success from "./Alerts/Success";
+import Error from "./Alerts/Error";
 import {
   Box,
   Flex,
@@ -24,48 +26,132 @@ import {
   Icon,
 } from "@chakra-ui/react";
 
-const accountCreatedSuccessAlert = () => {
-  toast({
-    position: "top",
-    render: () => <Success title="Success" body="Account Created"></Success>,
-  });
-};
-const userFoundAlert = () => {
-  toast({
-    position: "top",
-    render: () => <Error title="Error" body="Account Found"></Error>,
-  });
-};
+const avatars = [
+  {
+    name: "Ryan Florence",
+    url: "https://bit.ly/ryan-florence",
+  },
+  {
+    name: "Segun Adebayo",
+    url: "https://bit.ly/sage-adebayo",
+  },
+  {
+    name: "Kent Dodds",
+    url: "https://bit.ly/kent-c-dodds",
+  },
+  {
+    name: "Prosper Otemuyiwa",
+    url: "https://bit.ly/prosper-baba",
+  },
+  {
+    name: "Christian Nwamba",
+    url: "https://bit.ly/code-beast",
+  },
+];
 
-const creatingAccountAlert = () => {
-  toast({
-    position: "top",
-    render: () => <Success title="Success" body="Account Created!"></Success>,
-  });
-};
-
-function SignUp(props) {
+function SignIn(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const submitValue = () => {
-    createUser(email, password).then((user) => {
-      if (user !== false) {
-        creatingAccountAlert();
-        setTimeout(() => {
-          window.location.href = "/";
-        }, 3000);
-      } else {
-        userFoundAlert();
-        return user;
-      }
+  const toast = useToast();
+  const alertLoginSuccess = () => {
+    toast({
+      position: "top",
+      render: () => (
+        <Success title="Success" body="Retrieving Account Details."></Success>
+      ),
     });
   };
+  const userNotFoundAlert = () => {
+    toast({
+      position: "top",
+      render: () => (
+        <Error
+          title={"Error"}
+          body={"Username or password is incorrect."}
+        ></Error>
+      ),
+    });
+  };
+  const emptyFieldAlert = () => {
+    toast({
+      position: "top",
+      render: () => (
+        <Error
+          title={"Error"}
+          body={"Please enter a username or password"}
+        ></Error>
+      ),
+    });
+  };
+
   function handleChange(event) {
     // Here, we invoke the callback with the new value
 
-    props.onChange(true);
+    props.onChange(false);
   }
+
+  const submitValue = () => {
+    if (email != "" || password !== "") {
+      loginUser(email, password)
+        .then((user) => {
+          console.log("user", user);
+          if (user !== false) {
+            alertLoginSuccess();
+            localStorage.setItem("isAuthenticated", "true");
+            localStorage.setItem("email", user.email);
+            localStorage.setItem("theme", user.theme);
+            let htmlSelect = document.getElementsByTagName("html");
+
+            return user;
+          } else {
+            userNotFoundAlert();
+            return user;
+          }
+        })
+        .then((user) => {
+          console.log("user", user);
+          if (user !== false) {
+            setTimeout(() => {
+              window.location.href = "/namematch";
+            }, 2000);
+          } else {
+            return false;
+          }
+        });
+    } else {
+      emptyFieldAlert();
+    }
+  };
+  const demoUserLogin = () => {
+    let demoEmail = "test";
+    let demoPassword = "test";
+
+    loginUser(demoEmail, demoPassword)
+      .then((user) => {
+        if (user !== false) {
+          alertLoginSuccess();
+          localStorage.setItem("isAuthenticated", "true");
+          localStorage.setItem("email", user.email);
+          localStorage.setItem("theme", user.theme);
+          let htmlSelect = document.getElementsByTagName("html");
+
+          return user;
+        } else {
+          userNotFoundAlert();
+          return user;
+        }
+      })
+      .then((user) => {
+        console.log("user", user);
+        if (user !== false) {
+          setTimeout(() => {
+            window.location.href = "/namematch";
+          }, 2000);
+        } else {
+          return false;
+        }
+      });
+  };
   return (
     <Box position={"relative"}>
       <Container
@@ -91,19 +177,18 @@ function SignUp(props) {
           </Heading>
         </Stack>
         <Stack
-          bg={"gray.50"}
           rounded={"xl"}
           p={{ base: 4, sm: 6, md: 8 }}
           spacing={{ base: 8 }}
           maxW={{ lg: "lg" }}
+          bg={useColorModeValue("white", "gray.800")}
         >
           <Stack spacing={4}>
             <Heading
-              color={"gray.800"}
               lineHeight={1.1}
               fontSize={{ base: "2xl", sm: "3xl", md: "4xl" }}
             >
-              Sign Up{" "}
+              Sign In{" "}
             </Heading>
           </Stack>
           <Box as={"form"} mt={10}>
@@ -164,18 +249,23 @@ function SignUp(props) {
                 boxShadow: "xl",
               }}
             >
-              Sign Up
+              Login
             </Button>
             <Text margin={3}>
-              Already Have An Account?{" "}
-              <Button id="true" onClick={handleChange}>
-                Login
+              Don't have an account?{" "}
+              <Button id="false" onClick={handleChange}>
+                Sign Up
+              </Button>
+              <Button ml="1" id="false" onClick={demoUserLogin}>
+                Demo User
               </Button>
             </Text>
+            <Text margin={3}></Text>
           </Box>
         </Stack>
       </Container>
     </Box>
   );
 }
-export default SignUp;
+
+export default SignIn;

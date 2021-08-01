@@ -2,7 +2,7 @@ import React from "react";
 import { Route, BrowserRouter } from "react-router-dom";
 import ProtectedRoute from "./Components/ProtectedRoutes.js";
 import Landing from "./Pages/Landing.js";
-import SignUp from "./Pages/SignUp.js";
+import SignUp from "./Components/SignUp.js";
 import NameMatch from "./Pages/NameMatch";
 function App() {
   return (

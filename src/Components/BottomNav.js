@@ -95,9 +95,14 @@ function NavBar(props) {
         >
           <BiCog className="" size={"2.5rem"}></BiCog>
         </Link>
-        <Button onClick={toggleColorMode}>
-          {colorMode === "light" ? "Dark" : "Light"}
-        </Button>
+        <Flex flexDirection="column">
+          <Button size="sm" onClick={toggleColorMode}>
+            {colorMode === "light" ? "Dark" : "Light"}
+          </Button>
+          <Button mt="1" size="sm" onClick={handleLogout}>
+            Logout
+          </Button>
+        </Flex>
       </Flex>
     </Box>
   );

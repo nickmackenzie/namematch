@@ -4,8 +4,8 @@ import loginIllustration from "../imgs/loginIllustration.svg";
 import toast, { Toaster } from "react-hot-toast";
 import { themeChange } from "theme-change";
 import { Player } from "@lottiefiles/react-lottie-player";
-import SignIn from "./SignIn";
-import SignUp from "./SignUp";
+import SignIn from "../Components/SignIn";
+import SignUp from "../Components/SignUp";
 import { Stack, useColorMode, useColorModeValue } from "@chakra-ui/react";
 const alertLoginSuccess = () => {
   toast.custom((t) => (

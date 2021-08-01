@@ -113,9 +113,11 @@ export default function Advanced(props) {
 
         <Stack mt={8} direction={"row"} spacing={4}>
           <Button
+            key={`${props.name} like key`}
             id="like"
             data-name={props.name}
             onClick={likeOrDislike}
+            className="nextBtn"
             flex={1}
             fontSize={"sm"}
             rounded={"full"}
@@ -132,6 +134,7 @@ export default function Advanced(props) {
           </Button>
           <Button
             flex={1}
+            key={`${props.name} dislike key`}
             fontSize={"sm"}
             rounded={"full"}
             bg={"gray.400"}
