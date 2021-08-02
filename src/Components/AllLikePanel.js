@@ -24,7 +24,10 @@ import {
   Button,
   TableCaption,
 } from "@chakra-ui/react";
+import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
+import { useTable, useSortBy } from "react-table";
 import { useEffect } from "react";
+import { compareAsc, format } from "date-fns";
 let CurrentDisplay = "";
 export default function AllLikePanel(props) {
   const [likeList, setLikeList] = useState([]);
@@ -51,7 +54,10 @@ export default function AllLikePanel(props) {
     return likeList.map((like, i) => (
       <Tr key={i}>
         <Td>{like.name}</Td>
-        <Td>{like.dateCreated}</Td>
+        <Td>{`${format(
+          new Date(like.dateCreated),
+          "EE MMM do yyyy '@' h:mm a"
+        )}`}</Td>
         <Td>
           <Button>Delete</Button>
         </Td>
@@ -60,14 +66,14 @@ export default function AllLikePanel(props) {
   }
 
   return (
-    <Flex justifyContent="center">
+    <Flex justifyContent="center" overflow="scroll" maxHeight="300px">
       <Table
         mt="5"
-        variant="unstyled"
         rounded={"xl"}
         overflow="scroll"
         bg={useColorModeValue("white", "gray.800")}
         w="50"
+        size="sm"
       >
         {" "}
         <Thead>

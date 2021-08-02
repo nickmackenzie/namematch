@@ -1,16 +1,6 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
-
+import React, { useState } from "react";
+import { getMatches } from "../helpers/matchHelper";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
-import {
-  Paginator,
-  Previous,
-  Next,
-  setCurrentPage,
-  currentPage,
-  PageGroup,
-  usePaginator,
-  pagesQuantity,
-} from "chakra-paginator";
 import {
   Stack,
   HStack,
@@ -34,67 +24,64 @@ import {
   Button,
   TableCaption,
 } from "@chakra-ui/react";
-export default function TableExample(props) {
-  const FC = () => {
-    const pagesQuantity = 12;
-    const { currentPage, setCurrentPage } = usePaginator({
-      initialState: { currentPage: 1 },
+import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
+import { useTable, useSortBy } from "react-table";
+import { useEffect } from "react";
+let CurrentDisplay = "";
+export default function AllLikePanel(props) {
+  const [likeList, setLikeList] = useState([]);
+  const [loader, setLoader] = useState("loading");
+
+  let mounted = true;
+
+  useEffect(() => {
+    mounted = true;
+
+    getMatches().then((items) => {
+      if (mounted) {
+        console.log(items);
+        setLikeList(items);
+
+        setLoader("done");
+      }
     });
-  };
+
+    return () => (mounted = false);
+  }, []);
+
+  function renderTable() {
+    return likeList.map((like, i) => (
+      <Tr key={i}>
+        <Td>{like.name}</Td>
+        <Td>{like.dateCreated}</Td>
+        <Td>
+          <Button>Delete</Button>
+        </Td>
+      </Tr>
+    ));
+  }
+
   return (
-    <>
-      <Flex justifyContent="center">
-        <Table
-          mt="5"
-          variant="unstyled"
-          rounded={"xl"}
-          bg={useColorModeValue("white", "gray.800")}
-          w="50"
-        >
-          {" "}
-          <Thead>
-            <Tr>
-              <Th>Name</Th>
-              <Th>Date</Th>
-              <Th></Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            <Tr>
-              <Td>Tablescon</Td>
-              <Td>9 April 2019</Td>
-              <Td>
-                <Button>Delete</Button>
-              </Td>
-            </Tr>
-            <Tr>
-              <Td>Capstone Data</Td>
-              <Td>19 May 2019</Td>
-              <Td>
-                <Button>Delete</Button>
-              </Td>
-            </Tr>
-            <Tr>
-              <Td>Tuscaloosa D3</Td>
-              <Td>29 June 2019</Td>
-              <Td>
-                <Button>Delete</Button>
-              </Td>
-            </Tr>
-          </Tbody>
-        </Table>
-      </Flex>
-      <Paginator
-        pagesQuantity={pagesQuantity}
-        currentPage={currentPage}
-        onPageChange={setCurrentPage}
+    <Flex justifyContent="center" overflow="scroll" maxHeight="300px">
+      <Table
+        mt="5"
+        rounded={"xl"}
+        overflow="scroll"
+        bg={useColorModeValue("white", "gray.800")}
+        w="50"
+        size="sm"
+        variant="simple"
       >
-        <Container align="center" justify="space-between" w="full" p={4}>
-          <Previous>Previous</Previous>
-          <PageGroup isInline align="center" />
-          <Next>Next</Next>
-        </Container>
-      </Paginator>
-    </>
+        {" "}
+        <Thead>
+          <Tr>
+            <Th>Name</Th>
+            <Th>Date</Th>
+            <Th></Th>
+          </Tr>
+        </Thead>
+        <Tbody>{renderTable()}</Tbody>
+      </Table>
+    </Flex>
   );
 }

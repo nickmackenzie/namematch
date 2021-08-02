@@ -384,7 +384,7 @@ router.get("/getLikes", function (req, res, next) {
 
   let email = req.params.email;
   userLike.find({ email: req.query.email }, function (err, userLikes) {
-    res.status(200).send(userLikes);
+    res.status(200).send(userLikes.reverse());
   });
 });
 router.get("/partnerMatch", function (req, res, next) {
