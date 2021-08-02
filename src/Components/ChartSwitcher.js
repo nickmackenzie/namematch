@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import AllLikePanel from "../Components/AllLikePanel";
 import MatchesCard from "../Components/MatchesCard";
-
+import Timeline2 from "../Components/Timeline2";
 export default function ChartSwitcher(props) {
   return (
     <Center>
@@ -29,7 +29,7 @@ export default function ChartSwitcher(props) {
           <TabPanel>
             <p>
               {" "}
-              <MatchesCard></MatchesCard>
+              <Timeline2></Timeline2>
             </p>
           </TabPanel>
           <TabPanel>
