@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-import { Box, Flex, Avatar, WrapItem } from "@chakra-ui/react";
+import { Box, Flex, Icon, useColorModeValue } from "@chakra-ui/react";
 import { getLikes } from "../helpers/matchHelper";
 import { compareAsc, format } from "date-fns";
 import { ImHeart, ImHeartBroken } from "react-icons/im";
+import { FaHeart } from "react-icons/fa";
 import { faBoxOpen } from "@fortawesome/free-solid-svg-icons";
 
 export default function App() {
@@ -39,23 +40,24 @@ export default function App() {
 
   function renderTable() {
     return likes.map((like, i) => (
-      <>
+      <Box rounded="xl">
+        <Icon color="red.600" as={FaHeart}></Icon>
+        <h3>{`${format(
+          new Date(like.dateCreated),
+          "EE MMM do yyyy '@' h:mm a"
+        )}`}</h3>
         <Flex
           justifyContent="space-around"
           flexDir="column"
-          bg="white"
           m="2"
+          bg={"white"}
           rounded="xl"
+          shadow="md"
           p="2"
         >
           <h4>{like.name}</h4>
-
-          <h3>{`${format(
-            new Date(like.dateCreated),
-            "EE MMM do yyyy '@' h:mm a"
-          )}`}</h3>
         </Flex>
-      </>
+      </Box>
     ));
   }
   return (
