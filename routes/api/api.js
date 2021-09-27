@@ -259,6 +259,18 @@ router.get("/LikeName", function (req, res, next) {
           email: req.query.email,
           sex: req.query.sex,
         });
+        User.findOneAndUpdate(
+          { email: req.query.email },
+          { $set: { likes: req.query.name } },
+
+          (err, doc) => {
+            if (err) {
+              console.log("Something wrong when updating data!");
+            }
+            console.log(doc);
+          }
+        );
+
         like.save();
         res.status(200).send("created");
       } else {
@@ -395,7 +407,7 @@ router.get("/partnerMatch", function (req, res, next) {
   let matchArray2 = [];
   try {
     User.find({ partner: "test" }, function (err, userPartner) {
-      console.log(userPartner);
+      console.log(userPartner[0]);
       if (userPartner.length > 1) {
         console.log(true);
         matchArray1.push(userPartner[0].likes);
