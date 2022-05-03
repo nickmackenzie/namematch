@@ -11,7 +11,7 @@ It will keep track of your overall personal likes/dislikes as well.
 Includes a dark and light mode.
 If you notice any bugs, feel free to open a pull request.
 
-Play with it live at [http://name-match.herokuapp.com/](https://namematch.me)
+Play with it live at [http://name-match.herokuapp.com/](http://name-match.herokuapp.com/)
 
 More features coming soon! 🎭
 
